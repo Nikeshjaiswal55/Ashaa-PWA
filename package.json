@@ -1,0 +1,81 @@
+{
+  "name": "react-pwa",
+  "version": "2.0.2",
+  "description": "Starter kit for modern web applications",
+  "homepage": "https://react-pwa.surenatoyan.com/",
+  "type": "module",  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suren-atoyan/react-pwa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suren-atoyan/react-pwa/issues",
+    "email": "contact@surenatoyan.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "https-preview": "serve dist",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.0",
+    "@tailwindcss/vite": "^4.1.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "is-mobile": "^3.1.1",
+    "lucide-react": "^0.487.0",
+    "notistack": "^2.0.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-error-boundary": "^3.1.4",
+    "react-helmet-async": "^1.3.0",
+    "react-hotkeys-hook": "^3.4.6",
+    "react-router-dom": "^6.3.0",
+    "recoil": "^0.7.2",
+    "tailwind-merge": "^3.2.0",
+    "tailwindcss": "^4.1.3",
+    "tw-animate-css": "^1.2.5"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/node": "^18.19.86",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "@vitejs/plugin-react": "^1.3.2",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.16.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "https-localhost": "^4.7.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
+    "prettier": "2.6.2",
+    "typescript": "^4.7.2",
+    "vite": "^5.4.18",
+    "vite-plugin-pwa": "^1.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "eslint --max-warnings=0"
+    ]
+  },
+  "author": {
+    "name": "Suren Atoyan",
+    "email": "contact@surenatoyan.com",
+    "url": "http://surenatoyan.com/"
+  },
+  "keywords": [
+    "react",
+    "pwa",
+    "starter-kit",
+    "vite"
+  ]
+}
