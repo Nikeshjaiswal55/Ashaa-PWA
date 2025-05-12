@@ -21,7 +21,10 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html}', '**/*.{svg,png,jpg,gif}'],
       },
     })
-  ],
+  ], server: {
+    host: true, // binds to 0.0.0.0, allowing access from other devices
+    port: 5173, // or any other port
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
