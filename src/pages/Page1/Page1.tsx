@@ -37,17 +37,11 @@ const Page1: React.FC = () => {
       <div className="flex flex-col min-h-screen bg-gray-50">
         {/* Top banner */}
         <div className="relative w-full h-30  overflow-hidden flex items-center bg-white">
-          {/* Background Image with reduced width and right alignment */}
           <div className="absolute top-0 right-0 h-full w-3/5">
-            <img
-              src={farmSeeding} // Replace with your image path
-              alt="Smart Farming"
-              className="h-40 w-full object-cover"
-            />
-            {/* Left-side gradient overlay on image */}
+            <img src={farmSeeding} alt="Smart Farming" className="h-40 w-full object-cover" />
+
             <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-l  from-transparent via-white/60 to-white"></div>
           </div>
-          {/* Bottom gradient overlay */}
           <div className="absolute bottom-0 left-0 h-1/7 w-full bg-gradient-to-t from-white/80 to-transparent"></div>
 
           <div className="relative z-10 px-6 w-70">
@@ -132,24 +126,9 @@ const Page1: React.FC = () => {
         <div className="relative">
           <img src={villageBackground} alt="village" className="w-full h-auto" />
 
-          {/* Gradient Overlay */}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/0 to-[rgba(54,195,96,0.2)]"></div>
         </div>{' '}
-        {/* Rest of your content */}
       </div>
-      {/* Bottom Navbar */}
-      {/* <div
-        className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-2 items-center"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-      >
-        <div><Home style={{ color: "#005B24" }} /></div>
-        <div><Search style={{ color: "#005B24" }} /></div>
-        <button className="bg-green-600 text-white p-3 rounded-full shadow-md">
-          <Plus />
-        </button>
-        <div><Map style={{ color: "#005B24" }} /></div>
-        <div><Menu style={{ color: "#005B24" }} /></div>
-      </div> */}
     </>
   );
 };
