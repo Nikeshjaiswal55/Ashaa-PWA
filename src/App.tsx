@@ -10,8 +10,9 @@ import Pages from '@/routes/Pages';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 
-import Footer from './components/ui/FooterBar/Footer';
-import Header from './components/ui/Header/Header';
+import '../src/style.css';
+import Footer from './components/FooterBar/Footer';
+import Header from './components/Header/Header';
 import Page1 from './pages/Page1';
 
 // import Sidebar from '@/sections/Sidebar';

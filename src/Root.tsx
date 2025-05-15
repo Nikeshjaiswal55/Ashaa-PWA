@@ -2,8 +2,8 @@ import { ComponentType, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { RecoilRoot } from 'recoil';
-import './style.css'
 
+import './style.css';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
@@ -13,7 +13,7 @@ function render(App: ComponentType) {
     <StrictMode>
       <RecoilRoot>
         <HelmetProvider>
-            <App />
+          <App />
         </HelmetProvider>
       </RecoilRoot>
     </StrictMode>,

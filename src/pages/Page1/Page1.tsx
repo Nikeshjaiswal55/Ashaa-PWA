@@ -1,10 +1,10 @@
 import { Filter } from 'lucide-react';
 
+import DashboardCard from '@/components/Card/DashboardCard';
+import SharedGrainProduction from '@/components/Card/SharedGrainProduction';
+import TopFertilizerPesticideCard from '@/components/Card/TopFertilizerPesticideCard';
+import VillageCropChart from '@/components/Chart/VillageCropChart';
 import Meta from '@/components/Meta';
-import DashboardCard from '@/components/ui/Card/DashboardCard';
-import SharedGrainProduction from '@/components/ui/Card/SharedGrainProduction';
-import TopFertilizerPesticideCard from '@/components/ui/Card/TopFertilizerPesticideCard';
-import VillageCropChart from '@/components/ui/Chart/VillageCropChart';
 import { Button } from '@/components/ui/button';
 
 import soilImg from '../../assets/home/SOILImg.jpg';
@@ -45,7 +45,7 @@ const Page1: React.FC = () => {
           <div className="absolute bottom-0 left-0 h-1/7 w-full bg-gradient-to-t from-white/80 to-transparent"></div>
 
           <div className="relative z-10 px-6 w-70">
-            <h1 className="heading-1 goldenbrown font-normal text-xl">Smart</h1>
+            <h1 className=" text-dangerred  ">Smart</h1>
             <p className="font-normal text-xl">Farming Solutions</p>
           </div>
         </div>

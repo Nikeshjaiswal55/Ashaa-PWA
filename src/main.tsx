@@ -4,6 +4,8 @@ import '@fontsource/lexend-deca';
 
 import welcome from '@/utils/welcome';
 
+import '../src/style.css';
+
 Promise.all([import('@/Root'), import('@/App')]).then(([{ default: render }, { default: App }]) => {
   render(App);
 });
