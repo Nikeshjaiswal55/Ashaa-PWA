@@ -9,7 +9,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import { Button } from '../button';
+import { Button } from '../ui/button';
 
 type CropData = {
   name: string;

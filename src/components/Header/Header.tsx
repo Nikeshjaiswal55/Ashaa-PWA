@@ -1,7 +1,7 @@
 import { Bell } from 'lucide-react';
 
-import headerImg from '../../../assets/header/header.png';
-import profileImg from '../../../assets/header/profile.jpg';
+import headerImg from '../../assets/header/header.png';
+import profileImg from '../../assets/header/profile.jpg';
 
 const Header = () => {
   return (
