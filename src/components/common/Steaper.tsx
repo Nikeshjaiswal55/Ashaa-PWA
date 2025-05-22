@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { Step } from '../../redux/slices/SteaperSlice'
 import "../common/steaper.css"
-// import Button from '../common/Button'
+import Button from '../common/Button'
 
 const Stepper = () => {
   const steps = useSelector((state: RootState) => state.steaper) as Step[]

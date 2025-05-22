@@ -30,7 +30,9 @@ export const SteaperSlice = createSlice({
         state.currentStep = current.nextStep;
       }
     },
-  
+    goToPreviousStep:(state)=>{
+       
+    },
   },
 });
 
