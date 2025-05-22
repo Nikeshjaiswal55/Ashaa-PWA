@@ -9,31 +9,30 @@ import Pages from '@/routes/Pages';
 // import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
-
+import { Provider } from 'react-redux';
 import '../src/style.css';
 import Footer from './components/FooterBar/Footer';
 import Header from './components/Header/Header';
 import Page1 from './pages/Page1';
+import { store } from './redux/store';
+import Stepper from './components/common/Steaper';
 
 // import Sidebar from '@/sections/Sidebar';
 
 function App() {
   return (
-    <Fragment>
-      {/* <CssBaseline /> */}
+      <Fragment>
       <Notifications />
-      {/* <HotKeys /> */}
       <SW />
-      <BrowserRouter>
-        {/* <Header /> */}
-        {/* <Sidebar /> */}
-
-        <Pages />
-        <Header />
-        {/* <Card/> */}
-        <Page1 />
-        <Footer />
-      </BrowserRouter>
+      <Provider store={store}> {/* 👈 Redux store wrap yaha karo */}
+        <BrowserRouter>
+          {/* <Header />
+          <Pages />
+          <Page1 />
+          <Footer /> */}
+          <Stepper/>
+        </BrowserRouter>
+      </Provider>
     </Fragment>
   );
 }
