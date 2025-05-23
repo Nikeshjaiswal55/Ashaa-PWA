@@ -1,11 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
-import steaperReducer from './slices/SteaperSlice'
+import { configureStore } from '@reduxjs/toolkit';
+
+import ApiSlice from '../redux/slices/ApiSlice';
 
 export const store = configureStore({
   reducer: {
-    steaper: steaperReducer,
+    [ApiSlice.reducerPath]: ApiSlice.reducer,
   },
-})
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(ApiSlice.middleware),
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

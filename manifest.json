@@ -3,7 +3,6 @@
   "short_name": "reactpwa",
   "description": "Starter kit for modern web applications",
     "start_url": ".",
-      "display": "standalone",
   "theme_color": "#ffffff",
   "icons": [
     {
