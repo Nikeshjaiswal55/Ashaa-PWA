@@ -11,7 +11,7 @@ const routes: Routes = {
     icon: undefined,
   },
   [Pages.Page1]: {
-    component: asyncComponentLoader(() => import('@/pages/Page1')),
+    component: asyncComponentLoader(() => import('@/pages/Home')),
     path: '/page-1',
     title: 'Page 1',
     icon: undefined,

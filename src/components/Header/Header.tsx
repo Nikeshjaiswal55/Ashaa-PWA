@@ -5,9 +5,9 @@ import profileImg from '../../assets/header/profile.jpg';
 
 const Header = () => {
   return (
-    <>
+    <div className='fixed top-0 w-full z-10'>
       <div
-        className=" h-15 text-white  px-4 py-3 flex justify-between items-center"
+        className=" h-15 text-white  px-4 py-3 flex justify-between items-center "
         style={{ backgroundColor: '#005b24' }}
       >
         <div className="flex items-center gap-3">
@@ -22,7 +22,7 @@ const Header = () => {
       <div>
         <img src={headerImg} alt="Header" className=" h-8 w-full block " />
       </div>
-    </>
+    </div>
   );
 };
 export default Header;
