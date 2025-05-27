@@ -9,7 +9,7 @@ import SW from '@/sections/SW';
 
 import '../src/style.css';
 import Layout from './components/Layout';
-import Page2 from './pages/Onboarding';
+import FarmerDetailsForm from './pages/DataCollectionForm';
 import { store } from './redux/store';
 
 function App() {
@@ -21,7 +21,8 @@ function App() {
         <BrowserRouter>
           <Layout>
             {/* <Home /> */}
-            <Page2 />
+            <FarmerDetailsForm />
+            {/* <Page2 /> */}
           </Layout>
           {/* <ProfilePage /> */}
         </BrowserRouter>
