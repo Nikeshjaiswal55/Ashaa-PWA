@@ -1,17 +1,16 @@
 import { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+
 import { withErrorHandler } from '@/error-handling';
 import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
-import '../src/style.css';
-import Apitest from './components/common/Apitest';
-import { store } from './redux/store';
-import Home from './pages/Home';
-import Layout from './components/Layout';
-import ProfilePage from './pages/Profile';
 
+import '../src/style.css';
+import Layout from './components/Layout';
+import Page2 from './pages/Onboarding';
+import { store } from './redux/store';
 
 function App() {
   return (
@@ -21,7 +20,8 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Layout>
-            <Home />
+            {/* <Home /> */}
+            <Page2 />
           </Layout>
           {/* <ProfilePage /> */}
         </BrowserRouter>

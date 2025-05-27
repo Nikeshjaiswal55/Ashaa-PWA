@@ -1,4 +1,3 @@
-
 import asyncComponentLoader from '@/utils/loader';
 
 import { Pages, Routes } from './types';
@@ -17,7 +16,7 @@ const routes: Routes = {
     icon: undefined,
   },
   [Pages.Page2]: {
-    component: asyncComponentLoader(() => import('@/pages/Page2')),
+    component: asyncComponentLoader(() => import('@/pages/Onboarding')),
     path: '/page-2',
     title: 'Page 2',
     icon: undefined,
