@@ -7,9 +7,9 @@ import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 
+import Pages from '../src/routes/Pages/Pages';
 import '../src/style.css';
 import Layout from './components/Layout';
-import Page2 from './pages/Onboarding';
 import { store } from './redux/store';
 
 function App() {
@@ -21,7 +21,9 @@ function App() {
         <BrowserRouter>
           <Layout>
             {/* <Home /> */}
-            <Page2 />
+
+            {/* <Page2 /> */}
+            <Pages />
           </Layout>
           {/* <ProfilePage /> */}
         </BrowserRouter>
