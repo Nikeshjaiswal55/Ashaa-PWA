@@ -22,6 +22,8 @@ function App() {
           <Layout>
             {/* <Home /> */}
             <FarmerDetailsForm />
+            {/* <FarmingExperienceDetails/> */}
+            {/* <FarmerLiveStock/> */}
             {/* <Page2 /> */}
           </Layout>
           {/* <ProfilePage /> */}

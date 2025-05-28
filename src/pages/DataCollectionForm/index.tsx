@@ -199,6 +199,7 @@ const FarmerDetailsForm: React.FC = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         {/* Header */}
+
         <div className="flex items-center mb-6">
           <button type="button" className="text-gray-600 hover:text-green-600 transition-colors">
             <BackArrowIcon />
@@ -236,7 +237,7 @@ const FarmerDetailsForm: React.FC = () => {
               <div className="relative">
                 <label
                   htmlFor="farmerName"
-                  className="absolute bg-white text-green-800 top-[-10px] left-3 block text-sm font-medium px-2 text-gray-700 mb-1"
+                  className="absolute bg-white  text-green-900 top-[-15px] left-3 block text-lg font-semibold px-2 text-gray-700 mb-1"
                 >
                   Farmer Name
                 </label>
@@ -245,7 +246,7 @@ const FarmerDetailsForm: React.FC = () => {
                   name="farmerName"
                   id="farmerName"
                   placeholder="Enter farmer's full name"
-                  className={`w-full border-2 border-green-700 p-3 border rounded-lg shadow-sm transition-colors
+                  className={`w-full border-2 border-green-800 p-3 border rounded-lg shadow-sm transition-colors
                     ${
                       touched.farmerName && errors.farmerName
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
@@ -263,7 +264,7 @@ const FarmerDetailsForm: React.FC = () => {
               <div className="relative">
                 <label
                   htmlFor="contactNumber"
-                  className="absolute bg-white text-green-800 top-[-10px] left-3 block text-sm font-medium text-gray-700 mb-1"
+                  className="absolute bg-white text-green-900 top-[-15px] left-3 block text-lg px-2 font-semibold text-gray-700 mb-1"
                 >
                   Contact Number
                 </label>
@@ -272,7 +273,7 @@ const FarmerDetailsForm: React.FC = () => {
                   name="contactNumber"
                   id="contactNumber"
                   placeholder="Enter mobile number"
-                  className={`w-full p-3 border rounded-lg shadow-sm transition-colors border-2 border-green-700
+                  className={`w-full p-3 border rounded-lg shadow-sm transition-colors border-2 border-green-800
                     ${
                       touched.contactNumber && errors.contactNumber
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
@@ -290,7 +291,7 @@ const FarmerDetailsForm: React.FC = () => {
               <div className="relative">
                 <label
                   htmlFor="aadharCardNumber"
-                  className="absolute bg-white text-green-800 top-[-10px] left-3  block text-sm font-medium text-gray-700 mb-1 "
+                  className="absolute bg-white text-green-900 top-[-15px] left-3  block text-lg font-semibold px-2 text-gray-700 mb-1 "
                 >
                   Aadhar Card Number
                 </label>
@@ -299,7 +300,7 @@ const FarmerDetailsForm: React.FC = () => {
                   name="aadharCardNumber"
                   id="aadharCardNumber"
                   placeholder="XXXX-XXXX-XXXX"
-                  className={`w-full border-2 border-green-700 p-3 border rounded-lg shadow-sm transition-colors
+                  className={`w-full border-2 border-green-800 p-3 border rounded-lg shadow-sm transition-colors
                     ${
                       touched.aadharCardNumber && errors.aadharCardNumber
                         ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
@@ -315,7 +316,7 @@ const FarmerDetailsForm: React.FC = () => {
 
               {/* Gender */}
               <div>
-                <label className="block text-sm font-medium text-green-800 mb-2">Gender</label>
+                <label className="block text-lg font-semibold text-green-900 mb-2">Gender</label>
                 <div
                   role="group"
                   aria-labelledby="gender-group"
@@ -324,10 +325,10 @@ const FarmerDetailsForm: React.FC = () => {
                   {(['Male', 'Female', 'Other'] as FormValues['gender'][]).map((genderOption) => (
                     <label
                       key={genderOption}
-                      className={`flex items-center px-4 py-1 rounded-lg shadow-sm cursor-pointer transition-all duration-150 ease-in-out
+                      className={`flex items-center w-[124px] h-[25px]  px-4 py-1 rounded-lg shadow-sm cursor-pointer transition-all duration-150 ease-in-out
                         ${
                           values.gender === genderOption
-                            ? 'bg-green-200'
+                            ? 'bg-green-100'
                             : 'bg-gray-300 hover:bg-gray-200'
                         }`}
                     >
@@ -335,9 +336,11 @@ const FarmerDetailsForm: React.FC = () => {
                         type="radio"
                         name="gender"
                         value={genderOption}
-                        className="accent-green-700"
+                        className="accent-green-600"
                       />
-                      <span className="text-sm text-green-800 pl-2">{genderOption}</span>
+                      <span className="text-lg font-semibold text-green-900 pl-2">
+                        {genderOption}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -346,24 +349,25 @@ const FarmerDetailsForm: React.FC = () => {
 
               {/* Total Farm Size & Unit */}
               <div className="grid grid-cols-3 gap-4 items-end">
+                {/* Input Field */}
                 <div className="col-span-2">
                   <label
                     htmlFor="totalFarmSize"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-semibold text-green-900 mb-1"
                   >
                     Total Farm Size
                   </label>
                   <Field
-                    type="number" // Changed to number for better input control, Yup will handle string from initialValues
+                    type="number"
                     name="totalFarmSize"
                     id="totalFarmSize"
                     placeholder="Enter your Farm Size"
-                    className={`w-full p-3 border rounded-lg shadow-sm transition-colors
-                      ${
-                        touched.totalFarmSize && errors.totalFarmSize
-                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                          : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-                      }`}
+                    className={`w-full px-4 py-2 bg-gray-200 text-sm rounded-lg shadow-sm focus:outline-none 
+        ${
+          touched.totalFarmSize && errors.totalFarmSize
+            ? 'border border-red-500'
+            : 'border border-gray-300'
+        }`}
                   />
                   <ErrorMessage
                     name="totalFarmSize"
@@ -371,17 +375,15 @@ const FarmerDetailsForm: React.FC = () => {
                     className="text-red-500 text-xs mt-1"
                   />
                 </div>
+
+                {/* Select Dropdown */}
                 <div>
                   <Field
                     as="select"
                     name="farmSizeUnit"
                     id="farmSizeUnit"
-                    className={`w-full p-3.5 border rounded-lg shadow-sm bg-gray-50 transition-colors
-                      ${
-                        touched.farmSizeUnit && errors.farmSizeUnit
-                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                          : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-                      }`}
+                    className={`w-full px-4 py-2 text-sm border rounded-lg shadow-sm focus:outline-none text-green-900
+        ${touched.farmSizeUnit && errors.farmSizeUnit ? 'border-red-500' : 'border-green-800'}`}
                   >
                     {farmUnits.map((unit) => (
                       <option key={unit} value={unit}>
@@ -401,17 +403,19 @@ const FarmerDetailsForm: React.FC = () => {
               <div>
                 <label
                   htmlFor="separateFarms"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-lg font-semibold text-green-900 mb-1"
                 >
                   No. of Separate Farms
                 </label>
-                <div className="flex items-center bg-green-50 p-3 rounded-lg border border-green-200 shadow-sm">
-                  <span className="text-sm text-green-700 flex-grow">Number of farms</span>
+                <div className="flex items-center bg-green-50 h-[53px] p-3 rounded-lg border border-green-200 shadow-sm">
+                  <span className="text-lg font-semibold text-green-800 flex-grow">
+                    Number of farms
+                  </span>
                   <Field
-                    type="number" // Changed to number
+                    type="number"
                     name="separateFarms"
                     id="separateFarms"
-                    className={`w-20 p-2 border rounded-md text-center shadow-sm transition-colors
+                    className={`w-20 p-2  bg-white rounded-md h-[42px]  text-center shadow-sm transition-colors
                       ${
                         touched.separateFarms && errors.separateFarms
                           ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
@@ -428,124 +432,137 @@ const FarmerDetailsForm: React.FC = () => {
 
               {/* State & District */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
-                    State
-                  </label>
-                  <Field
-                    as="select"
-                    name="state"
-                    id="state"
-                    className={`w-full p-3 border rounded-lg shadow-sm bg-gray-50 transition-colors
+                <div className="flex ">
+                  <div className="flex-1">
+                    <label
+                      htmlFor="state"
+                      className="block text-lg font-semibold text-green-900 mb-1"
+                    >
+                      State
+                    </label>
+                    <Field
+                      as="select"
+                      name="state"
+                      id="state"
+                      className={`w-[165px] h-[52px] p-3 border-2 border-green-800 rounded-lg shadow-sm bg-gray-50 transition-colors
                       ${
                         touched.state && errors.state
                           ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                           : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
                       }`}
-                  >
-                    {states.map((s) => (
-                      <option key={s} value={s === 'Select your state' ? '' : s}>
-                        {s}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="state"
-                    component="div"
-                    className="text-red-500 text-xs mt-1"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="district"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    District
-                  </label>
-                  <Field
-                    as="select"
-                    name="district"
-                    id="district"
-                    className={`w-full p-3 border rounded-lg shadow-sm bg-gray-50 transition-colors
+                    >
+                      {states.map((s) => (
+                        <option key={s} value={s === 'Select your state' ? '' : s}>
+                          {s}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage
+                      name="state"
+                      component="div"
+                      className="text-red-500 text-xs mt-1"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label
+                      htmlFor="district"
+                      className="block text-lg font-semibold text-green-900 mb-1"
+                    >
+                      District
+                    </label>
+                    <Field
+                      as="select"
+                      name="district"
+                      id="district"
+                      className={`w-[165px] h-[52px] w-full p-3 border-2 rounded-lg shadow-sm border-green-800 bg-gray-50 transition-colors w-[160px] h-[52px]
                       ${
                         touched.district && errors.district
                           ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                           : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
                       }`}
-                  >
-                    {districts.map((d) => (
-                      <option key={d} value={d === 'Select your district' ? '' : d}>
-                        {d}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="district"
-                    component="div"
-                    className="text-red-500 text-xs mt-1"
-                  />
+                    >
+                      {districts.map((d) => (
+                        <option key={d} value={d === 'Select your district' ? '' : d}>
+                          {d}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage
+                      name="district"
+                      component="div"
+                      className="text-red-500 text-xs mt-1"
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* Sub-District & Pin code */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="subDistrict"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Sub-District
-                  </label>
-                  <Field
-                    as="select"
-                    name="subDistrict"
-                    id="subDistrict"
-                    className={`w-full p-3 border rounded-lg shadow-sm bg-gray-50 transition-colors
+              <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
+                <div className="flex">
+                  <div className="flex-1">
+                    <label
+                      htmlFor="subDistrict"
+                      className="block text-lg font-semibold text-green-900 mb-1"
+                    >
+                      Sub-District
+                    </label>
+                    <Field
+                      as="select"
+                      name="subDistrict"
+                      id="subDistrict"
+                      className={`w-full p-3 border-2 border-green-800  h-[52px] rounded-lg shadow-sm bg-gray-50 transition-colors
                       ${
                         touched.subDistrict && errors.subDistrict
                           ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                           : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
                       }`}
-                  >
-                    {subDistricts.map((sd) => (
-                      <option key={sd} value={sd === 'Select Block' ? '' : sd}>
-                        {sd}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="subDistrict"
-                    component="div"
-                    className="text-red-500 text-xs mt-1"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pinCode" className="block text-sm font-medium text-gray-700 mb-1">
-                    Pin Code
-                  </label>
-                  <Field
-                    type="text"
-                    name="pinCode"
-                    id="pinCode"
-                    placeholder="Enter 6-digit pin code"
-                    className={`w-full p-3 border rounded-lg shadow-sm transition-colors
+                    >
+                      {subDistricts.map((sd) => (
+                        <option key={sd} value={sd === 'Select Block' ? '' : sd}>
+                          {sd}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage
+                      name="subDistrict"
+                      component="div"
+                      className="text-red-500 text-xs mt-1"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label
+                      htmlFor="pinCode"
+                      className="block text-lg font-semibold text-green-800 mb-1"
+                    >
+                      Pin Code
+                    </label>
+                    <Field
+                      type="text"
+                      name="pinCode"
+                      id="pinCode"
+                      placeholder="Enter 6-digit pin code"
+                      className={`w-full p-3 border-2 border-green-800  h-[52px] rounded-lg shadow-sm transition-colors
                       ${
                         touched.pinCode && errors.pinCode
                           ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                           : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
                       }`}
-                  />
-                  <ErrorMessage
-                    name="pinCode"
-                    component="div"
-                    className="text-red-500 text-xs mt-1"
-                  />
+                    />
+                    <ErrorMessage
+                      name="pinCode"
+                      component="div"
+                      className="text-red-500 text-xs mt-1"
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* Village */}
               <div>
-                <label htmlFor="village" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="village"
+                  className="block text-lg font-semibold text-green-800 mb-1"
+                >
                   Village
                 </label>
                 <Field
@@ -569,9 +586,11 @@ const FarmerDetailsForm: React.FC = () => {
 
               {/* Farmer Photo Upload */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Farmer Photo</label>
+                <label className="block text-lg font-semibold text-green-800 mb-2">
+                  Farmer Photo
+                </label>
                 <div
-                  className={`flex justify-center items-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+                  className={`flex justify-center items-center w-full h-[81px] border-2 border-dashed rounded-lg cursor-pointer transition-colors
                     ${
                       touched.farmerPhoto && errors.farmerPhoto
                         ? 'border-red-400 bg-red-50 hover:bg-red-100'
@@ -599,10 +618,9 @@ const FarmerDetailsForm: React.FC = () => {
                       className="h-full w-auto object-contain rounded-md"
                     />
                   ) : (
-                    <div className="text-center">
-                      <UploadIcon />
-                      <p className="mt-1 text-sm text-gray-500">Click to upload or drag and drop</p>
-                      <p className="text-xs text-gray-400">PNG, JPG, GIF up to 10MB</p>
+                    <div className="text-center flex flex-col items-center justify-center">
+                      <UploadIcon className="h-6 w-6 text-gray-400" />
+                      <p className="mt-1 text-sm text-green-600">Upload farmer image</p>
                     </div>
                   )}
                 </div>
