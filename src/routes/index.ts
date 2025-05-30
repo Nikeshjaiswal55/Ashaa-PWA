@@ -15,14 +15,21 @@ const routes: Routes = {
     title: 'Page 1',
     icon: undefined,
   },
+
   [Pages.Page2]: {
     component: asyncComponentLoader(() => import('@/pages/Onboarding')),
     path: '/page-2',
     title: 'Page 2',
     icon: undefined,
   },
+  [Pages.DataCollectionForm]: {
+    component: asyncComponentLoader(() => import('@/pages/DataCollectionForm')),
+    path: '/DataCollectionForm/FarmerDetails',
+    title: 'FarmerDetails',
+    icon: undefined,
+  },
   [Pages.Page3]: {
-    component: asyncComponentLoader(() => import('@/pages/Page3')),
+    component: asyncComponentLoader(() => import('@/pages/Page4')),
     path: '/page-3',
     title: 'Page 3',
     icon: undefined,

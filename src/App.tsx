@@ -9,8 +9,8 @@ import SW from '@/sections/SW';
 
 import '../src/style.css';
 import Layout from './components/Layout';
-import FarmerDetailsForm from './pages/DataCollectionForm';
 import { store } from './redux/store';
+import Pages from './routes/Pages';
 
 function App() {
   return (
@@ -21,8 +21,9 @@ function App() {
         <BrowserRouter>
           <Layout>
             {/* <Home /> */}
-            <FarmerDetailsForm />
+            {/* <FarmerDetailsForm /> */}
             {/* <FarmingExperienceDetails/> */}
+            <Pages />
             {/* <FarmerLiveStock/> */}
             {/* <Page2 /> */}
           </Layout>
