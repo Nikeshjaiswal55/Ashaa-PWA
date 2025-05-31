@@ -3,6 +3,8 @@ import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
+import { FormValues } from '../../../pages/DataCollectionForm/index';
+
 interface TextInputProps {
   values: FormValues;
   label: string;

@@ -6,6 +6,7 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import FarmerStep1 from './components/farmerStep1';
 import FarmerStep2 from './components/farmerStep2';
 import FarmerStep3 from './components/farmerStep3';
+import FarmerStep4 from './components/farmerStep4';
 
 // --- Icon Types (Optional but good practice) ---
 interface IconProps {
@@ -86,6 +87,16 @@ export interface FormValues {
   insuranceAvailable: boolean;
   insuranceCompany: string;
   photo: File | null;
+
+  // Step 4
+  equipmentType?: string;
+  brandName?: string;
+  owner?: string;
+  condition?: 'Good' | 'Moderate' | 'Poor';
+  onRent?: boolean;
+  document?: File | null;
+  image?: File | null;
+  Quantity?: number;
 }
 
 const HeaderData = [
@@ -100,7 +111,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const SUPPORTED_FORMATS = [
     'video/mp4',
     'video/webm',
@@ -130,13 +141,22 @@ export const FarmerDetailsForm: React.FC = () => {
 
     // step 3
     animalType: 'Cow / Goat etc.',
-    quantity: 3,
     milkProduction: 3,
     milkSellingPlace: '',
     breedName: '',
     insuranceAvailable: true,
     insuranceCompany: '',
+    quantity: 3,
     photo: null,
+
+    // step 4
+    brandName: '',
+    owner: '',
+    condition: 'Good',
+    onRent: false,
+    Quantity: 1,
+    document: null,
+    image: null,
   };
 
   const validationSchemaArray = [
@@ -207,6 +227,19 @@ export const FarmerDetailsForm: React.FC = () => {
         is: true,
         then: (schema) => schema.required('Required'),
       }),
+    }),
+    // step 4
+    Yup.object().shape({
+      equipmentType: Yup.string().required('Equipment type is required'),
+      quantity: Yup.number()
+        .typeError('Quantity must be a number')
+        .required('Quantity is required')
+        .min(1, 'Minimum 1 required'),
+      brandName: Yup.string().required('Brand name is required'),
+      owner: Yup.string().required('Owner is required'),
+      condition: Yup.string().oneOf(['Good', 'Moderate', 'Poor']).required('Condition is required'),
+      onRent: Yup.boolean().required(),
+      document: Yup.mixed().nullable(),
     }),
   ];
 
@@ -308,6 +341,14 @@ export const FarmerDetailsForm: React.FC = () => {
               )}
               {step === 3 && (
                 <FarmerStep3
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+              {step === 4 && (
+                <FarmerStep4
                   values={values}
                   errors={errors}
                   touched={touched}

@@ -3,6 +3,10 @@ import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
+import SelectInput from '@/components/ui/inputs/SelectInput';
+import TextInput from '@/components/ui/inputs/TextInput';
+import UnitInput from '@/components/ui/inputs/UnitInput';
+
 import { FormValues } from '../index';
 
 interface FarmerStep3Props {
@@ -17,28 +21,22 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({ values, errors, touched, setF
   const animalTypes = ['Cow', 'Goat', 'Buffalo', 'Sheep', 'Others'];
   const milkSellingPlaces = ['Dairy', 'Village', 'Market', 'Co-operative', 'Others'];
   return (
-    <div className=" bg-gradient-to-b from-green-50 to-white py-8 px-4">
-      <div className="max-w-md mx-auto bg-white rounded-2xl p-6 shadow-md space-y-6">
-        <div className="flex gap-2">
+    <div className="bg-[radial-gradient(circle,rgba(54,195,96,0.2),white)]  to-white py-4 px-2 ">
+      <div className="max-w-md mx-auto bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] bg-green-120 rounded-2xl p-2 shadow-md space-y-4">
+        <div className="flex gap-2 h-12">
           {/* animal type */}
-          <Field
-            type="text"
-            id="animalType"
-            as="select"
+          <SelectInput
             name="animalType"
-            className={`w-1/2 border border-gray-300 p-2 rounded-lg    ${
-              touched.animalType && errors.animalType
-                ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-            }`}
-          >
-            {animalTypes.map((animalTypes) => (
-              <option key={animalTypes} value={animalTypes}>
-                {animalTypes}
-              </option>
-            ))}
-          </Field>
-          <ErrorMessage name="animalType" component="div" className="text-red-500 text-xs mt-1" />
+            options={animalTypes}
+            touched={touched}
+            errors={errors}
+            width="w-1/2"
+            height="h-[40px]"
+            defaultOption="Select Animal Type"
+            setFieldValue={setFieldValue}
+            values={values}
+            label={''}
+          />
 
           {/* quantity */}
 
@@ -46,7 +44,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({ values, errors, touched, setF
             id="quantity"
             name="quantity"
             type="number"
-            className={`w-1/2 border border-gray-300 p-2 rounded-lg  ${
+            className={`w-1/2 h-[40px] bg-white shadow-sm p-2 rounded-lg  ${
               touched.quantity && errors.quantity
                 ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                 : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
@@ -55,92 +53,99 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({ values, errors, touched, setF
           <ErrorMessage name="quantity" component="div" className="text-red-500 text-xs mt-1" />
         </div>
 
-        <div>
-          <label className="text-sm block font-medium text-gray-700 mb-1">
-            How Much Milk Your Cows Produce?
-          </label>
-          <div className="flex items-center gap-2">
-            <Field
-              id="milkProduction"
-              name="milkProduction"
-              type="number"
-              className={`flex-1 border border-gray-300 p-2 rounded-lg  ${
-                touched.milkProduction && errors.milkProduction
-                  ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                  : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-              }`}
-            />
-            <ErrorMessage
-              name="milkProduction"
-              component="div"
-              className="text-red-500 text-xs mt-1"
-            />
+        <UnitInput
+          id="milkProduction"
+          name="milkProduction"
+          label="How Much Milk Your Cows Produce?"
+          type="number"
+          unit="Ltr"
+          touched={touched}
+          errors={errors}
+          setFieldValue={setFieldValue}
+        />
 
-            <span className="text-sm text-gray-500">Ltr</span>
+        {/* milk selling place */}
+        <SelectInput
+          name="milkSellingPlace"
+          options={milkSellingPlaces}
+          touched={touched}
+          errors={errors}
+          width="w-full"
+          height="h-[50px]"
+          defaultOption="Select Milk Selling Place"
+          setFieldValue={setFieldValue}
+          values={values}
+          label={''}
+        />
+
+        {values.milkSellingPlace && (
+          <div className="mt-4">
+            <TextInput
+              name={values.milkSellingPlace}
+              label={`${values.milkSellingPlace} Name`}
+              placeholder={`Enter ${values.milkSellingPlace} Name`}
+              errors={errors}
+              touched={touched}
+              type="text"
+              setFieldValue={setFieldValue}
+              values={values}
+            />
           </div>
+        )}
+
+        {/* milk selling place */}
+
+        <div className="mt-4">
+          <TextInput
+            name="breedName"
+            label="Breed Name"
+            placeholder="Enter Breed Name"
+            errors={errors}
+            touched={touched}
+            type="text"
+            setFieldValue={setFieldValue}
+            values={values}
+          />
         </div>
 
-        <Field
-          id="milkSellingPlace"
-          type="number"
-          as="select"
-          name="milkSellingPlace"
-          className={`w-full border border-gray-300 p-2 rounded-lg ${
-            touched.milkSellingPlace && errors.milkSellingPlace
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-              : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-          }`}
-        >
-          <option value="">Select Milk Selling Place</option>
-          {milkSellingPlaces.map((place) => (
-            <option key={place} value={place}>
-              {place}
-            </option>
-          ))}
-        </Field>
-        <ErrorMessage
-          name="milkSellingPlace"
-          component="div"
-          className="text-red-500 text-xs mt-1"
-        />
+        <div className="flex items-center justify-between bg-white px-3 py-2 rounded-md w-fit mb-4">
+          <label className="text-sm font-bold text-green-900 mr-3">Insurance Available?</label>
 
-        <Field
-          id="breedName"
-          type="number"
-          name="breedName"
-          className={`w-full border border-gray-300 p-2 rounded-lg ${
-            touched.breedName && errors.breedName
-              ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-              : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-          }`}
-          placeholder="Enter Breed Name"
-        />
-        <ErrorMessage name="breedName" component="div" className="text-red-500 text-xs mt-1" />
-
-        <div>
-          <label className="text-sm font-medium text-gray-700 block mb-1">
-            Insurance Available?
-          </label>
-          <div className="flex items-center gap-3">
-            <div
-              className={`w-14 flex items-center bg-gray-200 rounded-full p-1 cursor-pointer ${
-                values.insuranceAvailable ? 'justify-end bg-green-500' : 'justify-start'
+          <div className="flex border border-gray-300 rounded-full overflow-hidden">
+            <button
+              type="button"
+              className={`text-sm font-medium px-4 py-1 rounded-md ${
+                values.insuranceAvailable ? 'bg-green-600 text-white' : 'bg-white text-gray-500'
               }`}
-              onClick={() => setFieldValue('insuranceAvailable', !values.insuranceAvailable)}
+              onClick={() => setFieldValue('insuranceAvailable', true)}
             >
-              <div className="w-6 h-6 bg-white rounded-full shadow" />
-            </div>
-            <span className="text-sm">{values.insuranceAvailable ? 'Yes' : 'No'}</span>
+              Yes
+            </button>
+            <button
+              type="button"
+              className={`text-sm font-medium px-4 py-1 rounded-r-full ${
+                !values.insuranceAvailable ? 'bg-gray-300 text-gray-700' : 'bg-white text-gray-500'
+              }`}
+              onClick={() => setFieldValue('insuranceAvailable', false)}
+            >
+              No
+            </button>
           </div>
         </div>
 
         {values.insuranceAvailable && (
-          <Field
-            name="insuranceCompany"
-            type="text"
-            className="w-full border border-gray-300 p-2 rounded-lg"
-            placeholder="Enter Insurance Company Name"
-          />
+          <div className="mt-8">
+            <TextInput
+              name="insuranceCompany"
+              label="Insurance Company Name"
+              placeholder="Enter Insurance Company Name"
+              errors={errors}
+              touched={touched}
+              type="text"
+              setFieldValue={setFieldValue}
+              values={values}
+            />
+          </div>
         )}
 
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">

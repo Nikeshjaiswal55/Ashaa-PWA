@@ -3,6 +3,8 @@ import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
+import { FormValues } from '../../../pages/DataCollectionForm/index';
+
 interface SelectInputProps {
   values: FormValues;
   label: string;
@@ -10,6 +12,7 @@ interface SelectInputProps {
   name: string;
   defaultOption: string;
   width: string;
+  height: string;
   errors: FormikErrors<FormValues>;
   touched: FormikTouched<FormValues>;
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
@@ -22,9 +25,10 @@ const SelectInput: React.FC<SelectInputProps> = ({
   errors,
   width,
   defaultOption,
+  height,
 }) => {
   return (
-    <div className="mb-4">
+    <>
       {label && (
         <label htmlFor={name} className="block text-lg font-semibold text-green-900 mb-1">
           {label}
@@ -34,7 +38,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         as="select"
         name={name}
         id={name}
-        className={`${width} h-[52px] p-3 border-2 rounded-lg shadow-sm bg-gray-50 transition-colors
+        className={`${width} ${height}  border-2 rounded-lg shadow-sm bg-gray-50 transition-colors
           ${
             touched[name] && errors[name]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
@@ -49,7 +53,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         ))}
       </Field>
       <ErrorMessage name={name} component="div" className="text-red-500 text-xs mt-1" />
-    </div>
+    </>
   );
 };
 
