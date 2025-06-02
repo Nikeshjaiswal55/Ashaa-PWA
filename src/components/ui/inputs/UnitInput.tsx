@@ -31,24 +31,24 @@ const UnitInput: React.FC<UnitInputProps> = ({
   return (
     <div>
       {label && (
-        <label htmlFor={id} className="text-sm block font-medium text-gray-700 mb-1">
+        <label htmlFor={id} className="text-base font-semibold text-green-900 mb-2 block">
           {label}
         </label>
       )}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 bg-white px-3 h-[33px] w-[121px] py-3 rounded-md shadow-md w-fit">
         <Field
           id={id}
           name={name}
           type={type}
           placeholder={placeholder}
-          className={`flex-1 border border-gray-300 p-2 rounded-lg ${
+          className={`w-12 text-green-800 h-[25px] text-lg text-center font-semibold outline-none bg-transparent border-green-800 border-b-2 ${
             touched[name as keyof FormValues] && errors[name as keyof FormValues]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
               : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
           } ${className}`}
         />
         <ErrorMessage name={name} component="div" className="text-red-500 text-xs mt-1" />
-        {unit && <span className="text-sm text-gray-500">{unit}</span>}
+        {unit && <span className="text-gray-400 text-sm font-medium">{unit}</span>}
       </div>
     </div>
   );

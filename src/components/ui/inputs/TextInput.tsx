@@ -11,16 +11,19 @@ interface TextInputProps {
   name: string;
   type: string;
   placeholder: string;
+  labelcss: string;
   errors: FormikErrors<FormValues>;
   touched: FormikTouched<FormValues>;
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
+  rightIcon?: React.ReactNode; // rightIcon prop uses React.ReactNode so that you can pass any React element, icon, button, or text as a prop. // React.ReactNode is a flexible type that allows string, number, JSX, fragments, arrays, null, etc.
 }
 const TextInput: React.FC<TextInputProps> = ({
   label,
   name,
   type,
   placeholder,
-
+  rightIcon,
+  labelcss,
   errors,
   touched,
 }) => {
@@ -29,7 +32,7 @@ const TextInput: React.FC<TextInputProps> = ({
       <div className="relative">
         <label
           htmlFor={name}
-          className="absolute bg-white text-green-900 top-[-15px] left-3 block text-lg px-2 font-semibold text-gray-700 mb-1"
+          className={`absolute bg-white ${labelcss} text-green-900 top-[-15px] left-3 block text-lg px-2 font-semibold text-gray-700 mb-1`}
         >
           {label}
         </label>
@@ -45,6 +48,12 @@ const TextInput: React.FC<TextInputProps> = ({
               : 'border-green-800 focus:ring-green-500 focus:border-green-500'
           }`}
         />
+        {/* ...select code */}
+        {rightIcon && (
+          <div className="absolute h-[52px] bg-green-800  w-[50px] right-0 rounded-sm pt-2 pl-2 top-0 right-0flex items-center justify-center">
+            {rightIcon}
+          </div>
+        )}
         <ErrorMessage name={name} component="div" className="text-red-500 text-xs mt-1" />
       </div>
     </>

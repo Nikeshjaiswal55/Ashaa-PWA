@@ -4,6 +4,7 @@ import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
+import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 
@@ -15,7 +16,9 @@ interface FarmerStep1Props {
   touched: FormikTouched<FormValues>;
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
+
 const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setFieldValue }) => {
+  // Define the options for states, districts, sub-districts, and farm units
   const states: string[] = [
     'Select your state',
     'Maharashtra',
@@ -30,9 +33,9 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
     'Bangalore Rural',
     'Chennai',
   ];
-
   const subDistricts: string[] = ['Select Block', 'Haveli', 'Khed', 'Hosakote', 'Sriperumbudur'];
   const farmUnits: FormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
+
   const InputData = [
     {
       label: 'farmer Name',
@@ -59,7 +62,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center ">
-      <div className="w-full max-w-2xl rounded-xl md:p-8">
+      <div className="w-full max-w-2xl mt-8 rounded-xl md:p-8">
         <div className="space-y-6">
           {/* farmer name - adhar no - contact number */}
           {InputData.map((input) => (
@@ -73,53 +76,34 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
               errors={errors}
               touched={touched}
               setFieldValue={setFieldValue}
+              labelcss={''}
             />
           ))}
 
-          {/* Gender */}
-          <div>
-            <label className="block text-lg font-semibold text-green-900 mb-2">Gender</label>
-            <div role="group" aria-labelledby="gender-group" className="flex justify-between gap-3">
-              {(['Male', 'Female', 'Other'] as FormValues['gender'][]).map((genderOption) => (
-                <label
-                  key={genderOption}
-                  className={`flex items-center w-[124px] h-[25px]  px-4 py-1 rounded-lg shadow-sm cursor-pointer transition-all duration-150 ease-in-out
-                                ${
-                                  values.gender === genderOption
-                                    ? 'bg-green-100'
-                                    : 'bg-gray-300 hover:bg-gray-200'
-                                }`}
-                >
-                  <Field
-                    type="radio"
-                    name="gender"
-                    value={genderOption}
-                    className="accent-green-600"
-                  />
-                  <span className="text-lg font-semibold text-green-900 pl-2">{genderOption}</span>
-                </label>
-              ))}
-            </div>
-            <ErrorMessage name="gender" component="div" className="text-red-500 text-xs mt-1" />
-          </div>
+          {/* gender */}
+          <RadioInputs
+            values={values}
+            name="gender"
+            label={'gender'}
+            options={['Male', 'Female', 'Other']}
+          />
 
           {/* Total Farm Size & Unit */}
           <div className="grid grid-cols-3 gap-4 items-end">
-            {/* Input Field */}
             <div className="col-span-2">
               <label
                 htmlFor="totalFarmSize"
-                className="block text-sm font-semibold text-green-900 mb-1"
+                className="block text-lg font-semibold text-green-900 mb-1"
               >
-                Total Farm Size
+                {' '}
+                Total Farm Size{' '}
               </label>
               <Field
                 type="number"
                 name="totalFarmSize"
                 id="totalFarmSize"
                 placeholder="Enter your Farm Size"
-                className={`w-full px-4 py-2 bg-gray-200 text-sm rounded-lg shadow-sm focus:outline-none 
-                ${
+                className={`w-full h-[36px] px-4 py-2 bg-gray-300 text-sm rounded-lg shadow-sm focus:outline-none placeholder-green-800 ${
                   touched.totalFarmSize && errors.totalFarmSize
                     ? 'border border-red-500'
                     : 'border border-gray-300'
@@ -138,8 +122,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                 as="select"
                 name="farmSizeUnit"
                 id="farmSizeUnit"
-                className={`w-full px-4 py-2 text-sm border rounded-lg shadow-sm focus:outline-none text-green-900
-                ${
+                className={`w-full px-4 py-2 h-[36px] text-sm border-2 rounded-lg shadow-sm focus:outline-none text-green-900 ${
                   touched.farmSizeUnit && errors.farmSizeUnit
                     ? 'border-red-500'
                     : 'border-green-800'
@@ -158,29 +141,24 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
               />
             </div>
           </div>
+          {/* Total Farm Size & Unit */}
 
           {/* No. of Separate Farms */}
           <div>
-            <label
-              htmlFor="separateFarms"
-              className="block text-lg font-semibold text-green-900 mb-1"
-            >
-              No. of Separate Farms
-            </label>
-            <div className="flex items-center bg-green-50 h-[53px] p-3 rounded-lg border border-green-200 shadow-sm">
-              <span className="text-lg font-semibold text-green-800 flex-grow">
-                Number of farms
+            <div className="flex items-center  bg-[rgba(54,195,96,0.2)] h-[53px] p-3 rounded-lg border border-green-200 shadow-sm">
+              <span className="text-lg font-semibold  text-green-900 flex-grow">
+                {' '}
+                No. of Separate Farms{' '}
               </span>
               <Field
                 type="number"
                 name="separateFarms"
                 id="separateFarms"
-                className={`w-20 p-2  bg-white rounded-md h-[42px]  text-center shadow-sm transition-colors
-                              ${
-                                touched.separateFarms && errors.separateFarms
-                                  ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                                  : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-                              }`}
+                className={`w-20 p-2 bg-white text-green-800 font-semibold text-lg border-2 underline  rounded-md h-[42px] text-center shadow-sm  border-b-2   ${
+                  touched.separateFarms && errors.separateFarms
+                    ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                    : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
+                }`}
               />
             </div>
             <ErrorMessage
@@ -192,7 +170,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
 
           {/* State & District */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex ">
+            <div className="flex mr-2">
               <div className="flex-1">
                 <SelectInput
                   label="State"
@@ -200,75 +178,68 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                   options={states}
                   touched={touched}
                   errors={errors}
-                  width="w-40"
+                  width="w-full"
                   height="h-[52px]"
                   defaultOption="Select option"
                   values={values}
                   setFieldValue={setFieldValue}
+                  customClass={'border-2'}
                 />
               </div>
-              <div className="flex-1">
+              <div className="flex-1 ml-2">
                 <SelectInput
                   label="District"
                   name="district"
                   options={districts}
                   touched={touched}
                   errors={errors}
-                  width="w-40"
+                  width="w-full"
                   height="h-[52px]"
                   defaultOption="Select option"
                   values={values}
                   setFieldValue={setFieldValue}
+                  customClass={'border-2'}
                 />
               </div>
             </div>
           </div>
 
           {/* Sub-District & Pin code */}
-          <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
+          <div className="grid grid-cols-1 mb-9 h-[52px] md:grid-cols-2 w-full gap-4">
             <div className="flex">
-              <div className="flex-1">
+              <div className="flex-1 mr-2 ">
+                {/* sub-district */}
                 <SelectInput
                   label="Sub-District"
                   name="subDistrict"
                   options={subDistricts}
                   touched={touched}
-                  width="w-40"
+                  width="w-full"
                   height="h-[52px]"
                   errors={errors}
                   defaultOption="Select Block"
                   setFieldValue={setFieldValue}
                   values={values}
+                  customClass={'border-2'}
                 />
               </div>
-              <div className="flex-1">
-                <label
-                  htmlFor="pinCode"
-                  className="block text-lg font-semibold text-green-800 mb-1"
-                >
-                  Pin Code
-                </label>
-                <Field
+              <div className="flex-1 ml-2">
+                <TextInput
+                  label={'Pin Code'}
+                  name={'pinCode'}
                   type="text"
-                  name="pinCode"
-                  id="pinCode"
-                  placeholder="Enter 6-digit pin code"
-                  className={`w-full p-3 ml-2 border-2 border-green-800  h-[52px] rounded-lg shadow-sm transition-colors
-                              ${
-                                touched.pinCode && errors.pinCode
-                                  ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                                  : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-                              }`}
-                />
-                <ErrorMessage
-                  name="pinCode"
-                  component="div"
-                  className="text-red-500 text-xs mt-1"
+                  placeholder={'Enter 6-digit pin code'}
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                  labelcss={''}
                 />
               </div>
             </div>
           </div>
 
+          {/* Village */}
           <TextInput
             label={'Village'}
             name={'village'}
@@ -278,10 +249,10 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             errors={errors}
             touched={touched}
             setFieldValue={setFieldValue}
+            labelcss={''}
           />
 
           {/* Farmer Photo Upload */}
-
           <ImageUploadInput
             name="farmerPhoto"
             label="Farmer Photos"
