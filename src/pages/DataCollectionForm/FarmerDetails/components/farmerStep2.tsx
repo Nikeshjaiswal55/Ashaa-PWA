@@ -5,7 +5,7 @@ import { UploadIcon } from 'lucide-react';
 import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 
-import { FormValues } from '../index';
+import { FormValues } from '../../FarmerDetails/index';
 
 interface FarmerStep2Props {
   values: FormValues;

@@ -1,6 +1,6 @@
 import { ErrorMessage, Field } from 'formik';
 
-import { FormValues } from '../../../pages/DataCollectionForm/index';
+import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
 interface RadioInputsProps {
   label: string;

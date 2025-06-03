@@ -23,7 +23,7 @@ const routes: Routes = {
     icon: undefined,
   },
   [Pages.DataCollectionForm]: {
-    component: asyncComponentLoader(() => import('@/pages/DataCollectionForm')),
+    component: asyncComponentLoader(() => import('@/pages/DataCollectionForm/FarmerDetails')),
     path: '/DataCollectionForm/FarmerDetails',
     title: 'FarmerDetails',
     icon: undefined,

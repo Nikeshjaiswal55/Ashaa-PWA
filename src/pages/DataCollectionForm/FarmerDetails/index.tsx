@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 
-import image from '../../assets/header/image.png';
+import image from '../../../assets/header/image.png';
 import FarmerStep1 from './components/farmerStep1';
 import FarmerStep2 from './components/farmerStep2';
 import FarmerStep3 from './components/farmerStep3';

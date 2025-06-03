@@ -1,9 +1,8 @@
 import { ErrorMessage } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
-import { FormValues } from '@/pages/DataCollectionForm';
-
 import gallery from '../../../assets/Icons/gallery.svg';
+import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
 interface ImageUploadInputProps {
   values: FormValues;

@@ -3,7 +3,7 @@ import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
-import { FormValues } from '../../../pages/DataCollectionForm/index';
+import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
 interface SelectInputProps {
   values: FormValues;

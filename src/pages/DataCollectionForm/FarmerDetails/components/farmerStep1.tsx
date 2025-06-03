@@ -8,7 +8,8 @@ import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 
-import { FormValues } from '../index';
+// Update the path below to the actual location of your FormValues type
+import { FormValues } from '../../FarmerDetails/index';
 
 interface FarmerStep1Props {
   values: FormValues;

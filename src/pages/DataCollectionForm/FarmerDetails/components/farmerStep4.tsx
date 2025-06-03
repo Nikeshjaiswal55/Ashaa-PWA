@@ -7,7 +7,7 @@ import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 
-import { FormValues } from '..';
+import { FormValues } from '../../FarmerDetails/index';
 
 const storageTypes = ['Warehouse', 'Cold Storage', 'Silo', 'Other'];
 

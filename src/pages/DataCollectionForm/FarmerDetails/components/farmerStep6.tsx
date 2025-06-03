@@ -4,7 +4,7 @@ import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
 
-import { FormValues } from '..';
+import { FormValues } from '../../FarmerDetails/index';
 
 const internetOptions = ['WiFi', 'Mobile Data', 'No Internet'];
 const ownerOptions = ['Self', 'Son', 'Daughter', 'Other'];
