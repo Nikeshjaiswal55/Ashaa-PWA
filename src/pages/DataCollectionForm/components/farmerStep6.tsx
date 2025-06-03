@@ -16,7 +16,7 @@ interface FarmerStep5Props {
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
 const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setFieldValue }) => (
-  <div className="flex flex-col items-center justify-center ">
+  <div className="flex flex-col min-h-[70vh] items-center  ">
     <div className="w-full max-w-2xl rounded-xl md:p-8"></div>
     <div className="space-y-8">
       {/* Smartphone Ownership */}

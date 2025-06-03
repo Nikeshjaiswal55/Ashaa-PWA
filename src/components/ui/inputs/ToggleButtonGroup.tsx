@@ -20,7 +20,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
   <div
     className={`flex items-center w-full justify-between shadow-md px-3 py-1 h-[39px] rounded-md w-fit  ${className}`}
   >
-    <label className="text-lg font-semibold text-green-900 mr-3">{label}</label>
+    <label className="text-lg font-semibold text-green-900 mr-2">{label}</label>
     <div className="flex border border-gray-300 rounded-sm overflow-hidden">
       <button
         type="button"

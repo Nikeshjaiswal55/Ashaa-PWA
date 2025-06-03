@@ -128,11 +128,13 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                     : 'border-green-800'
                 }`}
               >
+                {' '}
                 {farmUnits.map((unit) => (
                   <option key={unit} value={unit}>
-                    {unit}
+                    {' '}
+                    {unit}{' '}
                   </option>
-                ))}
+                ))}{' '}
               </Field>
               <ErrorMessage
                 name="farmSizeUnit"
@@ -170,7 +172,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
 
           {/* State & District */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex mr-2">
+            <div className="flex  gap-4">
               <div className="flex-1">
                 <SelectInput
                   label="State"
@@ -186,7 +188,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                   customClass={'border-2'}
                 />
               </div>
-              <div className="flex-1 ml-2">
+              <div className="flex-1 ">
                 <SelectInput
                   label="District"
                   name="district"
@@ -205,9 +207,9 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           </div>
 
           {/* Sub-District & Pin code */}
-          <div className="grid grid-cols-1 mb-9 h-[52px] md:grid-cols-2 w-full gap-4">
-            <div className="flex">
-              <div className="flex-1 mr-2 ">
+          <div className="grid grid-cols-1 mb-9 h-[52px] md:grid-cols-2 w-full ">
+            <div className="flex gap-3">
+              <div className="flex-1 ">
                 {/* sub-district */}
                 <SelectInput
                   label="Sub-District"

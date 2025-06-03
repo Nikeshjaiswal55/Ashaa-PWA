@@ -3,6 +3,7 @@ import React from 'react';
 import { ErrorMessage, Field, FieldArray } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
+import deleteIcon from '@/assets/icons/delete.svg';
 import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
@@ -49,11 +50,11 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
   const vehcial = ['Tractor', 'Trolley', 'Cultivator', 'Rotavator', 'Plough', 'Seeder', 'Sprayer'];
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center min-h-[70vh] ">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         <div className="space-y-6">
           <FieldArray
-            name="animals"
+            name="Equipment"
             render={(arrayHelpers) => (
               <div className="bg-[radial-gradient(circle,rgba(54,195,96,0.10),white)] to-white py-4 px-2">
                 {/* Animal List */}
@@ -85,20 +86,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                               className="absolute -top-2 -left-2 bg-white p-1 rounded-full shadow border border-gray-200"
                               title="Delete"
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-3 w-3 text-black"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
+                              <img src={deleteIcon} alt="Delete" className="w-4 h-4" />
                             </button>
                           </div>
                           <div>
@@ -108,14 +96,33 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                         </div>
 
                         {/* MIDDLE: Quantity */}
-                        <div className="bg-white rounded-xl px-4 py-1 font-bold text-green-900 text-lg shadow border h-[36px] min-w-[45px] text-center">
+                        <div className="bg-white rounded-xl  px-4 ml-19 py-1 font-bold text-green-900 text-lg shadow border h-[36px] min-w-[45px] text-center">
                           {item.equipmentQuantity}
                         </div>
 
-                        {/* RIGHT: Equipment Type + Owner */}
-                        <div className="flex items-center gap-2 text-sm text-gray-700">
-                          <div>{item.equipmentType}</div>
-                          <div className="text-green-800 font-medium">({item.owner})</div>
+                        {/* RIGHT: Milk Info + Edit */}
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            className="bg-green-800 hover:bg-green-700 p-2 rounded-xl text-white"
+                            title="Edit"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              {' '}
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5l3 3L13 14h-3v-3L18.5 2.5z"
+                              />{' '}
+                            </svg>
+                          </button>
                         </div>
                       </div>
                     ))}
@@ -125,7 +132,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                 {/* Collapsible Add New Animal Section */}
                 <div className="mb-4 max-w-md mx-auto">
                   <div
-                    className="flex items-center justify-between bg-green-200 px-4 py-2 rounded cursor-pointer select-none"
+                    className="flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
                     onClick={() => setShowForm2((prev: boolean) => !prev)}
                   >
                     <span className="font-semibold text-green-900">+ Add New Equipment</span>

@@ -1,8 +1,9 @@
 import { ErrorMessage } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
-import { UploadIcon } from 'lucide-react';
 
 import { FormValues } from '@/pages/DataCollectionForm';
+
+import gallery from '../../../assets/Icons/gallery.svg';
 
 interface ImageUploadInputProps {
   values: FormValues;
@@ -27,7 +28,7 @@ const ImageUploadInput: React.FC<ImageUploadInputProps> = ({
       <div>
         <label className="block text-lg font-semibold w-full text-green-800 mb-2">{label}</label>
         <div
-          className={`flex justify-center items-center w-full h-[81px] border-2 border-dashed rounded-lg cursor-pointer transition-colors
+          className={`flex justify-center items-center w-full h-[81px] border-2 border-gray-500 border-dashed rounded-lg cursor-pointer transition-colors
           ${
             touched[name as keyof typeof touched] && errors[name as keyof typeof errors]
               ? 'border-red-400 bg-red-50 hover:bg-red-100'
@@ -53,8 +54,8 @@ const ImageUploadInput: React.FC<ImageUploadInputProps> = ({
             />
           ) : (
             <div className="text-center flex flex-col items-center justify-center">
-              <UploadIcon className="h-6 w-6 text-gray-400" />
-              <p className="mt-1 text-sm text-green-600">Upload image</p>
+              <img src={gallery} alt="Upload Icon" className="h-[24px] w-[24px] mb-2" />
+              <p className="mt-0 text-sm text-green-600">Upload image</p>
             </div>
           )}
         </div>

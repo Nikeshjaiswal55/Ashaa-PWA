@@ -9,6 +9,8 @@ import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
 import UnitInput from '@/components/ui/inputs/UnitInput';
 
+import DeleteImg from '../../../assets/Icons/delete.svg';
+import milk from '../../../assets/Icons/lucide_milk.svg';
 import { Animal, FormValues } from '../index';
 
 interface FarmerStep3Props {
@@ -52,7 +54,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   const animalTypes = ['Cow', 'Goat', 'Buffalo', 'Sheep', 'Others'];
   const milkSellingPlaces = ['Dairy', 'Village', 'Market', 'Co-operative', 'Others'];
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col min-h-[70vh] items-center ">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         <div className="space-y-6">
           <FieldArray
@@ -89,20 +91,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                               className="absolute -top-2 -left-2 bg-white p-1 rounded-full shadow border border-gray-200"
                               title="Delete"
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-3 w-3 text-black"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
+                              <img src={DeleteImg} alt="Delete" className="h-4 w-4" />
                             </button>
                           </div>
                           <div>
@@ -114,28 +103,14 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         </div>
 
                         {/* MIDDLE: Quantity */}
-                        <div className="bg-white rounded-xl px-4 py-1 font-bold text-green-900 text-lg shadow border h-[36px] min-w-[45px] text-center">
+                        <div className="bg-white rounded-md px-4 py-1 font-bold text-green-900 text-lg shadow border h-[36px] min-w-[45px] text-center">
                           {animal.quantity}
                         </div>
 
                         {/* RIGHT: Milk Info + Edit */}
                         <div className="flex items-center gap-2">
                           <div className="flex items-center text-gray-500 text-sm">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5 mr-1"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              {' '}
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={1.5}
-                                d="M9 2h6l1 4v14H8V6l1-4z"
-                              />{' '}
-                            </svg>{' '}
+                            <img src={milk} alt="Milk Icon" className="h-4 w-4 mr-1" />
                             {animal.quantity} ltr Miilk Daily{' '}
                           </div>
 
@@ -146,7 +121,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4"
+                              className="h-6 w-6"
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
@@ -167,13 +142,15 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                 )}
 
                 {/* Collapsible Add New Animal Section */}
-                <div className="mb-4 max-w-md mx-auto">
+                <div className="mb-4  max-w-md mx-auto">
                   <div
-                    className="flex items-center justify-between bg-green-200 px-4 py-2 rounded cursor-pointer select-none"
+                    className=" flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
                     onClick={() => setShowForm((prev) => !prev)}
                   >
-                    <span className="font-semibold text-green-900">+ Add New Animal</span>
-                    <span className="text-green-900 text-xl"> {showForm ? '▲' : '▼'} </span>
+                    <span className="font-semibold text-green-900 text-base">+ Add New Animal</span>
+                    <span className="text-green-900 text-2xl font-bold">
+                      {showForm ? '▲' : '▼'}
+                    </span>
                   </div>
                   {showForm && (
                     // Form to Add New Animal

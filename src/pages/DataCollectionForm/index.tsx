@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 
+import image from '../../assets/header/image.png';
 import FarmerStep1 from './components/farmerStep1';
 import FarmerStep2 from './components/farmerStep2';
 import FarmerStep3 from './components/farmerStep3';
@@ -359,7 +360,19 @@ export const FarmerDetailsForm: React.FC = () => {
 
   // --- Render  form---
   return (
-    <div className=" flex flex-col items-center justify-center p-4">
+    <div
+      className="flex flex-col items-center   p-4"
+      style={{
+        backgroundImage: `
+      radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%),
+      url(${image})
+    `,
+        backgroundSize: 'auto',
+        backgroundRepeat: 'no-repeat, repeat',
+        backgroundPosition: 'top left',
+        backgroundBlendMode: 'overlay',
+      }}
+    >
       {/* Background gradient with image */}
 
       <div className="w-full max-w-2xl rounded-xl md:p-8">
@@ -369,9 +382,7 @@ export const FarmerDetailsForm: React.FC = () => {
             <React.Fragment key={s}>
               <div
                 className={`w-5 h-5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-sm font-semibold ${
-                  s <= step
-                    ? 'bg-[#005B24] text-white ring-2 ring-green-300 ring-offset-1'
-                    : 'bg-gray-400 text-white'
+                  s <= step ? 'bg-[#005B24] text-white ' : 'bg-gray-400 text-white'
                 }`}
               >
                 {s}
@@ -388,7 +399,10 @@ export const FarmerDetailsForm: React.FC = () => {
         {/* back button */}
         <div className="flex items-center mb-0">
           {step > 1 && (
-            <button onClick={() => setStep(step - 1)} className="text-green-800 rounded">
+            <button
+              onClick={() => setStep(step - 1)}
+              className="text-green-900 border-2 border-green-900  rounded-full"
+            >
               <BackArrowIcon />
             </button>
           )}
@@ -485,7 +499,7 @@ export const FarmerDetailsForm: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center bg-green-900 w-[250px]  hover:bg-green-900 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center bg-green-900 w-[250px]  hover:bg-green-900 text-white text-center font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -514,7 +528,7 @@ export const FarmerDetailsForm: React.FC = () => {
                   ) : (
                     <>
                       {step < validationSchemaArray.length ? 'Next Step' : 'Submit'}
-                      <ArrowRightIcon className="ml-15 w-8 h-8" />
+                      <ArrowRightIcon className=" w-6 h-6" />
                     </>
                   )}
                 </button>
