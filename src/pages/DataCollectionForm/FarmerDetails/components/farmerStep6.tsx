@@ -28,7 +28,7 @@ const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setF
       />
 
       {/* Internet Access */}
-      <SelectInput
+      <SelectInput<FormValues>
         label="Internet Access"
         name="internetAccess"
         options={internetOptions}
@@ -40,10 +40,11 @@ const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setF
         width="w-full"
         height="h-[50px]"
         customClass={'border-2'}
+        labelFirst={''}
       />
 
       {/* Owned By */}
-      <SelectInput
+      <SelectInput<FormValues>
         label="Owned By"
         name="ownedBy"
         options={ownerOptions}
@@ -55,6 +56,7 @@ const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setF
         width="w-full"
         height="h-[50px]"
         customClass={'border-2'}
+        labelFirst={''}
       />
 
       {/* Farm Software/Apps Used */}
@@ -66,7 +68,7 @@ const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setF
       />
 
       {/* App Name */}
-      <TextInput
+      <TextInput<FormValues>
         label="App Name"
         name="appName"
         placeholder="Enter name of software/app"

@@ -19,7 +19,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         <div className="space-y-6">
           {/*  Years of Farming Experience */}
-          <TextInput
+          <TextInput<FormValues>
             label="Years of Farming Experience"
             name="yearsOfExperience"
             type="text"
@@ -81,7 +81,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
           </div>
 
           {/* Certification (if any) */}
-          <TextInput
+          <TextInput<FormValues>
             label="Certification (if any)"
             name="Certification"
             type="text"
@@ -95,7 +95,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
 
           {/* Farmer Photo Upload */}
 
-          <ImageUploadInput
+          <ImageUploadInput<FormValues>
             name="CertificateImage"
             label="Upload Certificate"
             errors={errors}
@@ -128,7 +128,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
             />
             <ErrorMessage name="awards" component="div" className="text-red-500 text-xs mt-1" />
             <div className="mt-4">
-              <ImageUploadInput
+              <ImageUploadInput<FormValues>
                 name="awardImage"
                 label="Upload Award"
                 errors={errors}

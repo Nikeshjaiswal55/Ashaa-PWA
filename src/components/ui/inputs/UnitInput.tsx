@@ -2,22 +2,20 @@ import React from 'react';
 
 import { ErrorMessage, Field, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
-import { FormValues } from '../../../pages/DataCollectionForm/index';
-
-interface UnitInputProps {
+interface UnitInputProps<T> {
   id: string;
   name: string;
   label: string;
   type?: string;
   unit?: string;
-  errors: FormikErrors<FormValues>;
-  touched: FormikTouched<FormValues>;
-  setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
+  errors: FormikErrors<T>;
+  touched: FormikTouched<T>;
+  setFieldValue: FormikHelpers<T>['setFieldValue'];
   value?: string | number;
   className?: string;
   placeholder?: string;
 }
-const UnitInput: React.FC<UnitInputProps> = ({
+const UnitInput = <T extends object>({
   id,
   name,
   label,
@@ -27,7 +25,7 @@ const UnitInput: React.FC<UnitInputProps> = ({
   errors,
   className = '',
   placeholder = '',
-}) => {
+}: UnitInputProps<T>) => {
   return (
     <div>
       {label && (
@@ -42,7 +40,7 @@ const UnitInput: React.FC<UnitInputProps> = ({
           type={type}
           placeholder={placeholder}
           className={`w-12 text-green-800 h-[25px] text-lg text-center font-semibold outline-none bg-transparent border-green-800 border-b-2 ${
-            touched[name as keyof FormValues] && errors[name as keyof FormValues]
+            touched[name as keyof T] && errors[name as keyof T]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
               : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
           } ${className}`}

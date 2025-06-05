@@ -1,15 +1,13 @@
 import { ErrorMessage, Field } from 'formik';
 
-import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
-
-interface RadioInputsProps {
+interface RadioInputsProps<T> {
   label: string;
   name: string;
-  values: FormValues;
+  values: T;
   options: string[];
 }
 
-const RadioInputs: React.FC<RadioInputsProps> = ({ label, name, values, options }) => {
+const RadioInputs = <T extends object>({ label, name, values, options }: RadioInputsProps<T>) => {
   return (
     <div>
       <label className="block text-lg font-semibold text-green-900 mb-2">{label}</label>
@@ -19,7 +17,7 @@ const RadioInputs: React.FC<RadioInputsProps> = ({ label, name, values, options 
             key={option}
             className={`flex items-center w-[124px] h-[25px] px-3 py-1 rounded-lg shadow-sm cursor-pointer transition-all duration-150 ease-in-out
                             ${
-                              values[name as keyof FormValues] === option
+                              values[name as keyof T] === option
                                 ? 'bg-green-200'
                                 : 'bg-gray-300 hover:bg-gray-200'
                             }`}

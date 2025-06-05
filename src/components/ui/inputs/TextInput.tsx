@@ -5,8 +5,8 @@ import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
-interface TextInputProps {
-  values: FormValues;
+interface TextInputProps<T> {
+  values: T;
   label: string;
   name: string;
   type: string;
@@ -17,7 +17,7 @@ interface TextInputProps {
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
   rightIcon?: React.ReactNode; // rightIcon prop uses React.ReactNode so that you can pass any React element, icon, button, or text as a prop. // React.ReactNode is a flexible type that allows string, number, JSX, fragments, arrays, null, etc.
 }
-const TextInput: React.FC<TextInputProps> = ({
+const TextInput = <T extends object>({
   label,
   name,
   type,
@@ -26,7 +26,7 @@ const TextInput: React.FC<TextInputProps> = ({
   labelcss,
   errors,
   touched,
-}) => {
+}: TextInputProps<T>) => {
   return (
     <>
       <div className="relative">
@@ -49,11 +49,13 @@ const TextInput: React.FC<TextInputProps> = ({
           }`}
         />
         {/* ...select code */}
+
         {rightIcon && (
-          <div className="absolute h-[52px] bg-green-800  w-[50px] right-0 rounded-sm pt-2 pl-2 top-0 right-0flex items-center justify-center">
-            {rightIcon}
+          <div className="absolute h-[52px] bg-green-800 w-[50px] right-0 rounded-sm  top-0 flex items-center justify-center">
+            {typeof rightIcon === 'string' ? <img src={rightIcon} alt="location" /> : rightIcon}
           </div>
         )}
+
         <ErrorMessage name={name} component="div" className="text-red-500 text-xs mt-1" />
       </div>
     </>

@@ -5,8 +5,8 @@ import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
-interface SelectInputProps {
-  values: FormValues;
+interface SelectInputProps<T> {
+  values: T;
   label: string;
   options: string[];
   name: string;
@@ -15,12 +15,14 @@ interface SelectInputProps {
   height: string;
   labelcss?: string;
   customClass: string;
+  labelFirst: string;
   errors: FormikErrors<FormValues>;
   touched: FormikTouched<FormValues>;
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
-const SelectInput: React.FC<SelectInputProps> = ({
+const SelectInput = <T extends object>({
   label,
+  labelFirst,
   name,
   options,
   touched,
@@ -28,13 +30,13 @@ const SelectInput: React.FC<SelectInputProps> = ({
   width,
   customClass,
   defaultOption,
-
   labelcss,
   height,
-}) => {
+}: SelectInputProps<T>) => {
   return (
     <>
       <div className="relative">
+        <label className="block text-lg font-semibold text-green-900 mb-2">{labelFirst}</label>
         {label && (
           <label
             htmlFor={name}
@@ -49,7 +51,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
           id={name}
           className={`${width} ${height}  ${
             customClass || ''
-          }   rounded-lg shadow-sm  transition-colors
+          }   rounded-lg shadow-sm  transition-colors 
           ${
             touched[name as keyof FormValues] && errors[name as keyof FormValues]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'

@@ -23,7 +23,7 @@ interface FarmerStep4Props {
 const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setFieldValue }) => (
   <div className="space-y-8">
     {/* Storage Facilities Type */}
-    <SelectInput
+    <SelectInput<FormValues>
       label="Storage Facilities Type"
       name="storageType"
       options={storageTypes}
@@ -34,10 +34,11 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
       defaultOption="Select your Storage Facilities Type"
       width="w-full"
       height="h-[50px]"
-      customClass={'border-2'}
+      customClass={'border-2 '}
+      labelFirst={''}
     />
     {/* Warehouse Name  */}
-    <TextInput
+    <TextInput<FormValues>
       label="Warehouse Name"
       name="warehouseName"
       type="text"
@@ -50,7 +51,7 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
     />
 
     {/* Warehouse Location */}
-    <TextInput
+    <TextInput<FormValues>
       label="Warehouse Location"
       name="warehouseLocation"
       type="text"
@@ -84,7 +85,7 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
           className="w-16 bg-transparent text-green-900 font-bold text-xl underline  border-none focus:ring-0 focus:outline-none"
           style={{ appearance: 'textfield' }}
         />
-        <SelectInput
+        <SelectInput<FormValues>
           name="capacityUnit"
           options={capacityUnits}
           values={values}
@@ -96,15 +97,21 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
           label=""
           customClass="bg-transparent text-gray-500 font-semibold text-lg border-none focus:ring-0 focus:outline-none"
           defaultOption={''}
+          labelFirst={''}
         />
       </div>
     </div>
 
     {/* capacityUnit */}
-    <RadioInputs label="Condition" name="condition" values={values} options={conditionOptions} />
+    <RadioInputs<FormValues>
+      label="Condition"
+      name="condition"
+      values={values}
+      options={conditionOptions}
+    />
 
     {/* storagePhoto */}
-    <ImageUploadInput
+    <ImageUploadInput<FormValues>
       name="storagePhoto"
       label="Upload photo of storage"
       values={values}

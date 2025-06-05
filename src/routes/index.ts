@@ -22,10 +22,16 @@ const routes: Routes = {
     title: 'Page 2',
     icon: undefined,
   },
-  [Pages.DataCollectionForm]: {
+  [Pages.DataCollectionFormFarmer]: {
     component: asyncComponentLoader(() => import('@/pages/DataCollectionForm/FarmerDetails')),
     path: '/DataCollectionForm/FarmerDetails',
     title: 'FarmerDetails',
+    icon: undefined,
+  },
+  [Pages.DataCollectionFormFarm]: {
+    component: asyncComponentLoader(() => import('@/pages/DataCollectionForm/FarmDetails')),
+    path: '/DataCollectionForm/FarmDetails',
+    title: 'DataCollectionFarmForm',
     icon: undefined,
   },
   [Pages.Page3]: {

@@ -10,7 +10,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-  const hiddenLayoutPaths = ['/DataCollectionForm', '/DataCollectionForm/FarmerDetails'];
+  const hiddenLayoutPaths = [
+    '/DataCollectionForm',
+    '/DataCollectionForm/FarmerDetails',
+    '/DataCollectionForm/FarmDetails',
+  ];
   const shouldHideLayout = hiddenLayoutPaths.includes(location.pathname);
 
   return (

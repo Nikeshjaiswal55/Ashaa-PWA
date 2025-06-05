@@ -67,7 +67,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         <div className="space-y-6">
           {/* farmer name - adhar no - contact number */}
           {InputData.map((input) => (
-            <TextInput
+            <TextInput<FormValues>
               key={input.id}
               label={input.label}
               name={input.name}
@@ -82,7 +82,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           ))}
 
           {/* gender */}
-          <RadioInputs
+          <RadioInputs<FormValues>
             values={values}
             name="gender"
             label={'gender'}
@@ -175,7 +175,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex  gap-4">
               <div className="flex-1">
-                <SelectInput
+                <SelectInput<FormValues>
                   label="State"
                   name="state"
                   options={states}
@@ -187,10 +187,11 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                   values={values}
                   setFieldValue={setFieldValue}
                   customClass={'border-2'}
+                  labelFirst={''}
                 />
               </div>
               <div className="flex-1 ">
-                <SelectInput
+                <SelectInput<FormValues>
                   label="District"
                   name="district"
                   options={districts}
@@ -202,6 +203,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                   values={values}
                   setFieldValue={setFieldValue}
                   customClass={'border-2'}
+                  labelFirst={''}
                 />
               </div>
             </div>
@@ -212,7 +214,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             <div className="flex gap-3">
               <div className="flex-1 ">
                 {/* sub-district */}
-                <SelectInput
+                <SelectInput<FormValues>
                   label="Sub-District"
                   name="subDistrict"
                   options={subDistricts}
@@ -224,10 +226,11 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                   setFieldValue={setFieldValue}
                   values={values}
                   customClass={'border-2'}
+                  labelFirst={''}
                 />
               </div>
               <div className="flex-1 ml-2">
-                <TextInput
+                <TextInput<FormValues>
                   label={'Pin Code'}
                   name={'pinCode'}
                   type="text"
@@ -243,7 +246,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           </div>
 
           {/* Village */}
-          <TextInput
+          <TextInput<FormValues>
             label={'Village'}
             name={'village'}
             type="text"
@@ -256,7 +259,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           />
 
           {/* Farmer Photo Upload */}
-          <ImageUploadInput
+          <ImageUploadInput<FormValues>
             name="farmerPhoto"
             label="Farmer Photos"
             id="farmerPhoto"

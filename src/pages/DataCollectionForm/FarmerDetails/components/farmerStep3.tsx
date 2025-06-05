@@ -157,7 +157,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                     <div className="mt-2 bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-4">
                       <div className="flex gap-2 h-12">
                         {/* animalType */}
-                        <SelectInput
+                        <SelectInput<FormValues>
                           name="animalType"
                           options={animalTypes}
                           touched={touched}
@@ -169,6 +169,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           values={values}
                           label={''}
                           customClass={'px-4 text-sm font-semibold bg-white text-green-800'}
+                          labelFirst={''}
                         />
 
                         {/* quantity */}
@@ -190,7 +191,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                       </div>
                       {/* How Much Milk Your Cows Produce? */}
                       <div>
-                        <UnitInput
+                        <UnitInput<FormValues>
                           id="milkProduction"
                           name="milkProduction"
                           label="How Much Milk Your Cows Produce?"
@@ -203,7 +204,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                       </div>
                       {/* milk selling place */}
                       <div className="mt-6">
-                        <SelectInput
+                        <SelectInput<FormValues>
                           name="milkSellingPlace"
                           options={milkSellingPlaces}
                           touched={touched}
@@ -216,10 +217,11 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           label={'Milk Selling Place'}
                           labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.10))] '}
                           customClass={'border-2'}
+                          labelFirst={''}
                         />
                         {values.milkSellingPlace && (
                           <div className="mt-4">
-                            <TextInput
+                            <TextInput<FormValues>
                               name={values.milkSellingPlace}
                               label={`${values.milkSellingPlace} Name`}
                               placeholder={`Enter ${values.milkSellingPlace} Name`}
@@ -235,7 +237,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                       </div>
                       {/* breedName */}
                       <div className="mt-6">
-                        <TextInput
+                        <TextInput<FormValues>
                           name="breedName"
                           label="Breed Name"
                           placeholder="Enter Breed Name"
@@ -256,7 +258,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                       />
                       {values.insuranceAvailable && (
                         <div className="mt-6">
-                          <TextInput
+                          <TextInput<FormValues>
                             name="insuranceCompany"
                             label="Insurance Company Name"
                             placeholder="Enter Insurance Company Name"
@@ -270,7 +272,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         </div>
                       )}
                       {/* image */}
-                      <ImageUploadInput
+                      <ImageUploadInput<FormValues>
                         name="photo"
                         label="Animal Photo"
                         errors={errors}

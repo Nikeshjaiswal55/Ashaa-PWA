@@ -33,7 +33,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
     const newEquipment: Equipment = {
       equipment: values.equipment,
       equipmentQuantity: values.equipmentQuantity,
-      equipmentType: values.equipmentType, // <-- fixed here
+      equipmentType: values.equipmentType,
       brandName: values.brandName,
       owner: values.owner,
       breedName: values.breedName,
@@ -143,7 +143,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                     <div className="mt-2 bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-4">
                       <div className="flex gap-2 h-12">
                         {/* animalType */}
-                        <SelectInput
+                        <SelectInput<FormValues>
                           name="equipment"
                           options={vehcial}
                           touched={touched}
@@ -155,6 +155,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           values={values}
                           label={''}
                           customClass={'px-4 text-sm font-semibold bg-white text-green-800'}
+                          labelFirst={''}
                         />
 
                         {/* quantity */}
@@ -177,7 +178,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
 
                       {/* How Much Milk Your Cows Produce? */}
 
-                      <TextInput
+                      <TextInput<FormValues>
                         name="equipmentType"
                         label="Equipment Type"
                         placeholder="Equipment Type"
@@ -190,7 +191,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                       />
 
                       {/* Brand Name */}
-                      <TextInput
+                      <TextInput<FormValues>
                         name="brandName"
                         label="Brand Name"
                         placeholder="Enter manufacturer name"
@@ -205,7 +206,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                       {/* milk selling place */}
                       <div className="mt-6">
                         {/* Owner */}
-                        <SelectInput
+                        <SelectInput<FormValues>
                           name="owner"
                           options={['Self', 'Rented', 'Other']}
                           touched={touched}
@@ -218,12 +219,13 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           label="Owner"
                           customClass={'border-2 h-[52px]'}
                           labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
+                          labelFirst={''}
                         />
                       </div>
 
                       {/* breedName */}
                       <div className="mt-6">
-                        <TextInput
+                        <TextInput<FormValues>
                           name="breedName"
                           label="Breed Name"
                           placeholder="Enter Breed Name"
@@ -246,7 +248,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
 
                       {values.insuranceAvailable && (
                         <div className="mt-6">
-                          <TextInput
+                          <TextInput<FormValues>
                             name="insuranceCompany"
                             label="Insurance Company Name"
                             placeholder="Enter Insurance Company Name"
@@ -267,7 +269,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                         </label>
                         <div className="flex w-full gap-5">
                           <div className="w-60">
-                            <ImageUploadInput
+                            <ImageUploadInput<FormValues>
                               name="equipmentDocument"
                               label=""
                               errors={errors}
@@ -280,7 +282,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           </div>
 
                           <div className="w-60">
-                            <ImageUploadInput
+                            <ImageUploadInput<FormValues>
                               name="equipmentImage"
                               label=""
                               errors={errors}
