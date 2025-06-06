@@ -85,7 +85,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           <RadioInputs<FormValues>
             values={values}
             name="gender"
-            label={'gender'}
+            label={'Gender'}
             options={['Male', 'Female', 'Other']}
           />
 
@@ -229,7 +229,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                   labelFirst={''}
                 />
               </div>
-              <div className="flex-1 ml-2">
+              <div className="flex-1 ml-2 mt-2">
                 <TextInput<FormValues>
                   label={'Pin Code'}
                   name={'pinCode'}
@@ -246,17 +246,19 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           </div>
 
           {/* Village */}
-          <TextInput<FormValues>
-            label={'Village'}
-            name={'village'}
-            type="text"
-            placeholder={'Enter your village'}
-            values={values}
-            errors={errors}
-            touched={touched}
-            setFieldValue={setFieldValue}
-            labelcss={''}
-          />
+          <div className="mt-12">
+            <TextInput<FormValues>
+              label={'Village'}
+              name={'village'}
+              type="text"
+              placeholder={'Enter your village'}
+              values={values}
+              errors={errors}
+              touched={touched}
+              setFieldValue={setFieldValue}
+              labelcss={''}
+            />
+          </div>
 
           {/* Farmer Photo Upload */}
           <ImageUploadInput<FormValues>

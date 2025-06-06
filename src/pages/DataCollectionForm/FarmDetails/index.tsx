@@ -8,6 +8,7 @@ import image from '../../../assets/header/image.png';
 import FarmStep1 from './components/farmStep1';
 import FarmStep2 from './components/farmStep2';
 import FarmStep3 from './components/farmStep3';
+import FarmStep4 from './components/farmStep4';
 import FarmStep5 from './components/farmStep5';
 
 // --- Icon Types (Optional but good practice) ---
@@ -25,7 +26,8 @@ const BackArrowIcon: React.FC<IconProps> = ({ className = 'w-6 h-6' }) => (
     stroke="currentColor"
     className={className}
   >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    {' '}
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />{' '}
   </svg>
 );
 
@@ -38,9 +40,18 @@ const ArrowRightIcon: React.FC<IconProps> = ({ className = 'w-5 h-5 ml-1' }) => 
     stroke="currentColor"
     className={className}
   >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+    {' '}
+    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />{' '}
   </svg>
 );
+
+// --- Equipment Interface ---
+export interface waterManagement {
+  waterSource: string;
+  waterSourcePhoto: File | null;
+  waterRetentionCapacity: string;
+  drainageQuality: string;
+}
 
 // --- Form Values Interface ---
 export interface FarmFormValues {
@@ -68,6 +79,13 @@ export interface FarmFormValues {
   soilTestingReportAvailable: boolean;
   soilTestingReport: File | null;
 
+  //   step 4
+  waterSource: string;
+  waterSourcePhoto: File | null;
+  waterRetentionCapacity: string;
+  waterManagement: waterManagement[];
+  drainageQuality: string;
+
   // step-5
   farmerPhoto: File | null;
   farmPhoto: File | null;
@@ -87,6 +105,7 @@ const HeaderData = [
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
   const [step, setStep] = useState(3);
+  const [showWaterManagementForm, setShowWaterManagementForm] = useState(false); //for show or hide water management form step 4
   // --- Initial Form Values ---
   const initialValues: FarmFormValues = {
     individualFarmSize: '',
@@ -112,6 +131,13 @@ export const FarmerDetailsForm: React.FC = () => {
     soilPhoto: null,
     soilTestingReportAvailable: false,
     soilTestingReport: null,
+
+    // step 4
+    waterManagement: [],
+    waterSource: '',
+    waterSourcePhoto: null,
+    waterRetentionCapacity: '',
+    drainageQuality: '',
 
     // step-5
     farmerPhoto: null,
@@ -171,7 +197,24 @@ export const FarmerDetailsForm: React.FC = () => {
     }),
 
     // step 4
-    Yup.object().shape({}),
+    Yup.object().shape({
+      waterSource: Yup.string().required('Water source is required'),
+      waterSourcePhoto: Yup.mixed()
+        .required('Water source photo is required')
+        .test(
+          'fileType',
+          'Only image files are allowed',
+          (value) =>
+            !value ||
+            (typeof value === 'object' &&
+              value !== null &&
+              'type' in value &&
+              typeof (value as { type?: string }).type === 'string' &&
+              ['image/jpeg', 'image/png', 'image/gif'].includes((value as { type: string }).type)),
+        ),
+      waterRetentionCapacity: Yup.string().required('Water retention capacity is required'),
+      drainageQuality: Yup.string().required('Drainage quality is required'),
+    }),
 
     // step 5
     Yup.object().shape({}),
@@ -305,6 +348,16 @@ export const FarmerDetailsForm: React.FC = () => {
                   values={values}
                   errors={errors}
                   touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+              {step === 4 && (
+                <FarmStep4
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  showWaterManagementForm={showWaterManagementForm}
+                  setShowWaterManagementForm={setShowWaterManagementForm}
                   setFieldValue={setFieldValue}
                 />
               )}

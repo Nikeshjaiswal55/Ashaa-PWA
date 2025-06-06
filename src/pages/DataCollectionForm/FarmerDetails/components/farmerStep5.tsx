@@ -140,7 +140,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                   </div>
                   {showForm2 && (
                     // Form to Add New Animal
-                    <div className="mt-2 bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-4">
+                    <div className="mt-3 bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-4">
                       <div className="flex gap-2 h-12">
                         {/* animalType */}
                         <SelectInput<FormValues>
@@ -148,7 +148,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           options={vehcial}
                           touched={touched}
                           errors={errors}
-                          width="w-full"
+                          width="w-[200px]"
                           height="h-[40px]"
                           defaultOption=""
                           setFieldValue={setFieldValue}
@@ -159,16 +159,25 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                         />
 
                         {/* quantity */}
-                        <Field
-                          id="equipmentQuantity"
-                          name="equipmentQuantity"
-                          type="number"
-                          className={`w-1/2 h-[40px] bg-white shadow-sm p-2 rounded-lg  ${
-                            touched.equipmentQuantity && errors.equipmentQuantity
-                              ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                              : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
-                          }`}
-                        />
+                        <div className="relative flex items-center justify-center bg-white rounded-md shadow-sm w-full h-[40px] mt-2 px-3">
+                          <label htmlFor="equipmentQuantity" className="text-gray-500 text-sm mr-2">
+                            Quantity
+                          </label>
+
+                          <Field
+                            id="equipmentQuantity"
+                            name="equipmentQuantity"
+                            type="number"
+                            className={`w-[40px] text-green-700 font-bold text-center bg-transparent
+                            border-b-2 text-sm outline-none border-b-gray-500
+                            ${
+                              touched.equipmentQuantity && errors.equipmentQuantity
+                                ? 'border-red-500 focus:border-red-500'
+                                : 'border-green-600 focus:border-green-600'
+                            }`}
+                          />
+                        </div>
+
                         <ErrorMessage
                           name="equipmentQuantity"
                           component="div"

@@ -149,8 +149,7 @@ export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(false); // for step 3 component
   const [showForm2, setShowForm2] = useState(false); // for step 5 component
 
-  const [step, setStep] = useState(3);
-  const SUPPORTED_FORMATS = ['video/mp4', 'video/webm', 'video/ogg'];
+  const [step, setStep] = useState(4);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -256,17 +255,6 @@ export const FarmerDetailsForm: React.FC = () => {
       awards: Yup.string(),
       Certification: Yup.string().max(100, 'Too long').nullable(),
       // CertificateImage: Yup.mixed().nullable(), // Allow null, add .required() if mandatory
-      farmerVideo: Yup.mixed()
-        .required('Farmer video is required')
-        .test(
-          'fileType',
-          'Unsupported file format',
-          (value) => value && SUPPORTED_FORMATS.includes((value as File).type),
-        )
-        .test('fileSize', 'File too large. Max size is 50MB', (value) => {
-          if (!value || !(value instanceof FileList) || value.length === 0) return true; // skip if empty
-          return value[0].size <= 50 * 1024 * 1024;
-        }), // .test(
     }),
 
     // step-3 form validation

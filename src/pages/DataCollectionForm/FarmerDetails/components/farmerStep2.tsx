@@ -38,7 +38,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
               Upload Experience Video{' '}
             </label>
             <div
-              className={`flex flex-col justify-center items-center  h-[81px] border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+              className={`flex flex-col justify-center items-center  h-[81px] border-2 border-gray-500 border-dashed rounded-lg cursor-pointer transition-colors ${
                 touched.farmerVideo && errors.farmerVideo
                   ? 'border-red-400 bg-red-50 hover:bg-red-100'
                   : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
