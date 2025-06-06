@@ -37,7 +37,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({
       waterSourcePhoto: values.waterSourcePhoto,
       waterRetentionCapacity: values.waterRetentionCapacity,
       drainageQuality: values.drainageQuality,
-      waterSource: '',
+      waterSource: values.waterSource,
     };
     setFieldValue('waterManagement', [...(values.waterManagement || []), WaterManagement]);
     // Reset animal fields after save

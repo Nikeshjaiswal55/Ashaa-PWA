@@ -51,7 +51,7 @@ const TextInput = <T extends object>({
         {/* ...select code */}
 
         {rightIcon && (
-          <div className="absolute h-[52px] bg-green-800 w-[50px] right-0 rounded-sm  top-0 flex items-center justify-center">
+          <div className="absolute h-[52px] bg-green-900 w-[50px] right-0 rounded-sm  top-0 flex items-center justify-center">
             {typeof rightIcon === 'string' ? <img src={rightIcon} alt="location" /> : rightIcon}
           </div>
         )}

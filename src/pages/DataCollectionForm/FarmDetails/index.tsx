@@ -10,6 +10,8 @@ import FarmStep2 from './components/farmStep2';
 import FarmStep3 from './components/farmStep3';
 import FarmStep4 from './components/farmStep4';
 import FarmStep5 from './components/farmStep5';
+import FarmStep6 from './components/farmStep6';
+import FarmStep7 from './components/farmStep7';
 
 // --- Icon Types (Optional but good practice) ---
 interface IconProps {
@@ -45,12 +47,35 @@ const ArrowRightIcon: React.FC<IconProps> = ({ className = 'w-5 h-5 ml-1' }) => 
   </svg>
 );
 
-// --- Equipment Interface ---
+// --- waterManagement Interface ---
 export interface waterManagement {
   waterSource: string;
   waterSourcePhoto: File | null;
   waterRetentionCapacity: string;
   drainageQuality: string;
+}
+
+// --- CropList Interface ---
+export interface CropList {
+  cultivationArea: string;
+  cropName: string;
+  cropVariety: string;
+  seedSource: string;
+  seedingRate: string;
+  seedingRateUnit: string;
+  seedName: string;
+  cropPhoto: File | null;
+}
+
+//  --- FertilizerUsageList Interface ---
+export interface FertilizerUsageList {
+  fertilizerName: string;
+  fertilizerType: string;
+  quantity: string;
+  price: string;
+  companyName: string;
+  appliedRate: string;
+  appliedStage: string;
 }
 
 // --- Form Values Interface ---
@@ -89,6 +114,27 @@ export interface FarmFormValues {
   // step-5
   farmerPhoto: File | null;
   farmPhoto: File | null;
+
+  //step 6
+  cultivationArea: string;
+  cropName: string;
+  cropVariety: string;
+  seedSource: string;
+  seedingRate: string;
+  CropList: CropList[];
+  seedingRateUnit: string;
+  seedName: string;
+  cropPhoto: File | null;
+
+  //step 7
+  fertilizerName: string;
+  fertilizerType: string;
+  quantity: string;
+  price: string;
+  FertilizerUsageList: FertilizerUsageList[];
+  companyName: string;
+  appliedRate: string;
+  appliedStage: string;
 }
 
 const HeaderData = [
@@ -104,8 +150,9 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(7);
   const [showWaterManagementForm, setShowWaterManagementForm] = useState(false); //for show or hide water management form step 4
+  const [showCropDetailsForm, setShowCropDetailsForm] = useState(false); // //for show or hide Crop Details form step 4
   // --- Initial Form Values ---
   const initialValues: FarmFormValues = {
     individualFarmSize: '',
@@ -142,6 +189,27 @@ export const FarmerDetailsForm: React.FC = () => {
     // step-5
     farmerPhoto: null,
     farmPhoto: null,
+
+    //step 6
+    cultivationArea: '',
+    cropName: '',
+    cropVariety: '',
+    seedSource: '',
+    seedingRate: '',
+    CropList: [],
+    seedingRateUnit: 'kg/Acre',
+    seedName: '',
+    cropPhoto: null,
+
+    //step 7
+    fertilizerName: '',
+    fertilizerType: '',
+    quantity: '',
+    price: '',
+    companyName: '',
+    FertilizerUsageList: [],
+    appliedRate: '',
+    appliedStage: '',
   };
 
   const validationSchemaArray = [
@@ -220,6 +288,37 @@ export const FarmerDetailsForm: React.FC = () => {
     Yup.object().shape({}),
 
     //step-6
+    Yup.object().shape({
+      cultivationArea: Yup.string().required('Cultivation Area is required'),
+      cropName: Yup.string().required('Crop Name is required'),
+      cropVariety: Yup.string().required('Crop Variety is required'),
+      seedSource: Yup.string().required('Seed Source is required'),
+      seedingRate: Yup.number()
+        .typeError('Seeding Rate must be a number')
+        .required('Seeding Rate is required')
+        .positive('Seeding Rate must be positive'),
+      seedingRateUnit: Yup.string().required('Unit is required'),
+      seedName: Yup.string().required('Seed Name is required'),
+    }),
+
+    // step-7
+    Yup.object().shape({
+      fertilizerName: Yup.string().required('Fertilizer Name is required'),
+      fertilizerType: Yup.string().required('Fertilizer Type is required'),
+      quantity: Yup.number()
+        .typeError('Quantity must be a number')
+        .required('Quantity is required')
+        .positive('Quantity must be positive'),
+      price: Yup.number()
+        .typeError('Price must be a number')
+        .required('Price is required')
+        .positive('Price must be positive'),
+      companyName: Yup.string().required('Company Name is required'),
+      appliedRate: Yup.string().required('Applied Rate is required'),
+      appliedStage: Yup.string().required('Applied Stage is required'),
+    }),
+
+    //  step-8
     Yup.object().shape({}),
   ];
 
@@ -279,7 +378,7 @@ export const FarmerDetailsForm: React.FC = () => {
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         {/* Progress Steps */}
         <div className="flex justify-center items-center space-x-0 sm:space-x-0 mb-5">
-          {[1, 2, 3, 4, 5, 6].map((s) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((s) => (
             <React.Fragment key={s}>
               <div
                 className={`w-5 h-5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-sm font-semibold ${
@@ -288,7 +387,7 @@ export const FarmerDetailsForm: React.FC = () => {
               >
                 {s}
               </div>
-              {s < 6 && (
+              {s < 8 && (
                 <div
                   className={`h-0.5 w-4 sm:w-6 ${s < step ? 'bg-green-600' : 'bg-gray-500'}`}
                 ></div>
@@ -363,6 +462,24 @@ export const FarmerDetailsForm: React.FC = () => {
               )}
               {step === 5 && (
                 <FarmStep5
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+              {step === 6 && (
+                <FarmStep6
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                  showCropDetailsForm={showCropDetailsForm}
+                  setShowCropDetailsForm={setShowCropDetailsForm}
+                />
+              )}
+              {step === 7 && (
+                <FarmStep7
                   values={values}
                   errors={errors}
                   touched={touched}

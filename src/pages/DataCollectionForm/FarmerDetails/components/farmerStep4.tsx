@@ -7,6 +7,7 @@ import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 
+import location from '../../../../assets/Icons/location.svg';
 import { FormValues } from '../../FarmerDetails/index';
 
 const storageTypes = ['Warehouse', 'Cold Storage', 'Silo', 'Other'];
@@ -56,16 +57,7 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
       name="warehouseLocation"
       type="text"
       placeholder="Pin location or enter manually"
-      rightIcon={
-        <button type="button" className="bg-green-800 p-2 rounded" title="Pin Location">
-          {' '}
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-            {' '}
-            <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="2" />{' '}
-            <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2" />{' '}
-          </svg>{' '}
-        </button>
-      }
+      rightIcon={location}
       values={values}
       errors={errors}
       touched={touched}
