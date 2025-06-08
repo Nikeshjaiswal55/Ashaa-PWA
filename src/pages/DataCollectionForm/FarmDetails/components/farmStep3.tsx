@@ -15,7 +15,7 @@ interface FarmStep3Props {
 }
 const FarmStep3: React.FC<FarmStep3Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
-    <div className="space-y-6 h-[70vh]">
+    <div className="space-y-6 h-[90vh]">
       {/* Soil Type */}
       <SelectInput
         values={values}

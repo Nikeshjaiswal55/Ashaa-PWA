@@ -12,6 +12,7 @@ import FarmStep4 from './components/farmStep4';
 import FarmStep5 from './components/farmStep5';
 import FarmStep6 from './components/farmStep6';
 import FarmStep7 from './components/farmStep7';
+import FarmStep8 from './components/farmStep8';
 
 // --- Icon Types (Optional but good practice) ---
 interface IconProps {
@@ -46,7 +47,6 @@ const ArrowRightIcon: React.FC<IconProps> = ({ className = 'w-5 h-5 ml-1' }) => 
     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />{' '}
   </svg>
 );
-
 // --- waterManagement Interface ---
 export interface waterManagement {
   waterSource: string;
@@ -76,6 +76,17 @@ export interface FertilizerUsageList {
   companyName: string;
   appliedRate: string;
   appliedStage: string;
+}
+
+//  --- PesticidesUsage Interface ---
+export interface PesticidesUsage {
+  pesticidesName: string;
+  pesticidesType: string;
+  pesticidesQuantity: string;
+  pesticidesprice: string;
+  pesticidescompanyName: string;
+  pesticidesappliedRate: string;
+  pesticidesappliedStage: string;
 }
 
 // --- Form Values Interface ---
@@ -125,7 +136,6 @@ export interface FarmFormValues {
   seedingRateUnit: string;
   seedName: string;
   cropPhoto: File | null;
-
   //step 7
   fertilizerName: string;
   fertilizerType: string;
@@ -135,6 +145,15 @@ export interface FarmFormValues {
   companyName: string;
   appliedRate: string;
   appliedStage: string;
+  // step 8
+  pesticidesName: string;
+  pesticidesType: string;
+  pesticidesQuantity: string;
+  pesticidesprice: string;
+  pesticidescompanyName: string;
+  pesticidesappliedRate: string;
+  pesticidesappliedStage: string;
+  pesticidesUsageList: PesticidesUsage[];
 }
 
 const HeaderData = [
@@ -150,8 +169,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(7);
-  const [showWaterManagementForm, setShowWaterManagementForm] = useState(false); //for show or hide water management form step 4
+  const [step, setStep] = useState(8);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(false); // //for show or hide Crop Details form step 4
   // --- Initial Form Values ---
   const initialValues: FarmFormValues = {
@@ -183,8 +201,8 @@ export const FarmerDetailsForm: React.FC = () => {
     waterManagement: [],
     waterSource: '',
     waterSourcePhoto: null,
-    waterRetentionCapacity: '',
-    drainageQuality: '',
+    waterRetentionCapacity: 'Low',
+    drainageQuality: 'Good',
 
     // step-5
     farmerPhoto: null,
@@ -200,7 +218,6 @@ export const FarmerDetailsForm: React.FC = () => {
     seedingRateUnit: 'kg/Acre',
     seedName: '',
     cropPhoto: null,
-
     //step 7
     fertilizerName: '',
     fertilizerType: '',
@@ -210,6 +227,16 @@ export const FarmerDetailsForm: React.FC = () => {
     FertilizerUsageList: [],
     appliedRate: '',
     appliedStage: '',
+
+    // step 8
+    pesticidesName: '',
+    pesticidesType: '',
+    pesticidesQuantity: '',
+    pesticidesprice: '',
+    pesticidescompanyName: '',
+    pesticidesappliedRate: '',
+    pesticidesappliedStage: '',
+    pesticidesUsageList: [],
   };
 
   const validationSchemaArray = [
@@ -319,7 +346,21 @@ export const FarmerDetailsForm: React.FC = () => {
     }),
 
     //  step-8
-    Yup.object().shape({}),
+    Yup.object().shape({
+      pesticidesName: Yup.string().required('Pesticides Name is required'),
+      pesticidesType: Yup.string().required('Pesticides Type is required'),
+      pesticidesQuantity: Yup.number()
+        .typeError('Quantity must be a number')
+        .required('Quantity is required')
+        .positive('Quantity must be positive'),
+      pesticidesprice: Yup.number()
+        .typeError('Price must be a number')
+        .required('Price is required')
+        .positive('Price must be positive'),
+      pesticidescompanyName: Yup.string().required('Company Name is required'),
+      pesticidesappliedRate: Yup.string().required('Applied Rate is required'),
+      pesticidesappliedStage: Yup.string().required('Applied Stage is required'),
+    }),
   ];
 
   const handleSubmit = (
@@ -352,6 +393,7 @@ export const FarmerDetailsForm: React.FC = () => {
       console.log(values);
     } else {
       console.log('All steps done, final submission.');
+      console.log(values); //
       // You can send final API call here
     }
 
@@ -363,10 +405,7 @@ export const FarmerDetailsForm: React.FC = () => {
     <div
       className="flex flex-col items-center   p-4"
       style={{
-        backgroundImage: `
-      radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%),
-      url(${image})
-    `,
+        backgroundImage: ` radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%), url(${image}) `,
         backgroundSize: 'auto',
         backgroundRepeat: 'no-repeat, repeat',
         backgroundPosition: 'top left',
@@ -413,17 +452,17 @@ export const FarmerDetailsForm: React.FC = () => {
             }`}
             style={{ color: '#005B24' }}
           >
-            Farmer Details
+            {HeaderData[step - 1]}
           </h1>
         </div>
-        <h3 className="text-center">{HeaderData[step - 1]}</h3>
+        {/* <h3 className="text-center">{HeaderData[step - 1]}</h3> */}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (
-            <Form className="space-y-6  mt-8">
+            <Form className="space-y-6   mt-8">
               {step === 1 && (
                 <FarmStep1
                   values={values}
@@ -455,8 +494,6 @@ export const FarmerDetailsForm: React.FC = () => {
                   values={values}
                   errors={errors}
                   touched={touched}
-                  showWaterManagementForm={showWaterManagementForm}
-                  setShowWaterManagementForm={setShowWaterManagementForm}
                   setFieldValue={setFieldValue}
                 />
               )}
@@ -480,6 +517,14 @@ export const FarmerDetailsForm: React.FC = () => {
               )}
               {step === 7 && (
                 <FarmStep7
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+              {step === 8 && (
+                <FarmStep8
                   values={values}
                   errors={errors}
                   touched={touched}
@@ -515,6 +560,7 @@ export const FarmerDetailsForm: React.FC = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                       >
+                        {' '}
                         <circle
                           className="opacity-25"
                           cx="12"
@@ -522,12 +568,12 @@ export const FarmerDetailsForm: React.FC = () => {
                           r="10"
                           stroke="currentColor"
                           strokeWidth="2"
-                        ></circle>
+                        ></circle>{' '}
                         <path
                           className="opacity-75"
                           fill="currentColor"
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
+                        ></path>{' '}
                       </svg>
                       Submitting...
                     </>

@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-import { Field, FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
+import {
+  ErrorMessage,
+  Field,
+  FieldArray,
+  FormikErrors,
+  FormikHelpers,
+  FormikTouched,
+} from 'formik';
 
 import { FarmFormValues } from '..';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
@@ -37,7 +44,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       <FieldArray
         name="fertilizerUsageList"
         render={(arrayHelpers) => (
@@ -103,18 +110,20 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
 
             {/* Fertilizer Form */}
             {showFertilizerForm && (
-              <div className="mt-2 bg-gradient-to-r mx-2 from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-6">
-                <TextInput
-                  label="Fertilizer Name"
-                  name="fertilizerName"
-                  placeholder="Enter Fertilizer Name"
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                  type=""
-                  labelcss=""
-                />
+              <div className="mt-4  rounded-2xl p-2 space-y-8  bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
+                <div className="mt-4">
+                  <TextInput
+                    label="Fertilizer Name"
+                    name="fertilizerName"
+                    placeholder="Enter Fertilizer Name"
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                    type=""
+                    labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                  />
+                </div>
                 <SelectInput
                   label="Fertilizer Type"
                   name="fertilizerType"
@@ -127,38 +136,64 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                   customClass="border-2"
                   width="w-full"
                   height="h-[52px]"
-                  labelFirst=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                  labelFirst={''}
                 />
+
                 {/* Quantity */}
-                <div>
-                  <label className="block text-green-900 font-semibold mb-1">Quantity</label>
-                  <span className="text-xs text-gray-500">Enter quantity used</span>
-                  <div className="flex items-center bg-[rgba(54,195,96,0.08)] rounded-lg px-4 py-3 mt-1">
+                <div className="flex flex-col gap-1 mb-4">
+                  <div className="flex justify-between items-center bg-white rounded-lg px-4 py-3">
+                    <div>
+                      <div className="text-green-900 font-semibold text-lg">Quantity</div>
+                      <div className="text-base text-gray-500 font-normal -mt-0.5">
+                        Enter quantity used
+                      </div>
+                    </div>
                     <Field
                       name="quantity"
                       type="number"
-                      as="input"
                       placeholder="1000"
-                      className="w-full text-right bg-transparent text-green-900 font-bold text-lg border-b-2 border-green-700 focus:ring-0 focus:outline-none"
+                      className={`w-[109.43px] text-center bg-transparent text-green-900 font-bold text-lg border-b-2 ${
+                        touched.quantity && errors.quantity ? 'border-red-500' : 'border-green-700'
+                      } focus:ring-0 focus:outline-none`}
                       style={{ appearance: 'textfield' }}
-                    />
+                    />{' '}
                   </div>
+
+                  {/* Error Message */}
+                  <ErrorMessage
+                    name="quantity"
+                    component="div"
+                    className="text-red-500 text-sm ml-auto mr-4"
+                  />
                 </div>
+
                 {/* Price */}
-                <div>
-                  <label className="block text-green-900 font-semibold mb-1">Price</label>
-                  <span className="text-xs text-gray-500">Enter Price</span>
-                  <div className="flex items-center bg-[rgba(54,195,96,0.08)] rounded-lg px-4 py-3 mt-1">
+                <div className="flex flex-col gap-1 mb-4">
+                  <div className="flex justify-between items-center bg-white rounded-lg px-4 py-3">
+                    <div>
+                      <div className="text-green-900 font-semibold text-lg">Price</div>
+                      <div className="text-base text-gray-500 -mt-0.5 font-normal">Enter Price</div>
+                    </div>
                     <Field
                       name="price"
                       type="number"
-                      as="input"
                       placeholder="1000"
-                      className="w-full text-right bg-transparent text-green-900 font-bold text-lg border-b-2 border-green-700 focus:ring-0 focus:outline-none"
+                      className={`w-[109.43px] text-center bg-transparent text-green-900 font-bold text-lg border-b-2
+        ${touched.price && errors.price ? 'border-red-500' : 'border-green-700'}
+        focus:ring-0 focus:outline-none`}
                       style={{ appearance: 'textfield' }}
                     />
                   </div>
+
+                  {/* Error Message */}
+                  <ErrorMessage
+                    name="price"
+                    component="div"
+                    className="text-red-500 text-sm ml-auto mr-4"
+                  />
                 </div>
+
                 <TextInput
                   label="Company Name"
                   name="companyName"
@@ -168,7 +203,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                   touched={touched}
                   setFieldValue={setFieldValue}
                   type=""
-                  labelcss=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <TextInput
                   label="Applied Rate"
@@ -179,7 +214,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                   touched={touched}
                   setFieldValue={setFieldValue}
                   type=""
-                  labelcss=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <SelectInput
                   label="Applied Stage"
@@ -194,10 +229,11 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                   width="w-full"
                   height="h-[52px]"
                   labelFirst=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <button
                   type="button"
-                  className="bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
+                  className=" bg-[#005B24] text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
                   onClick={handleSaveFertilizer}
                 >
                   Save Fertilizer

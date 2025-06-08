@@ -9,6 +9,7 @@ enum Pages {
   Page2,
   DataCollectionFormFarmer,
   DataCollectionFormFarm,
+  farmer,
   Page3,
   Page4,
   NotFound,

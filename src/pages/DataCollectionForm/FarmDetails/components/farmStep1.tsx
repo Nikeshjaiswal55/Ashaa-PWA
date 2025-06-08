@@ -20,7 +20,7 @@ const topographyOptions = ['Plain', 'Hilly', 'Undulating', 'Plateau', 'Valley'];
 
 const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
-    <div className="space-y-8 h-[70vh]">
+    <div className="space-y-8 mt-15 h-[75vh]">
       {/* Individual Farm Size & Unit */}
       <div className="flex gap-2">
         <SelectInput<FarmFormValues>
@@ -37,6 +37,7 @@ const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setField
           height={'h-[36px]'}
           customClass={'bg-[#005B24] text-white'}
         />
+
         <SelectInput
           name="farmSizeUnit"
           options={farmUnits}
@@ -48,7 +49,7 @@ const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setField
           width="w-[120px]"
           label={''}
           height={'h-[36px]'}
-          customClass={'border-2 mt-[26px]'}
+          customClass={'border-2 mt-[28px]'}
           labelFirst={''}
         />
       </div>

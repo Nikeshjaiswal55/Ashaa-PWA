@@ -14,6 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     '/DataCollectionForm',
     '/DataCollectionForm/FarmerDetails',
     '/DataCollectionForm/FarmDetails',
+    // '/DataCollectionForm/farmer'
   ];
   const shouldHideLayout = hiddenLayoutPaths.includes(location.pathname);
 

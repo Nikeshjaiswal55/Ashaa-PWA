@@ -18,7 +18,7 @@ const RadioInputs = <T extends object>({ label, name, values, options }: RadioIn
             className={`flex items-center w-[124px] h-[25px] px-3 py-1 rounded-lg shadow-sm cursor-pointer transition-all duration-150 ease-in-out
                             ${
                               values[name as keyof T] === option
-                                ? 'bg-green-200'
+                                ? 'bg-[radial-gradient(circle,rgba(54,195,96,0.3))]'
                                 : 'bg-gray-300 hover:bg-gray-200'
                             }`}
           >

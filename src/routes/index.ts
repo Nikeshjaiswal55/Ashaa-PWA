@@ -34,6 +34,12 @@ const routes: Routes = {
     title: 'DataCollectionFarmForm',
     icon: undefined,
   },
+  [Pages.farmer]: {
+    component: asyncComponentLoader(() => import('@/pages/DataCollectionForm/farmer')),
+    path: 'DataCollectionForm/farmer',
+    title: 'farmer',
+    icon: undefined,
+  },
   [Pages.Page3]: {
     component: asyncComponentLoader(() => import('@/pages/Page4')),
     path: '/page-3',

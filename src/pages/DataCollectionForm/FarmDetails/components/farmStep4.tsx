@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
@@ -15,21 +15,13 @@ const drainageOptions = ['Good', 'Moderate', 'Poor'];
 interface FarmStep4Props {
   values: FarmFormValues;
   errors: FormikErrors<FarmFormValues>;
-  showWaterManagementForm: boolean;
-  setShowWaterManagementForm: React.Dispatch<React.SetStateAction<boolean>>;
   touched: FormikTouched<FarmFormValues>;
 
   setFieldValue: FormikHelpers<FarmFormValues>['setFieldValue'];
 }
-const FarmStep4: React.FC<FarmStep4Props> = ({
-  values,
-  errors,
-  touched,
-  setFieldValue,
-  setShowWaterManagementForm,
-  showWaterManagementForm,
-}) => {
+const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setFieldValue }) => {
   const waterManagementList = values.waterManagement || [];
+  const [showWaterManagementForm, setShowWaterManagementForm] = useState(false); //for show or hide form
 
   const handleSaveAnimal = () => {
     // Construct the new animal from form values
@@ -46,7 +38,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({
   };
 
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-6 h-[70vh]">
       <FieldArray
         name="waterManagment"
         render={(arrayHelpers) => (
@@ -141,7 +133,10 @@ const FarmStep4: React.FC<FarmStep4Props> = ({
               </div>
 
               {showWaterManagementForm && (
-                <div className="mt-2 bg-gradient-to-r mx-2 from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-8">
+                <div
+                  className="mt-2 mx-2 rounded-2xl p-2 space-y-8"
+                  style={{ background: 'rgba(54, 195, 96, 0.2)' }}
+                >
                   <div className="flex gap-2 "></div>
                   <>
                     <SelectInput
@@ -172,7 +167,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({
                         errors={errors}
                         touched={touched}
                         setFieldValue={setFieldValue}
-                        height="h-[120px]"
+                        height="h-[81px]"
                       />
                     </div>
                     <RadioInputs

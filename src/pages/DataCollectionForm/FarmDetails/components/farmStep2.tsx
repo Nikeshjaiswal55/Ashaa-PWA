@@ -23,7 +23,7 @@ interface FarmStep2Props {
 }
 const FarmStep2: React.FC<FarmStep2Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
-    <div className="space-y-8 h-[70vh]">
+    <div className="space-y-8 h-[100vh] mt-15">
       {/* Irrigation Method */}
       <RadioInputs
         label="Irrigation Method"
@@ -37,7 +37,7 @@ const FarmStep2: React.FC<FarmStep2Props> = ({ values, errors, touched, setField
         label="Do farmers have KCC?"
         value={values.hasKCC}
         onChange={(val) => setFieldValue('hasKCC', val)}
-        className="bg-[rgba(54,195,96,0.2)] "
+        className="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
       />
 
       {/* Loan Approved? */}
@@ -45,7 +45,7 @@ const FarmStep2: React.FC<FarmStep2Props> = ({ values, errors, touched, setField
         label="Loan Approved?"
         value={values.loanApproved}
         onChange={(val) => setFieldValue('loanApproved', val)}
-        className="bg-[rgba(54,195,96,0.2)] "
+        className="bg-[radial-gradient(circle,rgba(54,195,96,0.2))] "
       />
 
       {/* Labor Availability */}
@@ -80,7 +80,7 @@ const FarmStep2: React.FC<FarmStep2Props> = ({ values, errors, touched, setField
         options={farmingApproachOptions}
         defaultOption="Select your Farming Approach"
         width="w-full"
-        height="h-[48px]"
+        height="h-[52px]"
         customClass="border-2"
         errors={errors}
         touched={touched}
@@ -97,7 +97,7 @@ const FarmStep2: React.FC<FarmStep2Props> = ({ values, errors, touched, setField
         options={croppingPatternOptions}
         defaultOption="Select your Cropping Pattern"
         width="w-full"
-        height="h-[48px]"
+        height="h-[52px]"
         customClass="border-2"
         errors={errors}
         touched={touched}

@@ -3,6 +3,7 @@ import React from 'react';
 import { Field, FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FarmFormValues } from '..';
+import deleteImg from '../../../../assets/Icons/delete.svg';
 import ImageUploadInput from '../../../../components/ui/inputs/ImageUploadInput';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 import TextInput from '../../../../components/ui/inputs/TextInput';
@@ -55,11 +56,12 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                 {values.CropList.map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between bg-[rgba(54,195,96,0.08)] rounded-xl p-2 mb-3"
+                    className="flex items-center justify-between bg-[#E6F4EC] rounded-xl px-3 py-2 mb-3"
                   >
+                    {/* Left: Image + Details */}
                     <div className="flex items-center gap-3">
-                      {/* Photo */}
-                      <div className="relative w-12 h-12">
+                      {/* Image */}
+                      <div className="relative w-12 h-12 shrink-0">
                         {item.cropPhoto ? (
                           <img
                             src={URL.createObjectURL(item.cropPhoto)}
@@ -71,24 +73,27 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                             No Image
                           </div>
                         )}
+
+                        {/* Delete Button */}
                         <button
                           type="button"
                           onClick={() => arrayHelpers.remove(idx)}
                           className="absolute -top-2 -left-2 bg-white p-1 rounded-full shadow border border-gray-200"
                           title="Delete"
                         >
-                          <span className="text-red-500 font-bold">×</span>
+                          <img src={deleteImg} alt="delete" />
                         </button>
                       </div>
-                      {/* Details */}
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-green-900 text-sm">
+
+                      {/* Text Info */}
+                      <div className="flex flex-col justify-center">
+                        <span className="font-semibold text-green-900 leading-tight text-sm">
                           {item.cropName}
                         </span>
-                        <span className="text-xs text-gray-600">
+                        <span className="text-[12px] text-gray-600 leading-tight">
                           Variety: <span className="font-medium">{item.cropVariety}</span>
                         </span>
-                        <span className="text-xs text-gray-600">
+                        <span className="text-[12px] text-gray-600 leading-tight">
                           Seeding Rate:{' '}
                           <span className="font-medium">
                             {item.seedingRate} {item.seedingRateUnit}
@@ -96,6 +101,28 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                         </span>
                       </div>
                     </div>
+
+                    {/* Right: Edit Button */}
+                    <button
+                      type="button"
+                      className="bg-green-800 hover:bg-green-700 p-2 rounded-xl text-white shrink-0"
+                      title="Edit"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5l3 3L13 14h-3v-3L18.5 2.5z"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -116,18 +143,20 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
 
             {/* Crop Form */}
             {showCropDetailsForm && (
-              <div className="mt-2 bg-gradient-to-r mx-2 from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-6">
-                <TextInput
-                  label="Cultivation Area"
-                  name="cultivationArea"
-                  placeholder="Enter area under cultivation"
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                  type=""
-                  labelcss=""
-                />
+              <div className="mt-2  rounded-2xl p-2 space-y-8 bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
+                <div className="mt-3">
+                  <TextInput
+                    label="Cultivation Area"
+                    name="cultivationArea"
+                    placeholder="Enter area under cultivation"
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                    type=""
+                    labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                  />
+                </div>
                 <TextInput
                   label="Crop Name"
                   name="cropName"
@@ -137,7 +166,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                   touched={touched}
                   setFieldValue={setFieldValue}
                   type=""
-                  labelcss=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <TextInput
                   label="Crop Variety"
@@ -148,7 +177,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                   touched={touched}
                   setFieldValue={setFieldValue}
                   type=""
-                  labelcss=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <SelectInput
                   label="Seed Source"
@@ -163,23 +192,30 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                   width="w-full"
                   height="h-[52px]"
                   labelFirst=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 {/* Seeding Rate */}
                 <div>
                   <label className="block text-green-900 font-semibold mb-1">Seeding Rate</label>
                   <span className="text-xs text-gray-500">Kg per acre/hectare</span>
-                  <div className="flex items-center bg-[rgba(54,195,96,0.08)] rounded-lg px-4 py-3 mt-1">
-                    <Field
-                      name="seedingRate"
-                      type="number"
-                      as="input"
-                      placeholder="100"
-                      className="w-24 bg-transparent text-green-900 font-bold text-lg border-b-2 border-gray-400 focus:ring-0 focus:outline-none pr-10"
-                      style={{ appearance: 'textfield' }}
-                    />
-                    <span className="absolute right-2 text-gray-500 font-semibold text-lg pointer-events-none">
-                      kg
-                    </span>
+
+                  <div className="flex justify-evenly bg-white rounded-md px-4 py-3 mt-1  w-full">
+                    {/* Input + kg suffix */}
+                    <div className="relative flex items-center">
+                      <Field
+                        name="seedingRate"
+                        type="number"
+                        as="input"
+                        placeholder="100"
+                        className="w-20 bg-transparent text-green-900 font-bold text-lg border-b-2 border-green-700 focus:ring-0 focus:outline-none pr-0"
+                        style={{ appearance: 'textfield' }}
+                      />
+                      <span className="absolute right-1 text-gray-600 font-bold text-sm pointer-events-none">
+                        kg
+                      </span>
+                    </div>
+
+                    {/* Unit Selector */}
                     <SelectInput
                       name="seedingRateUnit"
                       options={seedingRateUnitOptions}
@@ -188,17 +224,19 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                       errors={errors}
                       touched={touched}
                       setFieldValue={setFieldValue}
-                      customClass="ml-2 border-2"
+                      customClass="ml-4 border border-green-800 text-green-900 font-semibold rounded-lg px-3 py-1"
                       width="w-[120px]"
-                      height="h-[40px]"
+                      height="h-[38px]"
                       label=""
                       labelFirst=""
                     />
                   </div>
+
                   {errors.seedingRate && touched.seedingRate && (
                     <div className="text-red-500 text-xs mt-1">{errors.seedingRate}</div>
                   )}
                 </div>
+
                 <TextInput
                   label="Seed Name"
                   name="seedName"
@@ -208,7 +246,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                   touched={touched}
                   setFieldValue={setFieldValue}
                   type=""
-                  labelcss=""
+                  labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <div>
                   <label className="block text-green-900 font-semibold mb-1">
@@ -222,13 +260,13 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                     errors={errors}
                     touched={touched}
                     setFieldValue={setFieldValue}
-                    height="h-[167px]"
+                    height="h-[81px]"
                     label=""
                   />
                 </div>
                 <button
                   type="button"
-                  className="bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
+                  className="bg-[#005B24] text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
                   onClick={handleSaveCrop}
                 >
                   Save Crop
