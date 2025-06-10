@@ -9,8 +9,11 @@ import SW from '@/sections/SW';
 
 import '../src/style.css';
 import Layout from './components/Layout';
-import Page2 from './pages/Onboarding';
 import { store } from './redux/store';
+import Pages from './routes/Pages';
+
+// import Page1 from './pages/Home';
+// import Page2 from './pages/Onboarding';
 
 function App() {
   return (
@@ -21,7 +24,8 @@ function App() {
         <BrowserRouter>
           <Layout>
             {/* <Home /> */}
-            <Page2 />
+            <Pages />
+            {/* <Page2/> */}
           </Layout>
           {/* <ProfilePage /> */}
         </BrowserRouter>
