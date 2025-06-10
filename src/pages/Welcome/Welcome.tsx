@@ -53,24 +53,30 @@ function Welcome() {
             onSubmit={handleSubmit}
           >
             <Form className="space-y-6">
-              <div>
-                <label htmlFor="identifier" className="block text-sm font-medium text-gray-700">
-                  Mobile Number / Gmail
+              <div className="relative w-full mb-6">
+                <label
+                  htmlFor="identifier"
+                  className="absolute -top-4 left-3 bg-white px-1 text-lg text-[#005B24] font-semibold z-10"
+                >
+                  Mobile Number/Gmail
                 </label>
                 <Field
                   id="identifier"
                   name="identifier"
                   type="text"
-                  placeholder="Enter mobile number or Gmail"
-                  className="mt-1 block w-full h-[52px] rounded-md border-2 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent border-[#005B24]"
+                  placeholder="Enter your mobile number"
+                  className="w-full h-[52px] rounded-md border-2 border-[#005B24] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
                 <ErrorMessage name="identifier">
                   {(msg) => <p className="text-red-500 text-xs mt-1">{msg}</p>}
                 </ErrorMessage>
               </div>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <div className="relative w-full mb-6">
+                <label
+                  htmlFor="password"
+                  className="absolute -top-4 left-3 bg-white px-1 text-lg text-[#005B24] font-semibold z-10"
+                >
                   Password
                 </label>
                 <Field
@@ -78,7 +84,7 @@ function Welcome() {
                   name="password"
                   type="password"
                   placeholder="Enter your password"
-                  className="mt-1 block w-full h-[52px] rounded-md border-2 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent border-[#005B24]"
+                  className="w-full h-[52px] rounded-md border-2 border-[#005B24] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
                 <ErrorMessage name="password">
                   {(msg) => <p className="text-red-500 text-xs mt-1">{msg}</p>}
