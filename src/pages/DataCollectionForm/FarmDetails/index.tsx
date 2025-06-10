@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
@@ -169,8 +170,19 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(8);
+  const [step, setStep] = useState(2);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(false); // //for show or hide Crop Details form step 4
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const shouldReset = searchParams.get('reset');
+    if (shouldReset === 'true') {
+      setStep(1);
+    }
+  }, [searchParams]);
+
   // --- Initial Form Values ---
   const initialValues: FarmFormValues = {
     individualFarmSize: '',
@@ -194,7 +206,7 @@ export const FarmerDetailsForm: React.FC = () => {
     // step-3
     soilType: '',
     soilPhoto: null,
-    soilTestingReportAvailable: false,
+    soilTestingReportAvailable: true,
     soilTestingReport: null,
 
     // step 4
@@ -395,6 +407,7 @@ export const FarmerDetailsForm: React.FC = () => {
       console.log('All steps done, final submission.');
       console.log(values); //
       // You can send final API call here
+      navigate(`/DataCollectionForm/farmer`);
     }
 
     setSubmitting(false);
@@ -403,7 +416,7 @@ export const FarmerDetailsForm: React.FC = () => {
   // --- Render  form---
   return (
     <div
-      className="flex flex-col items-center   p-4"
+      className="flex flex-col items-center p-4"
       style={{
         backgroundImage: ` radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%), url(${image}) `,
         backgroundSize: 'auto',
@@ -436,25 +449,23 @@ export const FarmerDetailsForm: React.FC = () => {
         </div>
 
         {/* back button */}
-        <div className="flex items-center mb-0">
+        <div className="relative w-full flex items-center justify-center mb-4">
+          {/* Back Button - absolute positioned on the left */}
           {step > 1 && (
             <button
               onClick={() => setStep(step - 1)}
-              className="text-green-900 border-2 border-green-900  rounded-full"
+              className="absolute left-0 text-green-900 border-2 border-green-900 rounded-full "
             >
-              <BackArrowIcon />
+              <BackArrowIcon className="w-5 h-5" />
             </button>
           )}
 
-          <h1
-            className={`text-3xl sm:text-2xl md:text-3xl font-semibold ${
-              step < 2 ? 'ml-20' : 'ml-13'
-            }`}
-            style={{ color: '#005B24' }}
-          >
+          {/* Centered Title */}
+          <h1 className="text-2xl sm:text-2xl md:text-2xl font-semibold text-[#005B24] text-center">
             {HeaderData[step - 1]}
           </h1>
         </div>
+
         {/* <h3 className="text-center">{HeaderData[step - 1]}</h3> */}
         <Formik
           initialValues={initialValues}

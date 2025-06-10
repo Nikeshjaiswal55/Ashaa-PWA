@@ -36,13 +36,14 @@ const SelectInput = <T extends object>({
   return (
     <>
       <div className="relative">
-        <label className="block text-lg font-semibold text-green-900 mb-2">{labelFirst}</label>
+        <label className="block text-lg pl-2 font-semibold text-green-900 mb-2">{labelFirst}</label>
         {label && (
           <label
             htmlFor={name}
             className={`absolute bg-white ${labelcss}  text-green-900 top-[-15px]  left-3 block text-lg px- font-semibold text-green-900 text-gray-700 mb-1`}
           >
-            {label}
+            {' '}
+            {label}{' '}
           </label>
         )}
         <Field
@@ -51,8 +52,7 @@ const SelectInput = <T extends object>({
           id={name}
           className={`${width} ${height}  ${
             customClass || ''
-          }   rounded-lg shadow-sm  transition-colors 
-          ${
+          }   rounded-lg shadow-sm  transition-colors ${
             touched[name as keyof FormValues] && errors[name as keyof FormValues]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
               : 'border-green-800 focus:ring-green-500 focus:border-green-500'

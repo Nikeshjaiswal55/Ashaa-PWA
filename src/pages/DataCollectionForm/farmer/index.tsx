@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Header from '@/components/Header/Header';
 
@@ -6,6 +7,7 @@ import farm from '../../../assets/FarmerFarmInfo/farm.png';
 import delte from '../../../assets/Icons/delete.svg';
 
 const FarmCard = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Header hideText hideProfile />
@@ -60,7 +62,12 @@ const FarmCard = () => {
 
       <div className="mb-4 mt-6 max-w-md mx-3">
         <div className="flex items-center justify-between  justify-center border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none">
-          <span className="font-semibold text-green-900  text-base">+ Add Fertilizer Usage</span>
+          <span
+            className="font-semibold text-green-900  text-base"
+            onClick={() => navigate('/DataCollectionForm/FarmDetails?reset=true')}
+          >
+            + Add Fertilizer Usage
+          </span>
           <span className="text-green-900 text-2xl font-bold"></span>
         </div>
       </div>
