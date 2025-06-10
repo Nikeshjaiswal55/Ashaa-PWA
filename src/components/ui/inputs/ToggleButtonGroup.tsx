@@ -18,9 +18,9 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
   className = '',
 }) => (
   <div
-    className={`flex items-center w-full justify-between shadow-md px-1 py-1 h-[54px] rounded-md w-fit  ${className}`}
+    className={`flex items-center w-full justify-between  px-1 py-1 h-[54px] rounded-md w-fit  ${className}`}
   >
-    <label className="text-lg font-semibold text-green-900 mr-0">{label}</label>
+    <label className="text-lg font-semibold text-green-900 pl-2 mr-0">{label}</label>
     <div className="flex border border-gray-300 w-[100px] rounded-[10px] overflow-hidden">
       <button
         type="button"

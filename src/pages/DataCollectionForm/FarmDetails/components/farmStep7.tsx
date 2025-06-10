@@ -10,6 +10,7 @@ import {
 } from 'formik';
 
 import { FarmFormValues } from '..';
+import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
 import deleteImg from '../../../../assets/Icons/delete.svg';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
@@ -26,7 +27,7 @@ interface FarmStep7Props {
 }
 
 const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setFieldValue }) => {
-  const [showFertilizerForm, setShowFertilizerForm] = useState(false);
+  const [showFertilizerForm, setShowFertilizerForm] = useState(true);
 
   // Save current fertilizer to fertilizerUsageList array
   const handleSaveFertilizer = () => {
@@ -123,7 +124,11 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                       + Add Fertilizer Usage
                     </span>
                     <span className="text-green-900 text-2xl font-bold">
-                      {showFertilizerForm ? '▲' : <img src={closeArrow} alt="open arrow"></img>}
+                      {showFertilizerForm ? (
+                        <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                      ) : (
+                        <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -204,8 +209,8 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                           type="number"
                           placeholder="1000"
                           className={`w-[109.43px] text-center bg-transparent text-green-900 font-bold text-lg border-b-2
-        ${touched.price && errors.price ? 'border-red-500' : 'border-green-700'}
-        focus:ring-0 focus:outline-none`}
+                         ${touched.price && errors.price ? 'border-red-500' : 'border-green-700'}
+                         focus:ring-0 focus:outline-none`}
                           style={{ appearance: 'textfield' }}
                         />
                       </div>

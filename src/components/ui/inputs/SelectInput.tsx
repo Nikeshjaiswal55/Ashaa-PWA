@@ -58,7 +58,7 @@ const SelectInput = <T extends object>({
               : 'border-green-800 focus:ring-green-500 focus:border-green-500'
           } `}
         >
-          <option value="">{defaultOption}</option>
+          {defaultOption ? <option value="">{defaultOption}</option> : null}
           {options.map((opt) => (
             <option key={opt} value={opt === defaultOption ? '' : opt}>
               {opt}

@@ -3,13 +3,12 @@ import React from 'react';
 import { Field, FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FarmFormValues } from '..';
+import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
+import closeArrow from '../../../../assets/Icons/arrow.png';
 import deleteImg from '../../../../assets/Icons/delete.svg';
 import ImageUploadInput from '../../../../components/ui/inputs/ImageUploadInput';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 import TextInput from '../../../../components/ui/inputs/TextInput';
-
-const seedSourceOptions = ['Supplier 1', 'Supplier 2', 'Supplier 3'];
-const seedingRateUnitOptions = ['kg/Acre', 'kg/Hectare'];
 
 interface FarmStep6Props {
   values: FarmFormValues;
@@ -28,6 +27,8 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
   showCropDetailsForm,
   setShowCropDetailsForm,
 }) => {
+  const seedSourceOptions: string[] = ['Supplier 1', 'Supplier 2', 'Supplier 3'];
+  const seedingRateUnitOptions: string[] = ['kg/Acre', 'Kg/hectare'];
   // Save current crop to CropList array
   const handleSaveCrop = () => {
     const crop = {
@@ -138,7 +139,11 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                   >
                     <span className="font-semibold text-green-900 text-base">+ Add New Crop</span>
                     <span className="text-green-900 text-2xl font-bold">
-                      {showCropDetailsForm ? '▲' : '▼'}
+                      {showCropDetailsForm ? (
+                        <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                      ) : (
+                        <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -147,7 +152,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                 {showCropDetailsForm && (
                   <div className="mt-2  rounded-2xl p-2 space-y-8 bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
                     <div className="mt-3">
-                      <TextInput
+                      <TextInput<FarmFormValues>
                         label="Cultivation Area"
                         name="cultivationArea"
                         placeholder="Enter area under cultivation"
@@ -155,11 +160,11 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                         errors={errors}
                         touched={touched}
                         setFieldValue={setFieldValue}
-                        type=""
+                        type="text"
                         labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                       />
                     </div>
-                    <TextInput
+                    <TextInput<FarmFormValues>
                       label="Crop Name"
                       name="cropName"
                       placeholder="Enter crop name"
@@ -170,7 +175,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                       type=""
                       labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                     />
-                    <TextInput
+                    <TextInput<FarmFormValues>
                       label="Crop Variety"
                       name="cropVariety"
                       placeholder="Enter variety name"
@@ -181,7 +186,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                       type=""
                       labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                     />
-                    <SelectInput
+                    <SelectInput<FarmFormValues>
                       label="Seed Source"
                       name="seedSource"
                       options={seedSourceOptions}
@@ -220,10 +225,10 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                         </div>
 
                         {/* Unit Selector */}
-                        <SelectInput
+                        <SelectInput<FarmFormValues>
                           name="seedingRateUnit"
                           options={seedingRateUnitOptions}
-                          defaultOption="kg/Acre"
+                          defaultOption=""
                           values={values}
                           errors={errors}
                           touched={touched}
@@ -241,7 +246,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                       )}
                     </div>
 
-                    <TextInput
+                    <TextInput<FarmFormValues>
                       label="Seed Name"
                       name="seedName"
                       placeholder="Enter Seed Name"
@@ -256,7 +261,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                       <label className="block text-green-900 font-semibold mb-1">
                         Upload Crop Photo
                       </label>
-                      <ImageUploadInput
+                      <ImageUploadInput<FarmFormValues>
                         name="cropPhoto"
                         id="cropPhoto"
                         placeholder="Upload Photo"

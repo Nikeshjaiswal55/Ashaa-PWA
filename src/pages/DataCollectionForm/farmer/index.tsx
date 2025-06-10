@@ -5,6 +5,7 @@ import Header from '@/components/Header/Header';
 
 import farm from '../../../assets/FarmerFarmInfo/farm.png';
 import delte from '../../../assets/Icons/delete.svg';
+import location from '../../../assets/Icons/onBoarding_location .svg';
 
 const FarmCard = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const FarmCard = () => {
     <>
       <Header hideText hideProfile />
       <div className="flex w-full justify-center ">
-        <div className="relative flex items-center h-[88px] mt-10 mx-3 justify-between bg-[rgba(54,195,96,0.1)] rounded-2xl px-4 w-full ">
+        <div className="relative flex items-center h-[88px] mt-10 mx-3 justify-between bg-[radial-gradient(circle,rgba(54,195,96,0.2))] rounded-2xl px-2 w-full ">
           {/* DELETE BUTTON */}
           <div className="absolute top-2 left-2">
             <button className="text-red-500 hover:text-red-600">
@@ -27,17 +28,27 @@ const FarmCard = () => {
 
           {/* CENTER: Farm Info */}
           <div className="flex-1 px-4">
-            <div className="text-green-900 font-bold text-lg">Shivam Farm</div>
-            <div className="flex items-center gap-2 text-gray-500 text-sm mt-1">
-              <span>📍Ajnas</span>
-              <span>🌾 Gram</span>
+            <div className="text-green-900 font-semibold text-base">Shivam Farm</div>
+            <div className="flex items-center  gap-2 text-gray-500 text-sm mt-1">
+              <div className="flex items-center">
+                <span>
+                  <img src={location}></img>
+                </span>
+                <span>Ajnas</span>
+              </div>
+              <div className="flex items-center">
+                <span>
+                  <img src={location}></img>
+                </span>
+                <span>Gram</span>
+              </div>
             </div>
           </div>
 
           {/* RIGHT SIDE */}
           <div className="flex flex-col items-end justify-between h-full">
-            <div className="text-gray-500 font-semibold text-md">1 Acre</div>
-            <button className="mt-2  text-green-800 p-1 bg-white rounded-xl ">
+            <div className="text-gray-500 font-normal pt-5 text-base">1 Acre</div>
+            <button className="mt-2 flex justify-center align-center mb-1  text-green-800 w-[33.8px] h-[32px] p-1 bg-white rounded-[10px] ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -56,7 +67,7 @@ const FarmCard = () => {
           </div>
 
           {/* FULL WIDTH LINE (ABSOLUTE) */}
-          <div className="absolute bottom-[40%] left-[110px] mb-1 right-[2px] h-[1px] bg-gray-400"></div>
+          <div className="absolute bottom-[40%] left-[110px] mb-1 right-[2px] h-[1px] bg-[#858585]"></div>
         </div>
       </div>
 

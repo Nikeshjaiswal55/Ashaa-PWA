@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Field, FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FarmFormValues } from '..';
+import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
+import closeArrow from '../../../../assets/Icons/arrow.png';
 import deleteImg from '../../../../assets/Icons/delete.svg';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 import TextInput from '../../../../components/ui/inputs/TextInput';
@@ -18,7 +20,7 @@ interface FarmStep8Props {
 }
 
 const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setFieldValue }) => {
-  const [showPesticideForm, setShowPesticideForm] = useState(false);
+  const [showPesticideForm, setShowPesticideForm] = useState(true);
 
   const handleSavePesticide = () => {
     const pesticide = {
@@ -112,7 +114,11 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
                   + Add Pesticide Usage
                 </span>
                 <span className="text-green-900 text-2xl font-bold">
-                  {showPesticideForm ? '▲' : '▼'}
+                  {showPesticideForm ? (
+                    <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                  ) : (
+                    <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                  )}
                 </span>
               </div>
             </div>

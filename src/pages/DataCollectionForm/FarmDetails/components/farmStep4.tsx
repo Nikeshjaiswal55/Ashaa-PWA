@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FarmFormValues, waterManagement } from '..';
+import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
+import closeArrow from '../../../../assets/Icons/arrow.png';
 import DeleteImg from '../../../../assets/Icons/delete.svg';
 import ImageUploadInput from '../../../../components/ui/inputs/ImageUploadInput';
 import RadioInputs from '../../../../components/ui/inputs/RadioInputs';
@@ -16,12 +18,11 @@ interface FarmStep4Props {
   values: FarmFormValues;
   errors: FormikErrors<FarmFormValues>;
   touched: FormikTouched<FarmFormValues>;
-
   setFieldValue: FormikHelpers<FarmFormValues>['setFieldValue'];
 }
 const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setFieldValue }) => {
   const waterManagementList = values.waterManagement || [];
-  const [showWaterManagementForm, setShowWaterManagementForm] = useState(false); //for show or hide form
+  const [showWaterManagementForm, setShowWaterManagementForm] = useState(true); //for show or hide form
 
   const handleSaveAnimal = () => {
     // Construct the new animal from form values
@@ -39,7 +40,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
 
   return (
     <div className="flex flex-col items-center  ">
-      <div className="w-full max-w-2xl mt-8 rounded-xl md:p-8">
+      <div className="w-full max-w-2xl mt-5 rounded-xl md:p-8">
         <div className="space-y-8 ">
           <FieldArray
             name="waterManagment"
@@ -92,12 +93,12 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                     <div>
                       <button
                         type="button"
-                        className="bg-green-700 hover:bg-green-600 p-2 rounded-xl text-white transition duration-150 ease-in-out"
+                        className="bg-[#005B24] hover:bg-green-600 p-2 rounded-xl text-white transition duration-150 ease-in-out"
                         title="Edit"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
+                          className="h-7 w-7"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -124,13 +125,17 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                       + Add New Water Source
                     </span>
                     <span className="text-green-900 text-2xl font-bold">
-                      {showWaterManagementForm ? '▲' : '▼'}
+                      {showWaterManagementForm ? (
+                        <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                      ) : (
+                        <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                      )}
                     </span>
                   </div>
 
                   {showWaterManagementForm && (
                     <div
-                      className="mt-2 mx-2 rounded-2xl p-2 space-y-8"
+                      className="mt-2  rounded-[10px] p-4 space-y-8"
                       style={{ background: 'rgba(54, 195, 96, 0.2)' }}
                     >
                       <div className="flex gap-2 "></div>
@@ -180,7 +185,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                         />
                         <button
                           onClick={handleSaveAnimal}
-                          className="w-full bg-green-800 text-white py-2 rounded-lg font-semibold"
+                          className="w-full h-[34px] bg-[#005B24] text-white  rounded-lg font-semibold"
                         >
                           {' '}
                           Save Animal{' '}

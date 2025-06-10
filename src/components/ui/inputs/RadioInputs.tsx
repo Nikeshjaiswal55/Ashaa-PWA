@@ -26,7 +26,7 @@ const RadioInputs = <T extends object>({ label, name, values, options }: RadioIn
               type="radio"
               name={name}
               value={option}
-              className="appearance-none w-4 h-4 rounded-full border-2 border-gray-600 bg-gray-600 checked:bg-green-800 checked:border-green-800"
+              className="appearance-none w-[16px] h-[16px] rounded-full border-2 border-gray-600 bg-gray-600 checked:bg-green-800 checked:border-green-800"
             />
             <span className="text-lg font-semibold text-green-900 pl-1">{option}</span>
           </label>

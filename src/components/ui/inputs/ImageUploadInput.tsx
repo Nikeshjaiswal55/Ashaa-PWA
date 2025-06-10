@@ -55,7 +55,7 @@ const ImageUploadInput = <T extends object>({
             />
           ) : (
             <div className="text-center flex flex-col items-center justify-center">
-              <img src={gallery} alt="Upload Icon" className="h-[24px] w-[24px] mb-2" />
+              <img src={gallery} alt="Upload Icon" className="h-[35.26px] w-[35.26px] mb-2" />
               <p className="mt-0 text-sm text-green-600">Upload image</p>
             </div>
           )}

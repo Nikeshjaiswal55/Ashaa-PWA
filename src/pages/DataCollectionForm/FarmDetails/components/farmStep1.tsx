@@ -21,8 +21,8 @@ const topographyOptions = ['Plain', 'Hilly', 'Undulating', 'Plateau', 'Valley'];
 const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
     <div className="flex flex-col items-center  h-[75vh]">
-      <div className="w-full max-w-2xl mt-8 rounded-xl md:p-8">
-        <div className="space-y-8 ">
+      <div className="w-full max-w-2xl mt-5 rounded-xl md:p-8">
+        <div className="space-y-6 ">
           {/* Individual Farm Size & Unit */}
           <div className="grid grid-cols-3 gap-4 item-end">
             <div className="col-span-2">
@@ -51,12 +51,12 @@ const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setField
                 errors={errors}
                 values={values}
                 setFieldValue={setFieldValue}
-                defaultOption="Acre"
                 width="w-full"
                 label={''}
                 height={'h-[36px]'}
                 customClass={'border-2 mt-[28px]'}
                 labelFirst={''}
+                defaultOption={''}
               />
             </div>
           </div>

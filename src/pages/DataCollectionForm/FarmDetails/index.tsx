@@ -34,7 +34,6 @@ const BackArrowIcon: React.FC<IconProps> = ({ className = 'w-6 h-6' }) => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />{' '}
   </svg>
 );
-
 const ArrowRightIcon: React.FC<IconProps> = ({ className = 'w-5 h-5 ml-1' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -170,8 +169,8 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(2);
-  const [showCropDetailsForm, setShowCropDetailsForm] = useState(false); // //for show or hide Crop Details form step 4
+  const [step, setStep] = useState(3);
+  const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -186,7 +185,7 @@ export const FarmerDetailsForm: React.FC = () => {
   // --- Initial Form Values ---
   const initialValues: FarmFormValues = {
     individualFarmSize: '',
-    farmSizeUnit: 'Acre',
+    farmSizeUnit: '',
     farmLocation: '',
     khasraNumber: '',
     landOwnership: '',
@@ -434,7 +433,7 @@ export const FarmerDetailsForm: React.FC = () => {
             <React.Fragment key={s}>
               <div
                 className={`w-5 h-5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-sm font-semibold ${
-                  s <= step ? 'bg-[#005B24] text-white ' : 'bg-gray-400 text-white'
+                  s <= step ? 'bg-[#005B24] text-white ' : 'bg-[#858585] text-white'
                 }`}
               >
                 {s}
