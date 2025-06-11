@@ -8,6 +8,8 @@ import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
 
+import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
+import closeArrow from '../../../../assets/Icons/arrow.png';
 import deleteIcon from '../../../../assets/Icons/delete.svg';
 import { Equipment, FormValues } from '../../FarmerDetails/index';
 
@@ -136,11 +138,18 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                     onClick={() => setShowForm2((prev: boolean) => !prev)}
                   >
                     <span className="font-semibold text-green-900">+ Add New Equipment</span>
-                    <span className="text-green-900 text-xl"> {showForm2 ? '▲' : '▼'} </span>
+                    <span className="text-green-900 text-xl">
+                      {' '}
+                      {showForm2 ? (
+                        <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                      ) : (
+                        <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                      )}{' '}
+                    </span>
                   </div>
                   {showForm2 && (
                     // Form to Add New Animal
-                    <div className="mt-3 bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-4">
+                    <div className="mt-3 bg-[radial-gradient(circle,rgba(54,195,96,0.2))] rounded-2xl p-2 shadow-md space-y-4">
                       <div className="flex gap-2 h-12">
                         {/* animalType */}
                         <SelectInput<FormValues>
@@ -227,7 +236,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           values={values}
                           label="Owner"
                           customClass={'border-2 h-[52px]'}
-                          labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
+                          labelcss={'px-2  bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
                           labelFirst={''}
                         />
                       </div>
@@ -243,7 +252,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           type="text"
                           setFieldValue={setFieldValue}
                           values={values}
-                          labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.10))] '}
+                          labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
                         />
                       </div>
 

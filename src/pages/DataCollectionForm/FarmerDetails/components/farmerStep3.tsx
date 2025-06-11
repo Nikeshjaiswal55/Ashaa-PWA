@@ -9,6 +9,8 @@ import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
 import UnitInput from '@/components/ui/inputs/UnitInput';
 
+import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
+import closeArrow from '../../../../assets/Icons/arrow.png';
 import DeleteImg from '../../../../assets/Icons/delete.svg';
 import milk from '../../../../assets/Icons/lucide_milk.svg';
 import { Animal, FormValues } from '../../FarmerDetails/index';
@@ -149,12 +151,16 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                   >
                     <span className="font-semibold text-green-900 text-base">+ Add New Animal</span>
                     <span className="text-green-900 text-2xl font-bold">
-                      {showForm ? '▲' : '▼'}
+                      {showForm ? (
+                        <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                      ) : (
+                        <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                      )}
                     </span>
                   </div>
                   {showForm && (
                     // Form to Add New Animal
-                    <div className="mt-2 bg-gradient-to-r from-[#d9f3e3] to-[#e9f7ef] rounded-2xl p-2 shadow-md space-y-8">
+                    <div className="mt-2 bg-[radial-gradient(circle,rgba(54,195,96,0.2))] rounded-2xl p-2 shadow-md space-y-8">
                       <div className="flex gap-2 h-12">
                         {/* animalType */}
                         <SelectInput<FormValues>
@@ -222,7 +228,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           setFieldValue={setFieldValue}
                           values={values}
                           label={'Milk Selling Place'}
-                          labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.10))] '}
+                          labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
                           customClass={'border-2'}
                           labelFirst={''}
                         />
@@ -237,7 +243,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                               type="text"
                               setFieldValue={setFieldValue}
                               values={values}
-                              labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.10))] '}
+                              labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
                             />
                           </div>
                         )}
@@ -253,7 +259,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           type="text"
                           setFieldValue={setFieldValue}
                           values={values}
-                          labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.10))] '}
+                          labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
                         />
                       </div>
                       {/* insuranceAvailable */}
@@ -274,7 +280,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                             type="text"
                             setFieldValue={setFieldValue}
                             values={values}
-                            labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
+                            labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
                           />
                         </div>
                       )}
@@ -291,7 +297,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                       />
                       <button
                         onClick={handleSaveAnimal}
-                        className="w-full bg-green-800 text-white py-2 rounded-lg font-semibold"
+                        className="w-full bg-[#005B24] text-white py-2 rounded-lg font-semibold"
                       >
                         {' '}
                         Save Animal{' '}
