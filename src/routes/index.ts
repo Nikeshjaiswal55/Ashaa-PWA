@@ -22,7 +22,7 @@ const routes: Routes = {
     icon: undefined,
   },
   [Pages.Page3]: {
-    component: asyncComponentLoader(() => import('@/pages/Page3')),
+    component: asyncComponentLoader(() => import('@/pages/FarmerForm')),
     path: '/page-3',
     title: 'Page 3',
     icon: undefined,
