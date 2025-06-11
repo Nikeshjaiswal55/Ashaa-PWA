@@ -4,7 +4,6 @@ function Welcome() {
   return (
     <>
       <Meta title="Welcome" />
-      {/* <h1>Welcome to the PWA</h1> */}
     </>
   );
 }
