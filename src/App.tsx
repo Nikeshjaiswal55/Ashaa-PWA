@@ -11,6 +11,7 @@ import Pages from '../src/routes/Pages/Pages';
 import '../src/style.css';
 import Layout from './components/Layout';
 import { store } from './redux/store';
+import Pages from './routes/Pages';
 
 function App() {
   return (
@@ -21,9 +22,11 @@ function App() {
         <BrowserRouter>
           <Layout>
             {/* <Home /> */}
-
-            {/* <Page2 /> */}
+            {/* <FarmerDetailsForm /> */}
+            {/* <FarmingExperienceDetails/> */}
             <Pages />
+            {/* <FarmerLiveStock/> */}
+            {/* <Page2 /> */}
           </Layout>
           {/* <ProfilePage /> */}
         </BrowserRouter>
