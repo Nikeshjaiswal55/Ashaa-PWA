@@ -11,7 +11,6 @@ enum Pages {
   DataCollectionFormFarm,
   farmer,
   Page3,
-  Page4,
   NotFound,
 }
 

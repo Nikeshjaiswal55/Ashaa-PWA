@@ -148,7 +148,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
 
   const initialValues: FormValues = {
     farmerName: '',

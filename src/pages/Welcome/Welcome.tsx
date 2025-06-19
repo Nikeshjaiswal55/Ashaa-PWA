@@ -39,7 +39,7 @@ function Welcome() {
             <h2 className="mt-4 text-2xl h-[35px] font-semibold text-[#005B24]">Welcome</h2>
             <p className="text-base font-bold text-gray-500">
               {' '}
-              Enter your mobile number or Gmail, and we&apos;ll send an OTP on WhatsApp.{' '}
+              Enter your mobile number or Gmail, and we&apos;ll send an OTP on WhatsApp.
             </p>
           </div>
 

@@ -7,7 +7,6 @@ import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 
-import Pages from '../src/routes/Pages/Pages';
 import '../src/style.css';
 import Layout from './components/Layout';
 import { store } from './redux/store';
@@ -20,15 +19,9 @@ function App() {
       <SW />
       <Provider store={store}>
         <BrowserRouter>
-          <Layout>
-            {/* <Home /> */}
-            {/* <FarmerDetailsForm /> */}
-            {/* <FarmingExperienceDetails/> */}
+          {/* <Layout> */}
             <Pages />
-            {/* <FarmerLiveStock/> */}
-            {/* <Page2 /> */}
-          </Layout>
-          {/* <ProfilePage /> */}
+          {/* </Layout> */}
         </BrowserRouter>
       </Provider>
     </Fragment>

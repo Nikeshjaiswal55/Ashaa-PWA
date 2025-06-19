@@ -169,7 +169,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
   const navigate = useNavigate();
 
