@@ -15,6 +15,11 @@ const routes: Routes = {
     title: 'Page 1',
     icon: undefined,
   },
+  [Pages.Profile]: {
+    component: asyncComponentLoader(() => import('@/pages/Profile')),
+    path: '/profile',
+    title: 'Profile',
+  },
 
   [Pages.Page2]: {
     component: asyncComponentLoader(() => import('@/pages/Onboarding')),

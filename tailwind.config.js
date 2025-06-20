@@ -92,6 +92,10 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			fontFamily: {
+				lexend: ['Lexend', 'sans-serif'],
+				deca: ['Lexend Deca', 'sans-serif'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

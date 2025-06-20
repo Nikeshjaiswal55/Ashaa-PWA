@@ -4,6 +4,12 @@ import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import image from '../../../assets/header/image.png';
+// import '@fontsource/lexend'; // Lexend font default weight 400
+// import '@fontsource/lexend-deca'; // Lexend Deca font
+import '../form.css';
+// import '@fontsource/lexend'; // Lexend font default weight 400
+// import '@fontsource/lexend-deca'; // Lexend Deca font
+import '../form.css';
 import FarmerStep1 from './components/farmerStep1';
 import FarmerStep2 from './components/farmerStep2';
 import FarmerStep3 from './components/farmerStep3';
@@ -395,7 +401,7 @@ export const FarmerDetailsForm: React.FC = () => {
           )}
 
           <h1
-            className={`text-3xl sm:text-2xl md:text-3xl font-semibold ${
+            className={`text-3xl sm:text-2xl md:text-3xl  steps-heading  ${
               step < 2 ? 'ml-20' : 'ml-13'
             }`}
             style={{ color: '#005B24' }}
@@ -403,11 +409,15 @@ export const FarmerDetailsForm: React.FC = () => {
             Farmer Details
           </h1>
         </div>
-        <h3 className="text-center">{HeaderData[step - 1]}</h3>
+        <h3 className="text-center ">{HeaderData[step - 1]}</h3>
         <Formik
+          key={step}
           initialValues={initialValues}
           validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
+          validateOnChange={true}
+          validateOnBlur={true}
+          //
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (
             <Form className="space-y-6  mt-8">

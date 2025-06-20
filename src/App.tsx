@@ -19,9 +19,10 @@ function App() {
       <SW />
       <Provider store={store}>
         <BrowserRouter>
-          {/* <Layout> */}
+          <Layout>
             <Pages />
-          {/* </Layout> */}
+          </Layout>
+          {/* <Profile /> */}
         </BrowserRouter>
       </Provider>
     </Fragment>

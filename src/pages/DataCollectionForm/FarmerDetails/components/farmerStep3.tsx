@@ -32,6 +32,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   showForm,
   setShowForm,
 }) => {
+  console.log('Touched:', touched);
   const animalList = values.animals || [];
 
   const handleSaveAnimal = () => {
