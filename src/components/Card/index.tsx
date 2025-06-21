@@ -203,7 +203,7 @@ export const HomeHeroSectionCard: React.FC<HomeHeroSectionCardProps> = ({ imageU
   return (
     <div className="relative w-full h-30  overflow-hidden flex items-center bg-white">
       <div className="absolute top-0 right-0 h-full w-3/5">
-        <img src={imageUrl} alt="Smart Farming" className="h-40 w-full object-cover" />
+        <img src={imageUrl} alt="Smart Farming" className="h-50 w-full object-cover" />
         <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-l  from-transparent via-white/60 to-white" />
       </div>
       <div className="absolute bottom-0 left-0 h-1/7 w-full bg-gradient-to-t from-white/80 to-transparent"></div>

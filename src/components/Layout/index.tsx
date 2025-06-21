@@ -16,6 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     '/DataCollectionForm/FarmDetails',
     '/profile',
     '/onboarding/farmer',
+    '/onboarding/farm',
 
     // '/DataCollectionForm/farmer'
   ];

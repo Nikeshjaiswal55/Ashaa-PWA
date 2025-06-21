@@ -59,7 +59,7 @@ const ReminderIcon = () => (
 // const ChangePasswordIcon = () => <svg className="w-5 h-5 text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H5v-2H3v-2H1v-4a6 6 0 017.743-5.743L13 5h2v2h2v2m-6 4h4m-2 2v2m-2-2H9m2-2V9m0 0H9m2 2h2"></path></svg>; // Placeholder
 const ChevronRightIcon = () => (
   <svg
-    className="w-5 h-5 text-gray-400"
+    className="w-5 h-5 text-black"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -73,39 +73,59 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Header */}
-      <div className="bg-[#005B24] p-4 text-white flex items-center z-20">
-        <button className="mr-4" onClick={() => window.history.back()}>
+      <div className="bg-[#005B24] h-[10px] p-4 text-white flex items-center z-20">
+        <button className="mr-4 pt-6" onClick={() => window.history.back()}>
           <BackArrowIcon />
         </button>
       </div>
 
       {/* Profile Info */}
-      <div className="relative  pb-24">
+      <div className="relative  pb-20">
         <div
-          className="bg-[#005B24] h-[200px] w-[100%] absolute "
+          className="bg-[#005B24] h-[210px] w-[100%] absolute "
           style={{
             top: '-110px',
-            borderRadius: '100%',
+            borderRadius: '90%',
           }}
         ></div>
         <div className="flex flex-col items-center">
-          <div className="relative ">
+          <div className="relative z-20 flex items-center justify-center mt-8">
+            {/* Light green circle background */}
+            <div
+              className="absolute"
+              style={{
+                width: '120px',
+                height: '120px',
+                background: '#E6F4EA', // light green
+                borderRadius: '50%',
+                top: 0,
+                left: 0,
+                right: 0,
+                margin: 'auto',
+                zIndex: 1,
+              }}
+            ></div>
+            {/* Profile image */}
             <img
-              className="w-28 h-28 rounded-full border-4 border-white shadow-lg"
-              src={ProfileImg} // Replace with actual image URL
+              className="w-28 h-28 rounded-full shadow-lg relative z-10"
+              src={ProfileImg}
               alt="Rahul Malviya"
             />
-            <button className="absolute bottom-0 right-0 bg-green-600 p-1.5 rounded-full border-2 border-white">
+            {/* Edit icon button (if needed) */}
+            <button
+              className="absolute bottom-1 right-1 bg-green-700 rounded-md flex items-center justify-center z-20"
+              style={{ width: 28, height: 28 }}
+            >
               <EditIcon />
             </button>
           </div>
-          <h1 className="text-2xl title font-lexend text-green-800 mt-3">Rahul Malviya</h1>
+          <h1 className="text-lg  font-semibold text-green-800 mt-1">Rahul Malviya</h1>
           <p className="text-gray-600 text-sm">+91 9770458688</p>
         </div>
       </div>
 
       {/* Details Section */}
-      <div className="-mt-16 border-t-2 p-6 rounded-lg border-b-2 mb-6 ">
+      <div className="-mt-16 border-t-2 p-6 rounded-lg  mb-6 ">
         <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
           <div>
             <label className="block text-[#858585]">Gender</label>
@@ -141,15 +161,15 @@ const ProfilePage = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="border-t-2 p-4 rounded-lg border-b-2 mb-6 text-sm">
-        <div className="flex justify-between items-center py-3">
+      <div className="border-t-2 p-4 px-7 rounded-lg border-b-2 mb-6 text-sm">
+        <div className="flex justify-between border-b-2 items-center py-2">
           <div>
             <h3 className="font-semibold text-base text-[#005B24]">Total Farmer Registered</h3>
             <p className="text-gray-600">2,350 Regiestered</p>
           </div>
           <ChevronRightIcon />
         </div>
-        <div className="flex justify-between items-center py-3">
+        <div className="flex justify-between items-center py-2">
           <div>
             <h3 className="font-semibold text-base text-[#005B24]">Total Farm Registered</h3>
             <p className="text-gray-600">2,350 Regiestered</p>
@@ -159,31 +179,31 @@ const ProfilePage = () => {
       </div>
 
       {/* Preferences Section */}
-      <div className="border-t-2 p-4 rounded-lg border-b-2 mb-6 text-sm">
+      <div className=" px-4 rounded-lg border-b-2 mb-6 text-sm">
         <h3 className="text-base font-semibold text-[#005B24] mb-3">Preferences</h3>
         <ul>
-          <li className="flex justify-between items-center py-3 ">
+          <li className="flex justify-between items-center py-2 ">
             <div className="flex items-center">
               <img src={languageIcon} alt="language" className="w-5 h-5" />
               <span className="ml-3 text-[#858585]">Language</span>
             </div>
             <ChevronRightIcon />
           </li>
-          <li className="flex justify-between items-center py-3 ">
+          <li className="flex justify-between items-center py-2 ">
             <div className="flex items-center">
               <img src={themeIcon} alt="theme" className="w-5 h-5" />
               <span className="ml-3 text-[#858585]">Theme</span>
             </div>
             <ChevronRightIcon />
           </li>
-          <li className="flex justify-between items-center py-3 ">
+          <li className="flex justify-between  items-center py-2 ">
             <div className="flex items-center">
               <ReminderIcon />
               <span className="ml-3 text-[#858585]">Reminder</span>
             </div>
             <ChevronRightIcon />
           </li>
-          <li className="flex justify-between items-center py-3">
+          <li className="flex justify-between items-center py-2">
             <div className="flex items-center">
               <img src={lockIcon} alt="change password" className="w-5 h-5" />
               <span className="ml-3 text-[#858585]">Change Password</span>
@@ -195,7 +215,7 @@ const ProfilePage = () => {
 
       {/* Log Out Button */}
       <div className="px-4 pb-6 mt-auto">
-        <button className="w-full bg-green-800 text-white py-3 rounded-lg font-semibold text-base">
+        <button className="w-full bg-green-800 text-white py-2 rounded-lg font-semibold text-base">
           Log Out
         </button>
       </div>

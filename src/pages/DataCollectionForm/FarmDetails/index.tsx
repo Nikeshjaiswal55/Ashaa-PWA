@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import image from '../../../assets/header/image.png';
+import '../form.css';
 // forms import
 import FarmStep1 from './components/farmStep1';
 import FarmStep2 from './components/farmStep2';

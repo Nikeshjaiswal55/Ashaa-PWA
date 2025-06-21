@@ -9,7 +9,6 @@ import image from '../../../assets/header/image.png';
 import '../form.css';
 // import '@fontsource/lexend'; // Lexend font default weight 400
 // import '@fontsource/lexend-deca'; // Lexend Deca font
-import '../form.css';
 import FarmerStep1 from './components/farmerStep1';
 import FarmerStep2 from './components/farmerStep2';
 import FarmerStep3 from './components/farmerStep3';
@@ -374,7 +373,7 @@ export const FarmerDetailsForm: React.FC = () => {
           {[1, 2, 3, 4, 5, 6].map((s) => (
             <React.Fragment key={s}>
               <div
-                className={`w-5 h-5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-sm font-semibold ${
+                className={`w-5 h-5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-sm font-normal ${
                   s <= step ? 'bg-[#005B24] text-white ' : 'bg-gray-400 text-white'
                 }`}
               >

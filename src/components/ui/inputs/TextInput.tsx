@@ -55,7 +55,6 @@ const TextInput = <T extends object>({
             {typeof rightIcon === 'string' ? <img src={rightIcon} alt="location" /> : rightIcon}
           </div>
         )}
-
         <ErrorMessage name={name} component="div" className="text-red-500 text-xs mt-1" />
       </div>
     </>
