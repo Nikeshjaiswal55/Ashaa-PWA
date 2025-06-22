@@ -43,7 +43,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
       type: 'farmerName',
       name: 'farmerName',
       id: 'farmerName',
-      placeholder: 'Enter farmer’s full name',
+      placeholder: "Enter farmer's full name",
     },
     {
       label: 'Contact Number',
@@ -62,7 +62,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center">
       <div className="w-full max-w-2xl mt-8 rounded-xl md:p-8">
         <div className="space-y-6">
           {/* farmer name - adhar no - contact number */}

@@ -57,7 +57,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   const animalTypes = ['Cow', 'Goat', 'Buffalo', 'Sheep', 'Others'];
   const milkSellingPlaces = ['Dairy', 'Village', 'Market', 'Co-operative', 'Others'];
   return (
-    <div className="flex flex-col min-h-[70vh] items-center ">
+    <div className="flex flex-col items-center ">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         <div className="space-y-6 ">
           <FieldArray

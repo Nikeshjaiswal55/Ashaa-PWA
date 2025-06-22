@@ -416,7 +416,7 @@ export const FarmerDetailsForm: React.FC = () => {
   // --- Render  form---
   return (
     <div
-      className="flex flex-col items-center p-4"
+      className="flex flex-col items-center p-4 min-h-screen"
       style={{
         backgroundImage: ` radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%), url(${image}) `,
         backgroundSize: 'auto',
@@ -427,7 +427,7 @@ export const FarmerDetailsForm: React.FC = () => {
     >
       {/* Background gradient with image */}
 
-      <div className="w-full max-w-2xl rounded-xl md:p-8">
+      <div className="w-full max-w-2xl rounded-xl md:p-8 flex flex-col flex-grow">
         {/* Progress Steps */}
         <div className="flex justify-center items-center space-x-0 sm:space-x-0 mb-5">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((s) => (
@@ -473,128 +473,132 @@ export const FarmerDetailsForm: React.FC = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (
-            <Form className="space-y-6   mt-8">
-              {step === 1 && (
-                <FarmStep1
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
+            <Form className="flex flex-col flex-grow mt-8">
+              <div className="flex-grow space-y-6">
+                {step === 1 && (
+                  <FarmStep1
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
 
-              {step === 2 && (
-                <FarmStep2
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
+                {step === 2 && (
+                  <FarmStep2
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
 
-              {step === 3 && (
-                <FarmStep3
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              {step === 4 && (
-                <FarmStep4
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              {step === 5 && (
-                <FarmStep5
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              {step === 6 && (
-                <FarmStep6
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                  showCropDetailsForm={showCropDetailsForm}
-                  setShowCropDetailsForm={setShowCropDetailsForm}
-                />
-              )}
-              {step === 7 && (
-                <FarmStep7
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              {step === 8 && (
-                <FarmStep8
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
+                {step === 3 && (
+                  <FarmStep3
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+                {step === 4 && (
+                  <FarmStep4
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+                {step === 5 && (
+                  <FarmStep5
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+                {step === 6 && (
+                  <FarmStep6
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                    showCropDetailsForm={showCropDetailsForm}
+                    setShowCropDetailsForm={setShowCropDetailsForm}
+                  />
+                )}
+                {step === 7 && (
+                  <FarmStep7
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+                {step === 8 && (
+                  <FarmStep8
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+              </div>
 
               {/* Submit Button */}
-              <div className="flex justify-evenly bottom-5  bottom-0 left-0 w-full   w-full  h-[50px] space-x-4">
-                {/* Draft Button */}
-                <button
-                  type="button"
-                  className="bg-gray-500 hover:bg-gray-600 w-[90px] text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-150 ease-in-out focus:outline-none"
-                  onClick={() => {
-                    // Handle draft logic
-                    console.log('Save as Draft');
-                  }}
-                >
-                  Draft
-                </button>
+              <div className="py-4">
+                <div className="flex justify-center md:justify-evenly w-full space-x-4">
+                  {/* Draft Button */}
+                  <button
+                    type="button"
+                    className="bg-gray-500 hover:bg-gray-600 w-1/3 md:w-[90px] text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-150 ease-in-out focus:outline-none"
+                    onClick={() => {
+                      // Handle draft logic
+                      console.log('Save as Draft');
+                    }}
+                  >
+                    Draft
+                  </button>
 
-                {/* Next Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="flex items-center justify-center bg-green-900 w-[250px]  hover:bg-green-900 text-white text-center font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg
-                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        {' '}
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        ></circle>{' '}
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>{' '}
-                      </svg>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      {step < validationSchemaArray.length ? 'Next Step' : 'Submit'}
-                      <ArrowRightIcon className=" w-6 h-6" />
-                    </>
-                  )}
-                </button>
+                  {/* Next Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex items-center justify-center bg-green-900 w-2/3 md:w-[250px]  hover:bg-green-900 text-white text-center font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          {' '}
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          ></circle>{' '}
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>{' '}
+                        </svg>
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        {step < validationSchemaArray.length ? 'Next Step' : 'Submit'}
+                        <ArrowRightIcon className=" w-6 h-6" />
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </Form>
           )}

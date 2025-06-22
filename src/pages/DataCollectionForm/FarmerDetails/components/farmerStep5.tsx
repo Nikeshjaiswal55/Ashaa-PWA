@@ -52,7 +52,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
   const vehcial = ['Tractor', 'Trolley', 'Cultivator', 'Rotavator', 'Plough', 'Seeder', 'Sprayer'];
 
   return (
-    <div className="flex flex-col items-center min-h-[70vh] ">
+    <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
         <div className="space-y-6">
           <FieldArray

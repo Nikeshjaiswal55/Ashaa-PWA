@@ -47,7 +47,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center  ">
+    <div className="flex flex-col items-center  ">
       <div className="w-full max-w-2xl mt-8 rounded-xl md:p-8">
         <div className="space-y-6">
           <FieldArray

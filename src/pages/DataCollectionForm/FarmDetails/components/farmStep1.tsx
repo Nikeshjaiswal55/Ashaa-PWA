@@ -20,7 +20,7 @@ const topographyOptions = ['Plain', 'Hilly', 'Undulating', 'Plateau', 'Valley'];
 
 const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
-    <div className="flex flex-col items-center  h-[75vh]">
+    <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl mt-5 rounded-xl md:p-8">
         <div className="space-y-6 ">
           {/* Individual Farm Size & Unit */}
