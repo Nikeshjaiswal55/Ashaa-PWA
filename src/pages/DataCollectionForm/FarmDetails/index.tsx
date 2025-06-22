@@ -170,7 +170,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
   const navigate = useNavigate();
 
@@ -416,7 +416,7 @@ export const FarmerDetailsForm: React.FC = () => {
   // --- Render  form---
   return (
     <div
-      className="flex flex-col items-center p-4 min-h-screen"
+      className="flex flex-col items-center p-[24px] min-h-screen"
       style={{
         backgroundImage: ` radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%), url(${image}) `,
         backgroundSize: 'auto',

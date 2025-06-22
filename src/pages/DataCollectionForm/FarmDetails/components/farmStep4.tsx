@@ -116,7 +116,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                 ))}
 
                 {/* Add New Wat er Source Section */}
-                <div className="mb-4 max-w-md  mx-auto">
+                <div className=" max-w-md  mx-auto">
                   <div
                     className="flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed mb-5 border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none"
                     onClick={() => setShowWaterManagementForm((prev) => !prev)}
@@ -135,10 +135,10 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
 
                   {showWaterManagementForm && (
                     <div
-                      className="mt-2  rounded-[10px] p-4 space-y-8"
+                      className="  rounded-[10px] space-y-[23px]"
                       style={{ background: 'rgba(54, 195, 96, 0.2)' }}
                     >
-                      <div className="flex gap-2 "></div>
+                      <div className="flex  "></div>
                       <>
                         <SelectInput
                           values={values}
@@ -156,7 +156,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                           labelcss="px-2 bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
                         />
                         <div>
-                          <label className="block text-lg font-semibold text-green-900 mb-2">
+                          <label className="block text-lg font-semibold text-green-900 ">
                             Upload Water Sources Photo
                           </label>
                           <ImageUploadInput

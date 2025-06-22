@@ -18,7 +18,7 @@ interface FarmerStep5Props {
 const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setFieldValue }) => (
   <div className="flex flex-col items-center  ">
     <div className="w-full max-w-2xl rounded-xl md:p-8"></div>
-    <div className="space-y-8">
+    <div className="space-y-[23px]">
       {/* Smartphone Ownership */}
       <ToggleButtonGroup
         label="Smartphone Ownership"

@@ -22,7 +22,7 @@ const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setField
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl mt-5 rounded-xl md:p-8">
-        <div className="space-y-6 ">
+        <div className="space-y-[23px]">
           {/* Individual Farm Size & Unit */}
           <div className="grid grid-cols-3 gap-4 item-end">
             <div className="col-span-2">

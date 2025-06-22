@@ -153,7 +153,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(6);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -353,7 +353,7 @@ export const FarmerDetailsForm: React.FC = () => {
   // --- Render  form---
   return (
     <div
-      className="flex flex-col items-center   p-4 min-h-screen"
+      className="flex flex-col items-center   p-[24px] min-h-screen"
       style={{
         backgroundImage: `
       radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%),
