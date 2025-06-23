@@ -22,7 +22,7 @@ interface FarmerStep4Props {
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
 const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setFieldValue }) => (
-  <div className="space-y-8">
+  <div className="space-y-[23px]">
     {/* Storage Facilities Type */}
     <SelectInput<FormValues>
       label="Storage Facilities Type"
@@ -67,14 +67,14 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
 
     {/* Capacity */}
     <div>
-      <label className="text-lg font-semibold text-green-900 ">Capacity</label>
+      <label className="text-lg font-semibold text-[#005B24] ">Capacity</label>
       <div className="flex items-center bg-green-100 rounded-2xl h-[33px] px-4 py-2 w-fit gap-2">
         <input
           type="number"
           name="capacity"
           value={values.capacity || ''}
           onChange={(e) => setFieldValue('capacity', e.target.value)}
-          className="w-16 bg-transparent text-green-900 font-bold text-xl underline  border-none focus:ring-0 focus:outline-none"
+          className="w-16 bg-transparent text-[#005B24] font-bold text-xl underline  border-none focus:ring-0 focus:outline-none"
           style={{ appearance: 'textfield' }}
         />
         <SelectInput<FormValues>

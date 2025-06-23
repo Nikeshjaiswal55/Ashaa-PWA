@@ -153,7 +153,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(2);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -341,10 +341,9 @@ export const FarmerDetailsForm: React.FC = () => {
       }, 3000);
     }
     if (step < validationSchemaArray.length) {
-      setStep((prev) => prev + 1); // Move to next step
+      setStep((prev) => prev + 1);
     } else {
       console.log('All steps done, final submission.');
-      // You can send final API call here
     }
 
     setSubmitting(false);
@@ -355,21 +354,16 @@ export const FarmerDetailsForm: React.FC = () => {
     <div
       className="flex flex-col items-center   p-[24px] min-h-screen"
       style={{
-        backgroundImage: `
-      radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%),
-      url(${image})
-    `,
+        backgroundImage: ` radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%), url(${image}) `,
         backgroundSize: 'auto',
         backgroundRepeat: 'no-repeat, repeat',
         backgroundPosition: 'top left',
         backgroundBlendMode: 'overlay',
       }}
     >
-      {/* Background gradient with image */}
-
       <div className="w-full max-w-2xl rounded-xl md:p-8 flex flex-col flex-grow">
         {/* Progress Steps */}
-        <div className="flex justify-center items-center space-x-0 sm:space-x-0 mb-5">
+        <div className="flex justify-center items-center space-x-0 sm:space-x-0 mb-[18px]">
           {[1, 2, 3, 4, 5, 6].map((s) => (
             <React.Fragment key={s}>
               <div
@@ -389,24 +383,30 @@ export const FarmerDetailsForm: React.FC = () => {
         </div>
 
         {/* back button */}
-        <div className="flex items-center mb-0">
-          {step > 1 && (
-            <button
-              onClick={() => setStep(step - 1)}
-              className="text-green-900 border-2 border-green-900  rounded-full"
+        <div className="flex items-center mb-0 w-full">
+          {/* Left: Back Button (fixed width) */}
+          <div className="w-12 flex justify-start">
+            {step > 1 && (
+              <button
+                onClick={() => setStep(step - 1)}
+                className="text-green-900 border-2 border-green-900 rounded-full p-1 sm:p-2"
+              >
+                {' '}
+                <BackArrowIcon />{' '}
+              </button>
+            )}
+          </div>
+          {/* Center: Heading */}
+          <div className="flex-1 flex flex-col items-center">
+            <p
+              className="text-2xl sm:text-2xl md:text-2xl font-semibold steps-heading"
+              style={{ color: '#005B24' }}
             >
-              <BackArrowIcon />
-            </button>
-          )}
-
-          <h1
-            className={`text-3xl sm:text-2xl md:text-3xl  steps-heading  ${
-              step < 2 ? 'ml-20' : 'ml-13'
-            }`}
-            style={{ color: '#005B24' }}
-          >
-            Farmer Details
-          </h1>
+              {' '}
+              Farmer Details{' '}
+            </p>
+          </div>
+          <div className="w-12"></div>
         </div>
         <h3 className="text-center ">{HeaderData[step - 1]}</h3>
         <Formik
@@ -419,8 +419,8 @@ export const FarmerDetailsForm: React.FC = () => {
           //
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (
-            <Form className="flex flex-col flex-grow mt-8">
-              <div className="flex-grow space-y-6">
+            <Form className="flex flex-col flex-grow mt-[59px]">
+              <div className="flex-grow">
                 {step === 1 && (
                   <FarmerStep1
                     values={values}

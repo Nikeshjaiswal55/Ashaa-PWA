@@ -27,7 +27,7 @@ const ImageUploadInput = <T extends object>({
   return (
     <>
       <div>
-        <label className="block text-lg font-semibold w-full text-green-800 mb-2">{label}</label>
+        <label className="block text-lg font-semibold w-full text-[#005B24] mb-1">{label}</label>
         <div
           className={`flex justify-center items-center w-full h-[81px] ${height} border-[2px] border-[#858585] border-dashed rounded-lg cursor-pointer transition-colors
           ${

@@ -39,7 +39,7 @@ const UnitInput = <T extends object>({
           name={name}
           type={type}
           placeholder={placeholder}
-          className={`w-12 text-green-800 h-[25px] text-lg text-center font-semibold outline-none bg-transparent border-green-800 border-b-2 ${
+          className={`w-12 text-[#005B24] h-[25px] text-lg text-center font-semibold outline-none bg-transparent border-green-800 border-b-2 ${
             touched[name as keyof T] && errors[name as keyof T]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
               : 'border-gray-300 focus:ring-green-500 focus:border-green-500'

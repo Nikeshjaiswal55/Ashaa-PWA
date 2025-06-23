@@ -63,8 +63,8 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full max-w-2xl mt-8 rounded-xl md:p-8">
-        <div className="space-y-6">
+      <div className="w-full max-w-2xl  rounded-xl md:p-8">
+        <div className="space-y-[23px]">
           {/* farmer name - adhar no - contact number */}
           {InputData.map((input) => (
             <TextInput<FormValues>
@@ -94,7 +94,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             <div className="col-span-2">
               <label
                 htmlFor="totalFarmSize"
-                className="block text-lg font-semibold text-green-900 mb-1"
+                className="block text-lg font-semibold text-[#005B24] mb-1"
               >
                 {' '}
                 Total Farm Size{' '}
@@ -123,7 +123,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                 as="select"
                 name="farmSizeUnit"
                 id="farmSizeUnit"
-                className={`w-full px-4 py-2 h-[36px] text-sm border-2 rounded-lg shadow-sm focus:outline-none text-green-900 ${
+                className={`w-full px-4 py-2 h-[36px] text-sm border-2 rounded-lg shadow-sm focus:outline-none text-[#005B24] ${
                   touched.farmSizeUnit && errors.farmSizeUnit
                     ? 'border-red-500'
                     : 'border-green-800'
@@ -149,7 +149,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           {/* No. of Separate Farms */}
           <div>
             <div className="flex items-center  bg-[rgba(54,195,96,0.2)] h-[53px] p-3 rounded-lg border border-green-200 shadow-sm">
-              <span className="text-lg font-semibold  text-green-900 flex-grow">
+              <span className="text-lg font-semibold  text-[#005B24] flex-grow">
                 {' '}
                 No. of Separate Farms{' '}
               </span>
@@ -157,7 +157,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
                 type="number"
                 name="separateFarms"
                 id="separateFarms"
-                className={`w-20 p-2 bg-white text-green-800 font-semibold text-lg border-2 underline  rounded-md h-[42px] text-center shadow-sm  border-b-2   ${
+                className={`w-20 p-2 bg-white text-[#005B24] font-semibold text-lg border-2 underline  rounded-md h-[42px] text-center shadow-sm  border-b-2   ${
                   touched.separateFarms && errors.separateFarms
                     ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                     : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
@@ -246,19 +246,17 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           </div>
 
           {/* Village */}
-          <div className="mt-12">
-            <TextInput<FormValues>
-              label={'Village'}
-              name={'village'}
-              type="text"
-              placeholder={'Enter your village'}
-              values={values}
-              errors={errors}
-              touched={touched}
-              setFieldValue={setFieldValue}
-              labelcss={''}
-            />
-          </div>
+          <TextInput<FormValues>
+            label={'Village'}
+            name={'village'}
+            type="text"
+            placeholder={'Enter your village'}
+            values={values}
+            errors={errors}
+            touched={touched}
+            setFieldValue={setFieldValue}
+            labelcss={''}
+          />
 
           {/* Farmer Photo Upload */}
           <ImageUploadInput<FormValues>

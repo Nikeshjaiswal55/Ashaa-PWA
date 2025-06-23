@@ -17,7 +17,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
   return (
     <div className="flex flex-col items-center justify-center ">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
-        <div className="space-y-6">
+        <div className="space-y-[23px]">
           {/*  Years of Farming Experience */}
           <TextInput<FormValues>
             label="Years of Farming Experience"
@@ -33,7 +33,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
 
           {/* Farmer Video Upload */}
           <div>
-            <label className="block text-lg text-green-900 font-semibold mb-2">
+            <label className="block text-lg text-[#005B24] font-semibold mb-2">
               {' '}
               Upload Experience Video{' '}
             </label>
@@ -110,9 +110,9 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
           <div className="relative">
             <label
               htmlFor="awards"
-              className="absolute bg-white text-green-900 top-[-15px] left-3 block text-lg px-2 font-semibold text-gray-700 mb-1"
+              className="absolute bg-white text-[#005B24] top-[-15px] left-3 block text-lg px-2 font-semibold text-gray-700 mb-1"
             >
-              awards (if any){' '}
+              Awards (if any){' '}
             </label>
             <Field
               type="tel"

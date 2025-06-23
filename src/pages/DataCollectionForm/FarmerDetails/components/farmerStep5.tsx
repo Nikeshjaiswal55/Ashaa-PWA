@@ -54,7 +54,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
-        <div className="space-y-6">
+        <div className="space-y-[23px]">
           <FieldArray
             name="Equipment"
             render={(arrayHelpers) => (
@@ -92,13 +92,13 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                             </button>
                           </div>
                           <div>
-                            <div className="text-green-900 font-bold text-md">{item.equipment}</div>
+                            <div className="text-[#005B24] font-bold text-md">{item.equipment}</div>
                             <div className="text-gray-500 text-sm">{item.brandName}</div>
                           </div>
                         </div>
 
                         {/* MIDDLE: Quantity */}
-                        <div className="bg-white rounded-xl  px-4 ml-19 py-1 font-bold text-green-900 text-lg shadow border h-[36px] min-w-[45px] text-center">
+                        <div className="bg-white rounded-xl  px-4 ml-19 py-1 font-bold text-[#005B24] text-lg shadow border h-[36px] min-w-[45px] text-center">
                           {item.equipmentQuantity}
                         </div>
 
@@ -137,8 +137,8 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                     className="flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
                     onClick={() => setShowForm2((prev: boolean) => !prev)}
                   >
-                    <span className="font-semibold text-green-900">+ Add New Equipment</span>
-                    <span className="text-green-900 text-xl">
+                    <span className="font-semibold text-[#005B24]">+ Add New Equipment</span>
+                    <span className="text-[#005B24] text-xl">
                       {' '}
                       {showForm2 ? (
                         <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
@@ -163,7 +163,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                           setFieldValue={setFieldValue}
                           values={values}
                           label={''}
-                          customClass={'px-4 text-sm font-semibold bg-white text-green-800'}
+                          customClass={'px-4 text-sm font-semibold bg-white text-[#005B24]'}
                           labelFirst={''}
                         />
 
@@ -177,7 +177,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                             id="equipmentQuantity"
                             name="equipmentQuantity"
                             type="number"
-                            className={`w-[40px] text-green-700 font-bold text-center bg-transparent
+                            className={`w-[40px] text-[#005B24] font-bold text-center bg-transparent
                             border-b-2 text-sm outline-none border-b-gray-500
                             ${
                               touched.equipmentQuantity && errors.equipmentQuantity
@@ -282,7 +282,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
 
                       {/* Upload Document & Image */}
                       <div>
-                        <label className="text-lg w-full text-green-800 font-semibold mb-1">
+                        <label className="text-lg w-full text-[#005B24] font-semibold mb-1">
                           Upload Document & Image
                         </label>
                         <div className="flex w-full gap-5">

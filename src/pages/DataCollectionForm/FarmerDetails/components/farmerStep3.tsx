@@ -59,7 +59,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   return (
     <div className="flex flex-col items-center ">
       <div className="w-full max-w-2xl rounded-xl md:p-8">
-        <div className="space-y-6 ">
+        <div className="space-y-[23px]">
           <FieldArray
             name="animals"
             render={(arrayHelpers) => (
@@ -98,7 +98,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                             </button>
                           </div>
                           <div>
-                            <div className="text-green-900 font-bold text-md">
+                            <div className="text-[#005B24] font-bold text-md">
                               {animal.animalType}
                             </div>
                             <div className="text-gray-500 text-sm">{animal.breedName}</div>
@@ -106,7 +106,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         </div>
 
                         {/* MIDDLE: Quantity */}
-                        <div className="bg-white rounded-md px-4 py-1 font-bold text-green-900 text-lg shadow border h-[36px] min-w-[45px] text-center">
+                        <div className="bg-white rounded-md px-4 py-1 font-bold text-[#005B24] text-lg shadow border h-[36px] min-w-[45px] text-center">
                           {animal.quantity}
                         </div>
 
@@ -150,8 +150,8 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                     className=" flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
                     onClick={() => setShowForm((prev) => !prev)}
                   >
-                    <span className="font-semibold text-green-900 text-base">+ Add New Animal</span>
-                    <span className="text-green-900 text-2xl font-bold">
+                    <span className="font-semibold text-[#005B24] text-base">+ Add New Animal</span>
+                    <span className="text-[#005B24] text-2xl font-bold">
                       {showForm ? (
                         <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
                       ) : (
@@ -175,7 +175,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           setFieldValue={setFieldValue}
                           values={values}
                           label={''}
-                          customClass={'px-4 text-sm font-semibold bg-white text-green-800'}
+                          customClass={'px-4 text-sm font-semibold bg-white text-[#005B24]'}
                           labelFirst={''}
                         />
 
@@ -190,7 +190,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                             id="quantity"
                             name="quantity"
                             type="number"
-                            className={`w-[40px] text-green-700 font-bold text-center bg-transparent border-b-2 text-sm outline-none border-b-gray-500 ${
+                            className={`w-[40px] text-[#005B24] font-bold text-center bg-transparent border-b-2 text-sm outline-none border-b-gray-500 ${
                               touched.quantity && errors.quantity
                                 ? 'border-red-500 focus:border-red-500'
                                 : 'border-green-600 focus:border-green-600'
