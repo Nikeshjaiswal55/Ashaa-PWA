@@ -33,7 +33,7 @@ const UnitInput = <T extends object>({
           {label}
         </label>
       )}
-      <div className="flex items-center gap-2 bg-white px-3 h-[33px] w-[121px] py-3 rounded-md shadow-md w-fit">
+      <div className="flex items-center gap-2 bg-white px-3 h-[33px] w-[121px] py-3 rounded-[10px] shadow-md w-fit">
         <Field
           id={id}
           name={name}

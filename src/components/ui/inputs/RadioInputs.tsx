@@ -10,7 +10,11 @@ interface RadioInputsProps<T> {
 const RadioInputs = <T extends object>({ label, name, values, options }: RadioInputsProps<T>) => {
   return (
     <div>
-      <label className="block text-lg font-semibold text-[#005B24] mb-1">{label}</label>
+      <label className=" block font-semibold text-[#005B24] mb-1 text-lg sm:text-xl md:text-2xl ">
+        {' '}
+        {label}{' '}
+      </label>
+
       <div role="group" aria-labelledby={`${name}-group`} className="flex justify-between gap-3">
         {options.map((option) => (
           <label
@@ -26,7 +30,7 @@ const RadioInputs = <T extends object>({ label, name, values, options }: RadioIn
               type="radio"
               name={name}
               value={option}
-              className="appearance-none w-[16px] h-[16px] rounded-full border-2 border-gray-600 bg-gray-600 checked:bg-green-800 checked:border-green-800"
+              className="appearance-none w-[16px] h-[16px] rounded-full border-[2px] border-gray-600 bg-gray-600 checked:bg-green-800 checked:border-green-800"
             />
             <span className="text-lg font-semibold text-[#005B24] pl-1">{option}</span>
           </label>

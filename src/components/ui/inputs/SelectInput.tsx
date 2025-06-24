@@ -41,7 +41,7 @@ const SelectInput = <T extends object>({
         {label && (
           <label
             htmlFor={name}
-            className={`absolute bg-white ${labelcss} top-[-15px]  left-3 block text-lg px-2 font-semibold text-[#005B24] text-gray-700 mb-1`}
+            className={`absolute bg-white ${labelcss} top-[-15px]  left-3 block text-lg px-2 font-semibold text-[#005B24]  mb-1`}
           >
             {' '}
             {label}{' '}
@@ -51,17 +51,17 @@ const SelectInput = <T extends object>({
           as="select"
           name={name}
           id={name}
-          className={`${width} ${height}  p-3 ${
+          className={`${width} ${height}  p-3  ${
             customClass || ''
-          }   rounded-lg shadow-sm  transition-colors ${
+          }   rounded-[10px]   transition-colors ${
             touched[name as keyof FormValues] && errors[name as keyof FormValues]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
               : 'border-green-800 focus:ring-green-500 focus:border-green-500'
-          } ${!values[name as keyof typeof values] ? 'text-gray-500' : 'text-black'} `}
+          } ${!values[name as keyof typeof values] ? 'text-[#858585]' : 'text-black'} `}
         >
           {defaultOption ? <option value="">{defaultOption}</option> : null}
           {options.map((opt) => (
-            <option className="text-black" key={opt} value={opt === defaultOption ? '' : opt}>
+            <option className="text-black " key={opt} value={opt === defaultOption ? '' : opt}>
               {opt}
             </option>
           ))}

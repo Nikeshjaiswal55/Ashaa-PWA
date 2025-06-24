@@ -18,24 +18,33 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
   className = '',
 }) => (
   <div
-    className={`flex items-center w-full justify-between  px-1 py-1 h-[54px] rounded-md w-fit  ${className}`}
+    className={`flex items-center justify-between w-full h-[52px]  bg-[#D6F5DD] rounded-[10px] px-3 py-2 ${className}`}
   >
-    <label className="text-lg font-semibold text-[#005B24] pl-2 mr-0">{label}</label>
-    <div className="flex border border-gray-300 w-[100px] rounded-[10px] overflow-hidden">
+    <span className="font-semibold text-[#17643A] text-base whitespace-nowrap">{label}</span>
+    <div className="flex rounded-[6px] overflow-hidden ml-2 w-[101px] h-[28px]">
       <button
         type="button"
-        className={`text-sm font-medium px-4 h-[30px] py-1 rounded-l-md ${
-          value ? 'bg-[#36C360] border-r-black border-1 text-white' : 'bg-white text-gray-500'
+        className={`flex-1 text-xs font-medium  h-full transition-colors duration-150 ${
+          value ? 'bg-[#36C360] text-white' : 'bg-[#E0E0E0] text-[#A0A0A0]'
         }`}
+        style={{
+          borderTopLeftRadius: 6,
+          borderBottomLeftRadius: 6,
+          borderRight: '2px solid #222',
+        }}
         onClick={() => onChange(true)}
       >
         {yesLabel}
       </button>
       <button
         type="button"
-        className={`text-sm font-medium px-4 h-[30px] py-1 rounded-r-md ${
-          !value ? 'bg-gray-300 text-gray-700' : 'bg-white text-gray-500'
+        className={`flex-1 text-xs font-medium border-[1px]  h-full transition-colors duration-150 ${
+          !value ? 'bg-[#E0E0E0] text-[#A0A0A0]' : 'bg-white text-[#A0A0A0]'
         }`}
+        style={{
+          borderTopRightRadius: 6,
+          borderBottomRightRadius: 6,
+        }}
         onClick={() => onChange(false)}
       >
         {noLabel}

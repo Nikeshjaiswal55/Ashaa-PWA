@@ -147,7 +147,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                 {/* Collapsible Add New Animal Section */}
                 <div className="mb-4  max-w-md mx-auto">
                   <div
-                    className=" flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
+                    className=" flex items-center justify-between bg-[#E9F7EF] border-[2px] border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
                     onClick={() => setShowForm((prev) => !prev)}
                   >
                     <span className="font-semibold text-[#005B24] text-base">+ Add New Animal</span>
@@ -230,7 +230,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           values={values}
                           label={'Milk Selling Place'}
                           labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
-                          customClass={'border-2'}
+                          customClass={'border-[2px]'}
                           labelFirst={''}
                         />
                         {values.milkSellingPlace && (

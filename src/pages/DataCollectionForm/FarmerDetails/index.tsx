@@ -22,7 +22,7 @@ interface IconProps {
 }
 
 // --- Icons ---
-const BackArrowIcon: React.FC<IconProps> = ({ className = 'w-6 h-6' }) => (
+const BackArrowIcon: React.FC<IconProps> = ({ className = 'w-[20px] h-[20px]' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -69,7 +69,7 @@ export interface Equipment {
   brandName: string;
   owner: string;
   breedName: string;
-  insuranceAvailable: boolean;
+  onRent: boolean;
   insuranceCompany?: string;
   equipmentDocument: File | null;
   equipmentImage: File | null;
@@ -153,7 +153,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(3);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -191,7 +191,7 @@ export const FarmerDetailsForm: React.FC = () => {
     storageType: '',
     warehouseName: '',
     warehouseLocation: '',
-    capacity: '',
+    capacity: '100',
     capacityUnit: 'Quintals',
     condition: 'Good',
     storagePhoto: null,
@@ -209,10 +209,10 @@ export const FarmerDetailsForm: React.FC = () => {
     equipmentImage: null,
 
     //  stepx-6
-    smartphoneOwnership: false,
+    smartphoneOwnership: true,
     internetAccess: '',
     ownedBy: '',
-    farmSoftwareUsed: false,
+    farmSoftwareUsed: true,
     appName: '',
   };
 
@@ -352,7 +352,7 @@ export const FarmerDetailsForm: React.FC = () => {
   // --- Render  form---
   return (
     <div
-      className="flex flex-col items-center   p-[24px] min-h-screen"
+      className="flex flex-col items-center p-[22px] min-h-screen"
       style={{
         backgroundImage: ` radial-gradient(circle at top right, rgba(0, 91, 36, 0.73) 0%, rgba(255, 255, 255, 0) 10%), url(${image}) `,
         backgroundSize: 'auto',
@@ -389,7 +389,7 @@ export const FarmerDetailsForm: React.FC = () => {
             {step > 1 && (
               <button
                 onClick={() => setStep(step - 1)}
-                className="text-green-900 border-2 border-green-900 rounded-full p-1 sm:p-2"
+                className="text-green-900 w-[26px] h-[26px] border-2 border-green-900 rounded-full  "
               >
                 {' '}
                 <BackArrowIcon />{' '}
@@ -419,7 +419,7 @@ export const FarmerDetailsForm: React.FC = () => {
           //
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (
-            <Form className="flex flex-col flex-grow mt-[59px]">
+            <Form className="flex flex-col flex-grow ">
               <div className="flex-grow">
                 {step === 1 && (
                   <FarmerStep1

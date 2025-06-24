@@ -26,14 +26,14 @@ const ImageUploadInput = <T extends object>({
 }: ImageUploadInputProps<T>) => {
   return (
     <>
-      <div>
+      <div className="">
         <label className="block text-lg font-semibold w-full text-[#005B24] mb-1">{label}</label>
         <div
-          className={`flex justify-center items-center w-full h-[81px] ${height} border-[2px] border-[#858585] border-dashed rounded-lg cursor-pointer transition-colors
+          className={`flex justify-center items-center w-full  h-[81px] ${height} border-[2px] border-[#858585]  border-dashed rounded-[10px] cursor-pointer transition-colors
           ${
             touched[name as keyof typeof touched] && errors[name as keyof typeof errors]
               ? 'border-red-400 bg-red-50 hover:bg-red-100'
-              : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
+              : 'border-gray-300 '
           }`}
           onClick={() => document.getElementById(name)?.click()}
         >
@@ -41,7 +41,7 @@ const ImageUploadInput = <T extends object>({
             type="file"
             name={name}
             id={name}
-            className="hidden"
+            className="hidden "
             accept="image/png, image/jpeg, image/gif"
             onChange={(event) => {
               setFieldValue(name, event.currentTarget.files ? event.currentTarget.files[0] : null);

@@ -32,7 +32,7 @@ const TextInput = <T extends object>({
       <div className="relative">
         <label
           htmlFor={name}
-          className={`absolute bg-white ${labelcss} text-[#005B24] top-[-15px] left-3 block text-lg px-2 font-semibold text-gray-700 mb-1`}
+          className={`absolute bg-white ${labelcss} text-[#005B24] top-[-15px] left-3 block text-lg px-2 font-semibold  mb-1`}
         >
           {label}
         </label>
@@ -41,7 +41,7 @@ const TextInput = <T extends object>({
           name={name}
           id={name}
           placeholder={placeholder}
-          className={`w-full p-3 border rounded-lg shadow-sm transition-colors border-2 placeholder:text-gray-500
+          className={`w-full p-3 border rounded-[10px] shadow-sm transition-colors border-[2px] placeholder:text-[#858585]
           ${
             touched[name as keyof typeof touched] && errors[name as keyof typeof errors]
               ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
