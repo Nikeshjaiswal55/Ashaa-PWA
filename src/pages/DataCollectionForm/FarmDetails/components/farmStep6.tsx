@@ -150,7 +150,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
 
                 {/* Crop Form */}
                 {showCropDetailsForm && (
-                  <div className="mt-2  rounded-2xl p-2 space-y-8 bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
+                  <div className="mt-2  rounded-[10px] p-2 space-y-[23px] bg-[radial-gradient(circle,rgba(54,195,96,0.2))] mb-[112px]">
                     <div className="mt-3">
                       <TextInput<FarmFormValues>
                         label="Cultivation Area"
@@ -203,9 +203,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                     />
                     {/* Seeding Rate */}
                     <div>
-                      <label className="block text-green-900 font-semibold mb-1">
-                        Seeding Rate
-                      </label>
+                      <label className="block text-green-900 font-semibold ">Seeding Rate</label>
                       <span className="text-xs text-gray-500">Kg per acre/hectare</span>
 
                       <div className="flex justify-between bg-white rounded-md px-4 py-3 mt-1  w-full">
@@ -275,7 +273,7 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                     </div>
                     <button
                       type="button"
-                      className="bg-[#005B24] text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
+                      className="bg-[#005B24] text-white font-normal text-base h-[34px]  rounded-[10px] shadow-md w-full"
                       onClick={handleSaveCrop}
                     >
                       Save Crop

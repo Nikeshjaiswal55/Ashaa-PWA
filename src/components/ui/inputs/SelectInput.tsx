@@ -51,7 +51,7 @@ const SelectInput = <T extends object>({
           as="select"
           name={name}
           id={name}
-          className={`${width} ${height}  p-3  ${
+          className={`${width} ${height}    ${
             customClass || ''
           }   rounded-[10px]   transition-colors ${
             touched[name as keyof FormValues] && errors[name as keyof FormValues]

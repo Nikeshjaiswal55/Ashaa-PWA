@@ -29,7 +29,7 @@ const ImageUploadInput = <T extends object>({
       <div className="">
         <label className="block text-lg font-semibold w-full text-[#005B24] mb-1">{label}</label>
         <div
-          className={`flex justify-center items-center w-full  h-[81px] ${height} border-[2px] border-[#858585]  border-dashed rounded-[10px] cursor-pointer transition-colors
+          className={`flex justify-center items-center w-full  h-[81px] ${height} border-[2px] border-gray-500  border-dashed rounded-[10px] cursor-pointer transition-colors
           ${
             touched[name as keyof typeof touched] && errors[name as keyof typeof errors]
               ? 'border-red-400 bg-red-50 hover:bg-red-100'

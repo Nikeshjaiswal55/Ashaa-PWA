@@ -135,7 +135,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
 
                 {/* Fertilizer Form */}
                 {showFertilizerForm && (
-                  <div className="mt-4  rounded-2xl p-2 space-y-8  bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
+                  <div className="mt-2  rounded-2xl p-2 space-y-[23px]  bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
                     <div className="mt-4">
                       <TextInput
                         label="Fertilizer Name"
@@ -166,7 +166,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                     />
 
                     {/* Quantity */}
-                    <div className="flex flex-col gap-1 mb-4">
+                    <div className="flex flex-col gap-1 mb-[23px]">
                       <div className="flex justify-between items-center bg-white rounded-lg px-4 py-3">
                         <div>
                           <div className="text-green-900 font-semibold text-lg">Quantity</div>
@@ -196,7 +196,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                     </div>
 
                     {/* Price */}
-                    <div className="flex flex-col gap-1 mb-4">
+                    <div className="flex flex-col gap-1 mb-[23px]">
                       <div className="flex justify-between items-center bg-white rounded-lg px-4 py-3">
                         <div>
                           <div className="text-green-900 font-semibold text-lg">Price</div>
@@ -262,7 +262,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                     />
                     <button
                       type="button"
-                      className=" bg-[#005B24] text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
+                      className=" bg-[#005B24] text-white font-normal text-base h-[34px]  rounded-lg shadow-md w-full"
                       onClick={handleSaveFertilizer}
                     >
                       Save Fertilizer

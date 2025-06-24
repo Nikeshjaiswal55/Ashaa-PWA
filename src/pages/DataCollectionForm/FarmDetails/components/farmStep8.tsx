@@ -38,14 +38,14 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
   };
 
   return (
-    <div className="space-y-6 mt-20">
+    <div className=" mt-[34px]">
       <FieldArray
         name="pesticidesUsageList"
         render={(arrayHelpers) => (
           <>
             {/* List */}
             {values.pesticidesUsageList && values.pesticidesUsageList.length > 0 && (
-              <div className="mb-4">
+              <div className="">
                 {values.pesticidesUsageList.map((item, idx) => (
                   <div
                     key={idx}
@@ -125,7 +125,7 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
 
             {/* Pesticide Form */}
             {showPesticideForm && (
-              <div className="mt-2  rounded-2xl p-2 space-y-8 bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
+              <div className="mt-2  rounded-2xl p-2 space-y-[23px] bg-[radial-gradient(circle,rgba(54,195,96,0.2))] mb-[112px]">
                 <div className="mt-4">
                   <TextInput
                     label="Pesticides Name"
@@ -155,7 +155,7 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
                   labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 {/* Quantity */}
-                <div className="flex justify-between items-center bg-white rounded-lg px-4 py-3 mb-4">
+                <div className="flex justify-between items-center bg-white rounded-lg px-4 py-3 ">
                   <div>
                     <div className="text-green-900  font-semibold text-lg">Quantity</div>
                     <div className="text-base text-gray-500 font-normal  -mt-0.5">
@@ -226,7 +226,7 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
                 />
                 <button
                   type="button"
-                  className="bg-[#005B24] text-white font-semibold py-2 px-6 rounded-lg shadow-md w-full"
+                  className="bg-[#005B24] text-white font-normal text-base h-[34px] rounded-[10px] shadow-md w-full"
                   onClick={handleSavePesticide}
                 >
                   Save Pesticide
