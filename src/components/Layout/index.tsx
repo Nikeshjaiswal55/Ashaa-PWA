@@ -12,11 +12,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const hiddenLayoutPaths = [
     '/DataCollectionForm',
-    '/DataCollectionForm/FarmerDetails',
-    '/DataCollectionForm/FarmDetails',
     '/profile',
     '/onboarding/farmer',
     '/onboarding/farm',
+    '/onboarding',
 
     // '/DataCollectionForm/farmer'
   ];

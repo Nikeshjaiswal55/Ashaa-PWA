@@ -22,7 +22,7 @@ const routes: Routes = {
   },
 
   [Pages.Page2]: {
-    component: asyncComponentLoader(() => import('@/pages/Onboarding')),
+    component: asyncComponentLoader(() => import('@/pages/Onboarding/onboarding1')),
     path: '/onboarding',
     title: 'farm and farmer onboarding',
     icon: undefined,

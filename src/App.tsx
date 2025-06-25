@@ -21,6 +21,7 @@ function App() {
         <BrowserRouter>
           <Layout>
             <Pages />
+            {/* <Onboarding1/> */}
           </Layout>
           {/* <Profile /> */}
         </BrowserRouter>
