@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ErrorMessage, Field, FieldArray } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
@@ -8,6 +6,7 @@ import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
 import UnitInput from '@/components/ui/inputs/UnitInput';
+import { useGetLivestockNamesQuery } from '@/redux/slices/ApiSlice';
 
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
@@ -35,6 +34,15 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   console.log('Touched:', touched);
   const animalList = values.animals || [];
 
+  const { data, isLoading } = useGetLivestockNamesQuery({});
+
+  if (isLoading) return <div>Loading...</div>;
+
+  // Extract animal list
+  const animals = data?.data?.data || [];
+  const animalNames = animals.map((animal: { name: string }) => animal.name);
+  console.log('Animal Names:', animalNames);
+
   const handleSaveAnimal = () => {
     // Construct the new animal from form values
     const newAnimal: Animal = {
@@ -54,7 +62,6 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
     setShowForm(false); // Hide the form after saving
   };
 
-  const animalTypes = ['Cow', 'Goat', 'Buffalo', 'Sheep', 'Others'];
   const milkSellingPlaces = ['Dairy', 'Village', 'Market', 'Co-operative', 'Others'];
   return (
     <div className="flex flex-col items-center ">
@@ -166,7 +173,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         {/* animalType */}
                         <SelectInput<FormValues>
                           name="animalType"
-                          options={animalTypes}
+                          options={animalNames}
                           touched={touched}
                           errors={errors}
                           width="w-[200px]"
