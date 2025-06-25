@@ -27,6 +27,14 @@ const routes: Routes = {
     title: 'farm and farmer onboarding',
     icon: undefined,
   },
+
+  [Pages.FarmerFarmOnboardingProgress]: {
+    component: asyncComponentLoader(() => import('@/pages/Onboarding/FarmerOnboardingProgress')),
+    path: '/onboarding/farmer-farm/progress',
+    title: 'Farmer & Farm Onboarding Progress',
+    icon: undefined,
+  },
+
   [Pages.DataCollectionFormFarmer]: {
     component: asyncComponentLoader(() => import('@/pages/DataCollectionForm/FarmerDetails')),
     path: '/onboarding/farmer',

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { FarmStepCard } from '@/components/Card';
 import Header from '@/components/Header/Header';
@@ -23,6 +24,16 @@ const steps = [
 ];
 
 const Page2: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate('/onboarding/farmer');
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, [navigate]);
+
   return (
     <>
       <div className="h-full bg-white relative">
@@ -34,7 +45,6 @@ const Page2: React.FC = () => {
         </div>
 
         <div className="mt-10 px-6 pb-32">
-          {' '}
           {/* Give bottom padding for space */}
           {steps.map((step, index) => (
             <FarmStepCard
@@ -47,12 +57,10 @@ const Page2: React.FC = () => {
             />
           ))}
         </div>
-
-        {/* Fixed bottom image */}
       </div>
       <div className="fixed bottom-0 left-0 w-full z-0 h-auto">
-        <div className="  max-h-[400px]">
-          <img src={grains} alt="village" className="w-full max-h-[400px]  object-cover" />
+        <div className="max-h-[400px]">
+          <img src={grains} alt="village" className="w-full max-h-[400px] object-cover" />
         </div>
       </div>
     </>

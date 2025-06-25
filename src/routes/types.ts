@@ -10,6 +10,7 @@ enum Pages {
   Profile,
   DataCollectionFormFarmer,
   DataCollectionFormFarm,
+  FarmerFarmOnboardingProgress,
   farmer,
   Page3,
   NotFound,
