@@ -9,6 +9,8 @@ import {
   FormikTouched,
 } from 'formik';
 
+import { useGetFertilizerQuery } from '@/redux/slices/ApiSlice';
+
 import { FarmFormValues } from '..';
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
@@ -28,6 +30,17 @@ interface FarmStep7Props {
 
 const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setFieldValue }) => {
   const [showFertilizerForm, setShowFertilizerForm] = useState(true);
+  const { data } = useGetFertilizerQuery({});
+  const fertilizerList = data?.data?.data || [];
+  const fertilizerName = fertilizerList.map(
+    (fertilizerName: { name: string }) => fertilizerName.name,
+  );
+  const fertilizerBrand =
+    fertilizerList.find(
+      (fertilizerList: { name: string; fertilizer_brand: [] }) =>
+        fertilizerList.name === values.fertilizerName,
+    )?.fertilizer_brand || [];
+  const brandName = fertilizerBrand.map((brand: { brand: string }) => brand);
 
   // Save current fertilizer to fertilizerUsageList array
   const handleSaveFertilizer = () => {
@@ -41,6 +54,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
       appliedStage: values.appliedStage,
     };
     setFieldValue('FertilizerUsageList', [...(values.FertilizerUsageList || []), fertilizer]);
+
     // Reset fields after save
 
     setShowFertilizerForm(false);
@@ -137,7 +151,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                 {showFertilizerForm && (
                   <div className="mt-2  rounded-2xl p-2 space-y-[23px]  bg-[radial-gradient(circle,rgba(54,195,96,0.2))]">
                     <div className="mt-4">
-                      <TextInput
+                      {/* <TextInput
                         label="Fertilizer Name"
                         name="fertilizerName"
                         placeholder="Enter Fertilizer Name"
@@ -147,6 +161,21 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                         setFieldValue={setFieldValue}
                         type=""
                         labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                      /> */}
+                      <SelectInput
+                        label="Fertilizer Name"
+                        name="fertilizerName"
+                        options={fertilizerName}
+                        defaultOption="Select Fertilizer"
+                        values={values}
+                        errors={errors}
+                        touched={touched}
+                        setFieldValue={setFieldValue}
+                        customClass="border-2"
+                        width="w-full"
+                        height="h-[52px]"
+                        labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                        labelFirst={''}
                       />
                     </div>
                     <SelectInput
@@ -223,16 +252,20 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                       />
                     </div>
 
-                    <TextInput
+                    <SelectInput
                       label="Company Name"
                       name="companyName"
-                      placeholder="Enter Fertilizer Company Name"
+                      options={brandName}
+                      defaultOption="Select Fertilizer Company Name"
                       values={values}
                       errors={errors}
                       touched={touched}
                       setFieldValue={setFieldValue}
-                      type=""
+                      customClass="border-2"
+                      width="w-full"
+                      height="h-[52px]"
                       labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                      labelFirst={''}
                     />
                     <TextInput
                       label="Applied Rate"

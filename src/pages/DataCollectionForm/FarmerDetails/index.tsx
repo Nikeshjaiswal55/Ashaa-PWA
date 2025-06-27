@@ -4,11 +4,7 @@ import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import image from '../../../assets/header/image.png';
-// import '@fontsource/lexend'; // Lexend font default weight 400
-// import '@fontsource/lexend-deca'; // Lexend Deca font
 import '../form.css';
-// import '@fontsource/lexend'; // Lexend font default weight 400
-// import '@fontsource/lexend-deca'; // Lexend Deca font
 import FarmerStep1 from './components/farmerStep1';
 import FarmerStep2 from './components/farmerStep2';
 import FarmerStep3 from './components/farmerStep3';

@@ -258,16 +258,24 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                       </div>
                       {/* breedName */}
                       <div className="mt-6">
-                        <TextInput<FormValues>
+                        <SelectInput<FormValues>
                           name="breedName"
                           label="Breed Name"
-                          placeholder="Enter Breed Name"
-                          errors={errors}
+                          options={(
+                            animals.find(
+                              (animal: { name: string }) => animal.name === values.animalType,
+                            )?.breeds || []
+                          ).map((breed: { name: string }) => breed.name)}
                           touched={touched}
-                          type="text"
+                          errors={errors}
+                          width="w-full"
+                          height="h-[50px]"
+                          defaultOption="Select Breed"
                           setFieldValue={setFieldValue}
                           values={values}
                           labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
+                          customClass={'border-[2px]'}
+                          labelFirst={''}
                         />
                       </div>
                       {/* insuranceAvailable */}

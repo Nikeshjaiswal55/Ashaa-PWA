@@ -7,6 +7,7 @@ import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
+import { useGetEquipementQuery } from '@/redux/slices/ApiSlice';
 
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
@@ -21,7 +22,7 @@ interface FarmerStep5Props {
   showForm2: boolean;
   setShowForm2: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const farmerStep5: React.FC<FarmerStep5Props> = ({
+const FarmerStep5: React.FC<FarmerStep5Props> = ({
   values,
   errors,
   touched,
@@ -29,7 +30,14 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
   setShowForm2,
   showForm2,
 }) => {
+  const { data } = useGetEquipementQuery({});
   const EquipmentList = values.Equipment || [];
+  const equipement = data?.data?.data || [];
+  const equipementName = equipement.map((equipement: { name: string }) => equipement.name);
+  const equipementBrand =
+    equipement.find((equipement: { name: string }) => equipement.name === values.equipment)
+      ?.brand || [];
+  const brandName = equipementBrand.map((brand: { brand: string }) => brand);
 
   const handleSaveAnimal = () => {
     const newEquipment: Equipment = {
@@ -48,8 +56,6 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
     setFieldValue('Equipment', [...(values.Equipment || []), newEquipment]);
     setShowForm2(false);
   };
-
-  const vehcial = ['Tractor', 'Trolley', 'Cultivator', 'Rotavator', 'Plough', 'Seeder', 'Sprayer'];
 
   return (
     <div className="flex flex-col items-center">
@@ -153,7 +159,7 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                       {/* animalType */}
                       <SelectInput<FormValues>
                         name="equipment"
-                        options={vehcial}
+                        options={equipementName}
                         touched={touched}
                         errors={errors}
                         width="w-[200px]"
@@ -208,16 +214,20 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
                     />
 
                     {/* Brand Name */}
-                    <TextInput<FormValues>
+                    <SelectInput<FormValues>
                       name="brandName"
                       label="Brand Name"
-                      placeholder="Enter manufacturer name"
+                      options={brandName}
+                      defaultOption="Select Brand"
                       errors={errors}
                       touched={touched}
-                      type="text"
                       setFieldValue={setFieldValue}
                       values={values}
                       labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
+                      customClass="border-2"
+                      width="w-full"
+                      height="h-[52px]"
+                      labelFirst={''}
                     />
 
                     {/* milk selling place */}
@@ -313,4 +323,4 @@ const farmerStep5: React.FC<FarmerStep5Props> = ({
   );
 };
 
-export default farmerStep5;
+export default FarmerStep5;
