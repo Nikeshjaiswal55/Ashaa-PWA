@@ -21,10 +21,13 @@ interface FarmerStep4Props {
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
 const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setFieldValue }) => {
-  const { data } = useGetStorageListQuery({});
+  const { data, isLoading } = useGetStorageListQuery({});
   const storageName = data?.data?.data || [];
-  const storageType = storageName.map((storageName: { name: string }) => storageName.name);
-
+  const storageType = isLoading
+    ? ['Loading...']
+    : storageName.length > 0
+    ? storageName.map((item: { name: string }) => item.name)
+    : ['No storage found'];
   return (
     <div className="mt-[104px] space-y-[23px]">
       {/* Storage Facilities Type */}

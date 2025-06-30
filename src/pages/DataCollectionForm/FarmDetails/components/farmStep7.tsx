@@ -30,11 +30,14 @@ interface FarmStep7Props {
 
 const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setFieldValue }) => {
   const [showFertilizerForm, setShowFertilizerForm] = useState(true);
-  const { data } = useGetFertilizerQuery({});
+  const { data, isLoading } = useGetFertilizerQuery({});
   const fertilizerList = data?.data?.data || [];
-  const fertilizerName = fertilizerList.map(
-    (fertilizerName: { name: string }) => fertilizerName.name,
-  );
+  const fertilizerName = isLoading
+    ? ['Loading...']
+    : fertilizerList.length > 0
+    ? fertilizerList.map((f: { name: string }) => f.name)
+    : ['No fertilizer found'];
+
   const fertilizerBrand =
     fertilizerList.find(
       (fertilizerList: { name: string; fertilizer_brand: [] }) =>

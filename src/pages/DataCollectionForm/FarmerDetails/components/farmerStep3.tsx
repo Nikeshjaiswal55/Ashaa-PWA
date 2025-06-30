@@ -173,7 +173,13 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         {/* animalType */}
                         <SelectInput<FormValues>
                           name="animalType"
-                          options={animalNames}
+                          options={
+                            isLoading
+                              ? ['Loading animals...']
+                              : animalNames.length > 0
+                              ? animalNames
+                              : ['No animals found']
+                          }
                           touched={touched}
                           errors={errors}
                           width="w-[200px]"
@@ -261,11 +267,15 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         <SelectInput<FormValues>
                           name="breedName"
                           label="Breed Name"
-                          options={(
-                            animals.find(
-                              (animal: { name: string }) => animal.name === values.animalType,
-                            )?.breeds || []
-                          ).map((breed: { name: string }) => breed.name)}
+                          options={
+                            isLoading
+                              ? ['Loading breeds...']
+                              : (
+                                  animals.find(
+                                    (animal: { name: string }) => animal.name === values.animalType,
+                                  )?.breeds || []
+                                ).map((breed: { name: string }) => breed.name)
+                          }
                           touched={touched}
                           errors={errors}
                           width="w-full"

@@ -30,15 +30,22 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
   setShowForm2,
   showForm2,
 }) => {
-  const { data } = useGetEquipementQuery({});
+  const { data, isLoading } = useGetEquipementQuery({});
   const EquipmentList = values.Equipment || [];
   const equipement = data?.data?.data || [];
-  const equipementName = equipement.map((equipement: { name: string }) => equipement.name);
+  const equipementName = isLoading
+    ? ['Loading...']
+    : equipement.length > 0
+    ? equipement.map((e: { name: string }) => e.name)
+    : ['No equipment found'];
   const equipementBrand =
     equipement.find((equipement: { name: string }) => equipement.name === values.equipment)
       ?.brand || [];
-  const brandName = equipementBrand.map((brand: { brand: string }) => brand);
-
+  const brandName = isLoading
+    ? ['Loading...']
+    : equipementBrand.length > 0
+    ? equipementBrand.map((b: { brand: string }) => b.brand)
+    : ['No brand found'];
   const handleSaveAnimal = () => {
     const newEquipment: Equipment = {
       equipment: values.equipment,

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { Field, FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
+import { useGetPesticidesQuery } from '@/redux/slices/ApiSlice';
+
 import { FarmFormValues } from '..';
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
@@ -21,6 +23,21 @@ interface FarmStep8Props {
 
 const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setFieldValue }) => {
   const [showPesticideForm, setShowPesticideForm] = useState(true);
+  const { data, isLoading } = useGetPesticidesQuery({});
+  const PesticideList = data?.data?.data || [];
+
+  const PesticideName = isLoading
+    ? ['Loading...']
+    : PesticideList.length > 0
+    ? PesticideList.map((f: { name: string }) => f.name)
+    : ['No fertilizer found'];
+
+  const PesticideBrand =
+    PesticideList.find(
+      (PesticideList: { name: string; pesticide_brand: [] }) =>
+        PesticideList.name === values.pesticidesName,
+    )?.pesticide_brand || [];
+  const brandName = PesticideBrand.map((brand: { brand: string }) => brand);
 
   const handleSavePesticide = () => {
     const pesticide = {
@@ -127,15 +144,19 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
             {showPesticideForm && (
               <div className="mt-2  rounded-2xl p-2 space-y-[23px] bg-[radial-gradient(circle,rgba(54,195,96,0.2))] mb-[112px]">
                 <div className="mt-4">
-                  <TextInput
+                  <SelectInput
                     label="Pesticides Name"
                     name="pesticidesName"
-                    placeholder="Enter Fertilizer Name"
+                    options={PesticideName} // <-- yeh array aapko banana hoga
+                    defaultOption="Select your Pesticide Name"
                     values={values}
                     errors={errors}
                     touched={touched}
                     setFieldValue={setFieldValue}
-                    type=""
+                    customClass="border-2"
+                    width="w-full"
+                    height="h-[52px]"
+                    labelFirst=""
                     labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                   />
                 </div>
@@ -187,15 +208,19 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
                     style={{ appearance: 'textfield' }}
                   />
                 </div>
-                <TextInput
+                <SelectInput
                   label="Company Name"
                   name="pesticidescompanyName"
-                  placeholder="Enter Fertilizer Company Name"
+                  options={brandName}
+                  defaultOption="Select Pesticide Company"
                   values={values}
                   errors={errors}
                   touched={touched}
                   setFieldValue={setFieldValue}
-                  type=""
+                  customClass="border-2"
+                  width="w-full"
+                  height="h-[52px]"
+                  labelFirst=""
                   labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))]'}
                 />
                 <TextInput

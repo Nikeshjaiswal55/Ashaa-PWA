@@ -7,6 +7,8 @@ import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
+import { useGetStateQuery } from '@/redux/slices/ApiSlice';
+import { useGetDistrictQuery } from '@/redux/slices/ApiSlice';
 
 // Update the path below to the actual location of your FormValues type
 import { FormValues } from '../../FarmerDetails/index';
@@ -19,21 +21,30 @@ interface FarmerStep1Props {
 }
 
 const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setFieldValue }) => {
+  //state
+  const { data } = useGetStateQuery({});
+  const stateData = data?.data?.data || [];
+  const stateName = stateData.map((stateName: { name: string }) => stateName.name);
+
+  //district
+  const { data: districtResponse } = useGetDistrictQuery({});
+  const districtData = districtResponse?.data?.data || [];
+  const districtName = districtData.map((districtName: { name: string }) => districtName.name);
+  console.log('name' + districtName);
+
+  // Get selected state
+  const selectedState = values.state;
+
+  // Filter district data based on selected state
+  const filteredDistricts = districtData.filter(
+    (district: { name: string; stateName: string }) => district.stateName === selectedState,
+  );
+
+  // Create an array of district names
+  const districtOptions = filteredDistricts.map((district: { name: string }) => district.name);
+
   // Define the options for states, districts, sub-districts, and farm units
-  const states: string[] = [
-    'Select your state',
-    'Maharashtra',
-    'Karnataka',
-    'Tamil Nadu',
-    'Uttar Pradesh',
-  ];
-  const districts: string[] = [
-    'Select your district',
-    'Pune',
-    'Mumbai',
-    'Bangalore Rural',
-    'Chennai',
-  ];
+
   const subDistricts: string[] = ['Select Block', 'Haveli', 'Khed', 'Hosakote', 'Sriperumbudur'];
   const farmUnits: FormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
 
@@ -166,7 +177,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             <SelectInput<FormValues>
               label="State"
               name="state"
-              options={states}
+              options={stateName}
               touched={touched}
               errors={errors}
               width="w-full"
@@ -182,7 +193,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             <SelectInput<FormValues>
               label="District"
               name="district"
-              options={districts}
+              options={districtOptions}
               touched={touched}
               errors={errors}
               width="w-full"
