@@ -70,7 +70,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
           <FieldArray
             name="animals"
             render={(arrayHelpers) => (
-              <div className="bg-[radial-gradient(circle,rgba(54,195,96,0.10),white)] to-white py-4 px-2">
+              <div className="bg-[radial-gradient(circle,rgba(54,195,96,0.10),white)] to-white py-4 ">
                 {/* Animal List */}
 
                 {animalList.length > 0 && (

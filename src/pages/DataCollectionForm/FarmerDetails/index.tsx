@@ -149,7 +149,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(6);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -408,7 +408,7 @@ export const FarmerDetailsForm: React.FC = () => {
         <Formik
           key={step}
           initialValues={initialValues}
-          validationSchema={validationSchemaArray[step - 1]}
+          // validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
           validateOnChange={true}
           validateOnBlur={true}

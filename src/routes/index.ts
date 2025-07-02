@@ -6,7 +6,7 @@ const routes: Routes = {
   [Pages.Welcome]: {
     component: asyncComponentLoader(() => import('@/pages/Welcome')),
     path: '/',
-    title: 'Welcome',
+    title: ' ',
     icon: undefined,
   },
   [Pages.Page1]: {

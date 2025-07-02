@@ -24,7 +24,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
   //state
   const { data } = useGetStateQuery({});
   const stateData = data?.data?.data || [];
-  const stateName = stateData.map((stateName: { name: string }) => stateName.name);
+  const stateName = stateData.map((stateName: { name: string; id: string }) => stateName.name);
 
   //district
   const { data: districtResponse } = useGetDistrictQuery({});
@@ -34,10 +34,11 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
 
   // Get selected state
   const selectedState = values.state;
+  console.log('selected state------' + selectedState);
 
   // Filter district data based on selected state
   const filteredDistricts = districtData.filter(
-    (district: { name: string; stateName: string }) => district.stateName === selectedState,
+    (district: { name: string; state_id: string }) => district.state_id === selectedState,
   );
 
   // Create an array of district names
