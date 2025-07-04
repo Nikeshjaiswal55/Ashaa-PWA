@@ -152,18 +152,17 @@
 }
 
 .wave-top::before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background:#00632b;
+  background: #00632b;
   border-radius: 0 0 50% 50% / 0 0 100% 100%;
   transform: scaleX(1.5);
 }
 
-.bg-image{
+.bg-image {
   background-image: url('./assets/header/Subtract.svg');
-  
 }
