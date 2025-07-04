@@ -5,6 +5,7 @@ const ApiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.42:3000/' }),
   endpoints: (build) => ({
+    //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
       query: () => 'livestock-name',
     }),
@@ -29,6 +30,28 @@ const ApiSlice = createApi({
     getApplicationName: build.query({
       query: () => 'application-name',
     }),
+    //------------------------------------------------------------------------------post-------------------------------------------------------------------------------------
+
+    //login
+    login: build.mutation({
+      query: (credentials) => ({
+        url: 'login',
+        method: 'POST',
+        body: credentials, // { email, password }
+      }),
+    }),
+
+    //change paasward
+    changePassword: build.mutation({
+      query: (body) => ({
+        url: 'change-password',
+        method: 'PATCH',
+        body,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -41,5 +64,7 @@ export const {
   useGetDistrictQuery,
   useGetPesticidesQuery,
   useGetApplicationNameQuery,
+  useLoginMutation,
+  useChangePasswordMutation,
 } = ApiSlice;
 export default ApiSlice;

@@ -3,7 +3,7 @@ import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
-import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
+// import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
 interface TextInputProps<T> {
   values: T;
@@ -12,9 +12,9 @@ interface TextInputProps<T> {
   type: string;
   placeholder: string;
   labelcss: string;
-  errors: FormikErrors<FormValues>;
-  touched: FormikTouched<FormValues>;
-  setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
+  errors: FormikErrors<T>;
+  touched: FormikTouched<T>;
+  setFieldValue: FormikHelpers<T>['setFieldValue'];
   rightIcon?: React.ReactNode; // rightIcon prop uses React.ReactNode so that you can pass any React element, icon, button, or text as a prop. // React.ReactNode is a flexible type that allows string, number, JSX, fragments, arrays, null, etc.
 }
 const TextInput = <T extends object>({

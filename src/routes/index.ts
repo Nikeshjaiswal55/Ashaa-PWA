@@ -15,6 +15,12 @@ const routes: Routes = {
     title: 'Page 1',
     icon: undefined,
   },
+  [Pages.ChangePassword]: {
+    component: asyncComponentLoader(() => import('@/pages/ChangePassword')),
+    path: '/change-password',
+    title: 'Change Password',
+    icon: undefined,
+  },
   [Pages.Profile]: {
     component: asyncComponentLoader(() => import('@/pages/Profile')),
     path: '/profile',

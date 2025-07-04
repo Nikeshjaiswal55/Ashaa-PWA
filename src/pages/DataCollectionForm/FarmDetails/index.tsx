@@ -170,7 +170,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(8);
+  const [step, setStep] = useState(1);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
   const navigate = useNavigate();
 
@@ -181,6 +181,7 @@ export const FarmerDetailsForm: React.FC = () => {
     if (shouldReset === 'true') {
       setStep(1);
     }
+    1;
   }, [searchParams]);
 
   // --- Initial Form Values ---

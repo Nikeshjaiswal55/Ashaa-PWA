@@ -22,6 +22,7 @@ function App() {
           <Layout>
             <Pages />
             {/* <Onboarding1/> */}
+            {/* <ChangePassword/> */}
           </Layout>
           {/* <Profile /> */}
         </BrowserRouter>

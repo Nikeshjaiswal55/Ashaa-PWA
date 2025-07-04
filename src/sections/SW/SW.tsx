@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import type { SnackbarKey } from 'notistack';
 import { useRegisterSW } from 'virtual:pwa-register/react';
-
 
 // TODO (Suren): this should be a custom hook :)
 function SW() {
@@ -19,9 +17,9 @@ function SW() {
 
   useEffect(() => {
     if (offlineReady) {
-     alert('App is ready to work offline');
+      alert('App is ready to work offline');
     } else if (needRefresh) {
-     alert('New content is available, please refresh');
+      alert('New content is available, please refresh');
     }
   }, [close, needRefresh, offlineReady, updateServiceWorker]);
 

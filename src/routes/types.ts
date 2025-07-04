@@ -7,6 +7,7 @@ enum Pages {
   Welcome,
   Page1,
   Page2,
+  ChangePassword,
   Profile,
   DataCollectionFormFarmer,
   DataCollectionFormFarm,
