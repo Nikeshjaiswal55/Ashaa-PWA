@@ -9,7 +9,7 @@ const Header = (props: { hideText?: boolean; hideProfile?: boolean }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed top-0 w-full z-10">
+    <div className="fixed top-0 w-full z-20">
       <div
         className=" h-15 text-white  px-4 py-3 flex justify-between items-center "
         style={{ backgroundColor: '#005b24' }}

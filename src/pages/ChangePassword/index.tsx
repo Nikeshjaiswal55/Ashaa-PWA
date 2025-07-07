@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
+import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
 import TextInput from '@/components/ui/inputs/TextInput';
+import { Toaster } from '@/components/ui/sonner';
 import { useChangePasswordMutation } from '@/redux/slices/ApiSlice';
 
 interface ChangePasswordValues {
@@ -41,24 +43,34 @@ const ChangePassword: React.FC = () => {
         new_password: values.newPassword,
       };
 
-      const response = await changePassword(payload).unwrap();
-      console.log('Password changed successfully:', response);
-      alert('Password changed successfully!');
-      if (response) {
+      await changePassword(payload).unwrap();
+
+      toast.success('Password changed successfully!', {
+        description: 'Now redirecting to your dashboard...',
+        duration: 3000,
+      });
+
+      setTimeout(() => {
         navigate('/home');
-      }
+      }, 2000);
     } catch (error: unknown) {
       console.error('Password change failed:', error?.data?.message || error.message);
-      alert('Failed to change password. Please try again.');
+
+      toast.error('Failed to change password.', {
+        description: error?.data?.message || 'Something went wrong.',
+        duration: 3000,
+      });
     }
   };
+
   return (
     <>
       <Meta title="Change Password" />
-      <div className="bg-white min-h-screen flex  justify-center px-[23px]">
+      <Toaster position="top-right" richColors /> {/* ✅ Ensure this is present */}
+      <div className="bg-white min-h-screen flex justify-center px-[23px]">
         <div className="max-w-md w-full mt-[50px] space-y-30">
           <div className="text-center">
-            <h2 className=" text-2xl font-semibold text-[#005B24]">Change Password</h2>
+            <h2 className="text-2xl font-semibold text-[#005B24]">Change Password</h2>
             <p className="text-base font-bold text-gray-500">Update your password securely.</p>
           </div>
 
