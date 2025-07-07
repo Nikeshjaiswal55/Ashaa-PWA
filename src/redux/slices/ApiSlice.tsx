@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.42:3000/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.31.151:3000/' }),
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
@@ -30,6 +30,17 @@ const ApiSlice = createApi({
     getApplicationName: build.query({
       query: () => 'application-name',
     }),
+
+    getProfileData: build.query({
+      query: () => ({
+        url: 'userProfile', // change this to your actual endpoint
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
+
     //------------------------------------------------------------------------------post-------------------------------------------------------------------------------------
 
     //login
@@ -66,5 +77,6 @@ export const {
   useGetApplicationNameQuery,
   useLoginMutation,
   useChangePasswordMutation,
+  useGetProfileDataQuery,
 } = ApiSlice;
 export default ApiSlice;

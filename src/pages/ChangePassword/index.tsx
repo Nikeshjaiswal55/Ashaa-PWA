@@ -19,7 +19,7 @@ interface ChangePasswordValues {
 const ChangePassword: React.FC = () => {
   const navigate = useNavigate();
   const [changePassword, { isLoading }] = useChangePasswordMutation();
-
+  const labelClass = 'text-[#005B24] text-lg font-semibold';
   const initialValues: ChangePasswordValues = {
     currentPassword: '',
     newPassword: '',
@@ -42,7 +42,6 @@ const ChangePassword: React.FC = () => {
         old_password: values.currentPassword,
         new_password: values.newPassword,
       };
-
       await changePassword(payload).unwrap();
 
       toast.success('Password changed successfully!', {
@@ -54,19 +53,20 @@ const ChangePassword: React.FC = () => {
         navigate('/home');
       }, 2000);
     } catch (error: unknown) {
-      console.error('Password change failed:', error?.data?.message || error.message);
-
-      toast.error('Failed to change password.', {
-        description: error?.data?.message || 'Something went wrong.',
-        duration: 3000,
-      });
+      if (error && typeof error === 'object' && 'data' in error) {
+        const err = error as { data?: { message?: string }; message?: string };
+        // ab safely access kar sakte ho
+        toast.error('Failed to change password', {
+          description: err.data?.message || err.message || 'Something went wrong',
+        });
+      }
     }
   };
 
   return (
     <>
       <Meta title="Change Password" />
-      <Toaster position="top-right" richColors /> {/* ✅ Ensure this is present */}
+      <Toaster position="top-right" richColors />
       <div className="bg-white min-h-screen flex justify-center px-[23px]">
         <div className="max-w-md w-full mt-[50px] space-y-30">
           <div className="text-center">
@@ -90,7 +90,7 @@ const ChangePassword: React.FC = () => {
                   setFieldValue={setFieldValue}
                   values={values}
                   type="password"
-                  labelcss="text-[#005B24] text-lg font-semibold"
+                  labelcss={labelClass}
                 />
 
                 <TextInput
@@ -102,7 +102,7 @@ const ChangePassword: React.FC = () => {
                   setFieldValue={setFieldValue}
                   values={values}
                   type="password"
-                  labelcss="text-[#005B24] text-lg font-semibold"
+                  labelcss={labelClass}
                 />
 
                 <TextInput
@@ -114,7 +114,7 @@ const ChangePassword: React.FC = () => {
                   setFieldValue={setFieldValue}
                   values={values}
                   type="password"
-                  labelcss="text-[#005B24] text-lg font-semibold"
+                  labelcss={labelClass}
                 />
 
                 <button

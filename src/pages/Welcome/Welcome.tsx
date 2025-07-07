@@ -45,8 +45,8 @@ const Welcome: React.FC = () => {
   const handleSubmit = async (values: WelcomeFormValues) => {
     try {
       const response = await login(values).unwrap();
-      const token = response.data?.access_token;
-      const isFirstLogin = response.data?.user?.is_first_login;
+      const token = response.data?.data?.access_token;
+      const isFirstLogin = response.data?.data?.user?.is_first_login;
 
       if (token) {
         localStorage.setItem('token', token);
@@ -59,7 +59,7 @@ const Welcome: React.FC = () => {
         setTimeout(() => {
           if (isFirstLogin === true) {
             navigate('/change-password');
-          } else {
+          } else if (isFirstLogin === false) {
             navigate('/home');
           }
         }, 2000);
