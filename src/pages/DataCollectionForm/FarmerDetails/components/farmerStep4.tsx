@@ -11,8 +11,19 @@ import { useGetStorageListQuery } from '@/redux/slices/ApiSlice';
 import location from '../../../../assets/Icons/location.svg';
 import { FormValues } from '../../FarmerDetails/index';
 
-const capacityUnits = ['Quintals', 'Tonnes', 'Kg'];
-const conditionOptions = ['Good', 'Moderate', 'Poor'];
+const capacityUnits: { label: string; value: string }[] = [
+  { label: 'Select Unit', value: '' },
+  { label: 'Quintals', value: 'quintals' },
+  { label: 'Tonnes', value: 'tonnes' },
+  { label: 'Kg', value: 'kg' },
+];
+
+const conditionOptions: { label: string; value: string }[] = [
+  { label: 'Select Condition', value: '' },
+  { label: 'Good', value: 'good' },
+  { label: 'Moderate', value: 'moderate' },
+  { label: 'Poor', value: 'poor' },
+];
 
 interface FarmerStep4Props {
   values: FormValues;

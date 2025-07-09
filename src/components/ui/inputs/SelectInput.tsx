@@ -4,10 +4,15 @@ import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import { FormValues } from '../../../pages/DataCollectionForm/FarmerDetails/index';
 
+interface SelectOption {
+  label: string;
+  value: string;
+}
+
 interface SelectInputProps<T> {
   values: T;
   label: string;
-  options: string[];
+  options: SelectOption[];
   name: string;
   defaultOption: string;
   width: string;
@@ -39,22 +44,21 @@ const SelectInput = <T extends object>({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const currentValue = values[name as keyof typeof values] as string;
+  const selectedLabel = options.find((opt) => opt.value === currentValue)?.label || defaultOption;
   const hasError = touched[name as keyof FormValues] && errors[name as keyof FormValues];
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleOptionClick = (option: string) => {
-    setFieldValue(name, option);
+  const handleOptionClick = (option: SelectOption) => {
+    setFieldValue(name, option.value);
     setIsOpen(false);
   };
 
@@ -69,7 +73,6 @@ const SelectInput = <T extends object>({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Label */}
       <label className="block text-lg pl-2 font-semibold text-[#005B24] mb-2">{labelFirst}</label>
       {label && (
         <label
@@ -80,7 +83,6 @@ const SelectInput = <T extends object>({
         </label>
       )}
 
-      {/* Custom Select Button */}
       <div
         className={`${width} ${height} ${
           customClass || ''
@@ -97,7 +99,7 @@ const SelectInput = <T extends object>({
         aria-haspopup="listbox"
         aria-labelledby={`${name}-label`}
       >
-        <span className="truncate">{currentValue || defaultOption}</span>
+        <span className="truncate">{selectedLabel}</span>
         <svg
           className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -108,40 +110,36 @@ const SelectInput = <T extends object>({
         </svg>
       </div>
 
-      {/* Dropdown Options */}
       {isOpen && (
         <div className="absolute z-50 w-full mt-1 bg-white border border-green-800 rounded-[10px] shadow-lg">
           <div className="max-h-40 overflow-y-auto" role="listbox">
-            {defaultOption && (
-              <div
-                className={`px-3 py-2 cursor-pointer hover:bg-green-100 ${
-                  !currentValue ? 'bg-green-200 font-semibold' : ''
-                }`}
-                onClick={() => handleOptionClick('')}
-                role="option"
-                aria-selected={!currentValue}
-              >
-                {defaultOption}
-              </div>
-            )}
+            <div
+              className={`px-3 py-2 cursor-pointer hover:bg-green-100 ${
+                !currentValue ? 'bg-green-200 font-semibold' : ''
+              }`}
+              onClick={() => handleOptionClick({ label: defaultOption, value: '' })}
+              role="option"
+              aria-selected={!currentValue}
+            >
+              {defaultOption}
+            </div>
             {options.map((option) => (
               <div
-                key={option}
+                key={option.value}
                 className={`px-3 py-2 cursor-pointer hover:bg-green-100 ${
-                  currentValue === option ? 'bg-green-200 font-semibold' : ''
+                  currentValue === option.value ? 'bg-green-200 font-semibold' : ''
                 }`}
                 onClick={() => handleOptionClick(option)}
                 role="option"
-                aria-selected={currentValue === option}
+                aria-selected={currentValue === option.value}
               >
-                {option}
+                {option.label}
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Error Message */}
       {hasError && (
         <div className="text-red-500 text-xs mt-1">{String(errors[name as keyof FormValues])}</div>
       )}

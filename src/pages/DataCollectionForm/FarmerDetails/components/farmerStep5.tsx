@@ -242,7 +242,12 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                     {/* Owner */}
                     <SelectInput<FormValues>
                       name="owner"
-                      options={['Self', 'Rented', 'Other']}
+                      options={[
+                        { label: 'Select Ownership Type', value: '' },
+                        { label: 'Self', value: 'self' },
+                        { label: 'Rented', value: 'rented' },
+                        { label: 'Other', value: 'other' },
+                      ]}
                       touched={touched}
                       errors={errors}
                       width="w-full"

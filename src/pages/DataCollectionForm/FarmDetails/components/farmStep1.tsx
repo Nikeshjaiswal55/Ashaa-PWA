@@ -26,7 +26,7 @@ const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setField
         <div className="col-span-2">
           <SelectInput
             name="individualFarmSize"
-            options={['1', '2', '3', '4', '5', '10', '20']}
+            options={[[]]}
             touched={touched}
             errors={errors}
             values={values}

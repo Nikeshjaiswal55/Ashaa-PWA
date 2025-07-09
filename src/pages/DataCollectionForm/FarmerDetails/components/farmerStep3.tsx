@@ -62,7 +62,13 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
     setShowForm(false); // Hide the form after saving
   };
 
-  const milkSellingPlaces = ['Dairy', 'Village', 'Market', 'Co-operative', 'Others'];
+  const milkSellingPlaces: { label: string; value: string }[] = [
+    { label: 'Dairy', value: 'dairy' },
+    { label: 'Village', value: 'village' },
+    { label: 'Market', value: 'market' },
+    { label: 'Co-operative', value: 'co-operative' },
+    { label: 'Others', value: 'others' },
+  ];
   return (
     <div className="flex flex-col items-center ">
       <div className="w-full max-w-2xl rounded-xl md:p-8">

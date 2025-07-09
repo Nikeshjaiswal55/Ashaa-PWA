@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.31.151:3000/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://172.26.32.1:3000/' }),
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
@@ -18,11 +18,15 @@ const ApiSlice = createApi({
     getEquipement: build.query({
       query: () => 'equipement',
     }),
+
     getState: build.query({
       query: () => 'state',
     }),
-    getDistrict: build.query({
-      query: () => 'district',
+    getDistrictByState: build.query({
+      query: (stateId) => `district/by-state/${stateId}`,
+    }),
+    getTehsilByDistrict: build.query({
+      query: (districtId) => `tehsil/by-district/${districtId}`,
     }),
     getPesticides: build.query({
       query: () => 'pesticide',
@@ -72,11 +76,12 @@ export const {
   useGetFertilizerQuery,
   useGetEquipementQuery,
   useGetStateQuery,
-  useGetDistrictQuery,
   useGetPesticidesQuery,
   useGetApplicationNameQuery,
   useLoginMutation,
   useChangePasswordMutation,
   useGetProfileDataQuery,
+  useGetDistrictByStateQuery,
+  useGetTehsilByDistrictQuery,
 } = ApiSlice;
 export default ApiSlice;

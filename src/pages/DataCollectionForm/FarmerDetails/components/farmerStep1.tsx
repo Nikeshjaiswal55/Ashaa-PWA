@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { skipToken } from '@reduxjs/toolkit/query';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
@@ -7,10 +8,9 @@ import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
-import { useGetStateQuery } from '@/redux/slices/ApiSlice';
-import { useGetDistrictQuery } from '@/redux/slices/ApiSlice';
+import { useGetDistrictByStateQuery, useGetStateQuery } from '@/redux/slices/ApiSlice';
+import { useGetTehsilByDistrictQuery } from '@/redux/slices/ApiSlice';
 
-// Update the path below to the actual location of your FormValues type
 import { FormValues } from '../../FarmerDetails/index';
 
 interface FarmerStep1Props {
@@ -21,32 +21,37 @@ interface FarmerStep1Props {
 }
 
 const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setFieldValue }) => {
-  //state
   const { data } = useGetStateQuery({});
   const stateData = data?.data?.data || [];
-  const stateName = stateData.map((stateName: { name: string; id: string }) => stateName.name);
+  const stateOptions = stateData.map((state: { name: string; _id: string }) => ({
+    label: state.name,
+    value: state._id,
+  }));
 
-  //district
-  const { data: districtResponse } = useGetDistrictQuery({});
-  const districtData = districtResponse?.data?.data || [];
-  const districtName = districtData.map((districtName: { name: string }) => districtName.name);
-  console.log('name' + districtName);
-
-  // Get selected state
-  const selectedState = values.state;
-  console.log('selected state------' + selectedState);
-
-  // Filter district data based on selected state
-  const filteredDistricts = districtData.filter(
-    (district: { name: string; state_id: string }) => district.state_id === selectedState,
+  const selectedStateId = values.state || '';
+  const { data: districtData } = useGetDistrictByStateQuery(
+    selectedStateId ? selectedStateId : skipToken,
   );
 
-  // Create an array of district names
-  const districtOptions = filteredDistricts.map((district: { name: string }) => district.name);
+  // const districtList = districtData?.data?.data || [];
+  const districtOptions = districtData?.data?.data || []; // districtList.map((d: { name: string; _id: string }) => ({
+  console.log('district option: ', districtOptions);
+  //   label: d.name,
+  //   value: d._id,.,,
+  // }));
+  const selectedDistrictId = values.district || '';
+  console.log(selectedDistrictId);
 
-  // Define the options for states, districts, sub-districts, and farm units
+  //sub district
+  const { data: tehsilData } = useGetTehsilByDistrictQuery(
+    selectedDistrictId ? selectedDistrictId : skipToken,
+  );
+  const tehsilList = tehsilData?.data?.data || [];
+  const tehsilOptions = tehsilList.map((t: { name: string; _id: string }) => ({
+    label: t.name,
+    value: t._id,
+  }));
 
-  const subDistricts: string[] = ['Select Block', 'Haveli', 'Khed', 'Hosakote', 'Sriperumbudur'];
   const farmUnits: FormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
 
   const InputData = [
@@ -75,7 +80,6 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
 
   return (
     <div className="space-y-[23px] mt-[59px] ">
-      {/* farmer name - adhar no - contact number */}
       {InputData.map((input) => (
         <TextInput<FormValues>
           key={input.id}
@@ -91,7 +95,6 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         />
       ))}
 
-      {/* gender */}
       <RadioInputs<FormValues>
         values={values}
         name="gender"
@@ -99,15 +102,13 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         options={['Male', 'Female', 'Other']}
       />
 
-      {/* Total Farm Size & Unit */}
       <div className="grid grid-cols-3 gap-4 items-end">
         <div className="col-span-2">
           <label
             htmlFor="totalFarmSize"
             className="block text-lg font-semibold text-[#005B24] mb-1"
           >
-            {' '}
-            Total Farm Size{' '}
+            Total Farm Size
           </label>
           <Field
             type="number"
@@ -127,7 +128,6 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
           />
         </div>
 
-        {/* Select Dropdown */}
         <div>
           <Field
             as="select"
@@ -137,31 +137,26 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
               touched.farmSizeUnit && errors.farmSizeUnit ? 'border-red-500' : 'border-green-800'
             }`}
           >
-            {' '}
             {farmUnits.map((unit) => (
               <option key={unit} value={unit}>
-                {' '}
-                {unit}{' '}
+                {unit}
               </option>
-            ))}{' '}
+            ))}
           </Field>
           <ErrorMessage name="farmSizeUnit" component="div" className="text-red-500 text-xs mt-1" />
         </div>
       </div>
-      {/* Total Farm Size & Unit */}
 
-      {/* No. of Separate Farms */}
       <div>
-        <div className="flex items-center  bg-[rgba(54,195,96,0.2)] h-[53px] p-3 rounded-lg border border-green-200 shadow-sm">
-          <span className="text-lg font-semibold  text-[#005B24] flex-grow">
-            {' '}
-            No. of Separate Farms{' '}
+        <div className="flex items-center bg-[rgba(54,195,96,0.2)] h-[53px] p-3 rounded-lg border border-green-200 shadow-sm">
+          <span className="text-lg font-semibold text-[#005B24] flex-grow">
+            No. of Separate Farms
           </span>
           <Field
             type="number"
             name="separateFarms"
             id="separateFarms"
-            className={`w-20 p-2 bg-white text-[#005B24] font-semibold text-lg border-[2px] underline  rounded-md h-[42px] text-center shadow-sm  border-b-2   ${
+            className={`w-20 p-2 bg-white text-[#005B24] font-semibold text-lg border-[2px] underline rounded-md h-[42px] text-center shadow-sm border-b-2 ${
               touched.separateFarms && errors.separateFarms
                 ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
                 : 'border-gray-300 focus:ring-green-500 focus:border-green-500'
@@ -171,26 +166,25 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         <ErrorMessage name="separateFarms" component="div" className="text-red-500 text-xs mt-1" />
       </div>
 
-      {/* State & District */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="flex  gap-4">
+        <div className="flex gap-4">
           <div className="flex-1">
             <SelectInput<FormValues>
               label="State"
               name="state"
-              options={stateName}
+              options={stateOptions}
               touched={touched}
               errors={errors}
               width="w-full"
               height="h-[52px]"
-              defaultOption="Select option"
+              defaultOption="Select State"
               values={values}
               setFieldValue={setFieldValue}
               customClass={'border-[2px]'}
               labelFirst={''}
             />
           </div>
-          <div className="flex-1 ">
+          <div className="flex-1">
             <SelectInput<FormValues>
               label="District"
               name="district"
@@ -199,7 +193,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
               errors={errors}
               width="w-full"
               height="h-[52px]"
-              defaultOption="Select option"
+              defaultOption="Select District"
               values={values}
               setFieldValue={setFieldValue}
               customClass={'border-[2px]'}
@@ -209,15 +203,13 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         </div>
       </div>
 
-      {/* Sub-District & Pin code */}
       <div className="grid grid-cols-1 mb-9 h-[52px] md:grid-cols-2 w-full ">
         <div className="flex gap-3">
-          <div className="flex-1 ">
-            {/* sub-district */}
+          <div className="flex-1">
             <SelectInput<FormValues>
               label="Sub-District"
               name="subDistrict"
-              options={subDistricts}
+              options={tehsilOptions}
               touched={touched}
               width="w-full"
               height="h-[52px]"
@@ -245,7 +237,6 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         </div>
       </div>
 
-      {/* Village */}
       <TextInput<FormValues>
         label={'Village'}
         name={'village'}
@@ -258,7 +249,6 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         labelcss={''}
       />
 
-      {/* Farmer Photo Upload */}
       <ImageUploadInput<FormValues>
         name="farmerPhoto"
         label="Farmer Photos"
