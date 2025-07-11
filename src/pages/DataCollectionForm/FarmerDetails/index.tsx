@@ -149,7 +149,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(6);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -193,7 +193,7 @@ export const FarmerDetailsForm: React.FC = () => {
     storagePhoto: null,
 
     // step 5
-    equipment: 'Tractor',
+    equipment: '',
     equipmentQuantity: 3,
     equipmentType: '',
     brandName: '',
@@ -406,11 +406,11 @@ export const FarmerDetailsForm: React.FC = () => {
         </div>
         <h3 className="text-center ">{HeaderData[step - 1]}</h3>
         <Formik
-          key={step}
+          // key={step}
           initialValues={initialValues}
           validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
-          validateOnChange={true}
+          validateOnChange={false}
           validateOnBlur={true}
           //
         >
