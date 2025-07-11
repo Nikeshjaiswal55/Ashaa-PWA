@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { skipToken } from '@reduxjs/toolkit/query';
 import {
   ErrorMessage,
   Field,
@@ -9,7 +10,7 @@ import {
   FormikTouched,
 } from 'formik';
 
-import { useGetFertilizerQuery } from '@/redux/slices/ApiSlice';
+import { useGetBreedNamesbyFertilizerQuery, useGetFertilizerQuery } from '@/redux/slices/ApiSlice';
 
 import { FarmFormValues } from '..';
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
@@ -18,8 +19,20 @@ import deleteImg from '../../../../assets/Icons/delete.svg';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 import TextInput from '../../../../components/ui/inputs/TextInput';
 
-const fertilizerTypeOptions = ['Urea', 'DAP', 'MOP', 'NPK', 'Compost'];
-const appliedStageOptions = ['Sowing', 'Vegetative', 'Flowering', 'Fruiting'];
+const fertilizerTypeOptions = [
+  { label: 'Urea', value: 'Urea' },
+  { label: 'DAP', value: 'DAP' },
+  { label: 'MOP', value: 'MOP' },
+  { label: 'NPK', value: 'NPK' },
+  { label: 'Compost', value: 'Compost' },
+];
+
+const appliedStageOptions = [
+  { label: 'Sowing', value: 'Sowing' },
+  { label: 'Vegetative', value: 'Vegetative' },
+  { label: 'Flowering', value: 'Flowering' },
+  { label: 'Fruiting', value: 'Fruiting' },
+];
 
 interface FarmStep7Props {
   values: FarmFormValues;
@@ -30,20 +43,15 @@ interface FarmStep7Props {
 
 const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setFieldValue }) => {
   const [showFertilizerForm, setShowFertilizerForm] = useState(true);
-  const { data, isLoading } = useGetFertilizerQuery({});
-  const fertilizerList = data?.data?.data || [];
-  const fertilizerName = isLoading
-    ? ['Loading...']
-    : fertilizerList.length > 0
-    ? fertilizerList.map((f: { name: string }) => f.name)
-    : ['No fertilizer found'];
+  const { data } = useGetFertilizerQuery({});
+  const fertilizerName = data?.data || [];
+  const selectedId = values.fertilizerName;
 
-  const fertilizerBrand =
-    fertilizerList.find(
-      (fertilizerList: { name: string; fertilizer_brand: [] }) =>
-        fertilizerList.name === values.fertilizerName,
-    )?.fertilizer_brand || [];
-  const brandName = fertilizerBrand.map((brand: { brand: string }) => brand);
+  const { data: breedData } = useGetBreedNamesbyFertilizerQuery(
+    selectedId ? selectedId : skipToken,
+  );
+
+  const breedName = breedData?.data || [];
 
   // Save current fertilizer to fertilizerUsageList array
   const handleSaveFertilizer = () => {
@@ -258,7 +266,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
                     <SelectInput
                       label="Company Name"
                       name="companyName"
-                      options={brandName}
+                      options={breedName}
                       defaultOption="Select Fertilizer Company Name"
                       values={values}
                       errors={errors}

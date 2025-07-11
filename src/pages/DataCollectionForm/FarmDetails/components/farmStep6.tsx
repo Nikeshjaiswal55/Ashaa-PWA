@@ -27,9 +27,16 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
   showCropDetailsForm,
   setShowCropDetailsForm,
 }) => {
-  const seedSourceOptions: string[] = ['Supplier 1', 'Supplier 2', 'Supplier 3'];
-  const seedingRateUnitOptions: string[] = ['kg/Acre', 'Kg/hectare'];
-  // Save current crop to CropList array
+  const seedSourceOptions = [
+    { label: 'Supplier 1', value: 'Supplier 1' },
+    { label: 'Supplier 2', value: 'Supplier 2' },
+    { label: 'Supplier 3', value: 'Supplier 3' },
+  ];
+  const seedingRateUnitOptions = [
+    { label: 'kg/acre', value: 'kg/acre' },
+    { label: 'kg/hectare', value: 'kg/hectare' },
+    { label: 'g/sq.m', value: 'g/sq.m' },
+  ]; // Save current crop to CropList array
   const handleSaveCrop = () => {
     const crop = {
       cultivationArea: values.cultivationArea,

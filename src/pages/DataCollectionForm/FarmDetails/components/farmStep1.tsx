@@ -14,9 +14,25 @@ interface FarmStep1Props {
   touched: FormikTouched<FarmFormValues>;
   setFieldValue: FormikHelpers<FarmFormValues>['setFieldValue'];
 }
-const farmUnits: FarmFormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
-const landOwnershipOptions = ['Owned', 'Leased', 'Rented', 'Government', 'Other'];
-const topographyOptions = ['Plain', 'Hilly', 'Undulating', 'Plateau', 'Valley'];
+const farmUnits = [
+  { label: 'Acre', value: 'acre' },
+  { label: 'Hectare', value: 'hectare' },
+  { label: 'Bigha', value: 'bigha' },
+];
+const landOwnershipOptions = [
+  { label: 'Owned', value: 'owned' },
+  { label: 'Leased', value: 'leased' },
+  { label: 'Rented', value: 'rented' },
+  { label: 'Government', value: 'government' },
+  { label: 'Other', value: 'other' },
+];
+const topographyOptions = [
+  { label: 'Plain', value: 'plain' },
+  { label: 'Hilly', value: 'hilly' },
+  { label: 'Undulating', value: 'undulating' },
+  { label: 'Plateau', value: 'plateau' },
+  { label: 'Valley', value: 'valley' },
+];
 
 const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
@@ -26,7 +42,12 @@ const FarmStep1: React.FC<FarmStep1Props> = ({ values, errors, touched, setField
         <div className="col-span-2">
           <SelectInput
             name="individualFarmSize"
-            options={[[]]}
+            options={[
+              { label: 'Less than 1 acre', value: '<1' },
+              { label: '1 to 2 acres', value: '1-2' },
+              { label: '2 to 5 acres', value: '2-5' },
+              { label: 'More than 5 acres', value: '>5' },
+            ]}
             touched={touched}
             errors={errors}
             values={values}

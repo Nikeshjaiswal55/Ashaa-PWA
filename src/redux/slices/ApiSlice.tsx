@@ -3,11 +3,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.45:3000/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.45:3000/' }), //http://192.168.1.45:3000/
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
       query: () => 'livestock-name',
+    }),
+    getBreedNamesbyLiveStock: build.query({
+      query: (LivestockNamesId) => `/livestock-name/breed/by-livestock/${LivestockNamesId}`,
     }),
     getStorageList: build.query({
       query: () => 'storage',
@@ -15,8 +18,14 @@ const ApiSlice = createApi({
     getFertilizer: build.query({
       query: () => 'fertilizer',
     }),
+    getBreedNamesbyFertilizer: build.query({
+      query: (fertilizerNamesId) => `fertilizer/brand/by-fertilizer/${fertilizerNamesId}`,
+    }),
     getEquipement: build.query({
       query: () => 'equipement',
+    }),
+    getBreedNamesbyEquipement: build.query({
+      query: (equipementNamesId) => `equipement-brand/by-equipment/${equipementNamesId}`,
     }),
 
     getState: build.query({
@@ -31,8 +40,12 @@ const ApiSlice = createApi({
     getVillagesByTehsil: build.query({
       query: (tehsilId) => `village/by-tehsil/${tehsilId}`,
     }),
+
     getPesticides: build.query({
       query: () => 'pesticide',
+    }),
+    getBreedNamesbyPesticides: build.query({
+      query: (PesticidesNamesId) => `/pesticide/brand/by-pesticide/${PesticidesNamesId}`,
     }),
     getApplicationName: build.query({
       query: () => 'application-name',
@@ -87,5 +100,9 @@ export const {
   useGetDistrictByStateQuery,
   useGetTehsilByDistrictQuery,
   useGetVillagesByTehsilQuery,
+  useGetBreedNamesbyLiveStockQuery,
+  useGetBreedNamesbyEquipementQuery,
+  useGetBreedNamesbyFertilizerQuery,
+  useGetBreedNamesbyPesticidesQuery,
 } = ApiSlice;
 export default ApiSlice;

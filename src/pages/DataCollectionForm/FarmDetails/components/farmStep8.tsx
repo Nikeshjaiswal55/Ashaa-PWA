@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import { skipToken } from '@reduxjs/toolkit/query';
 import { Field, FieldArray, FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
-import { useGetPesticidesQuery } from '@/redux/slices/ApiSlice';
+import { useGetBreedNamesbyPesticidesQuery, useGetPesticidesQuery } from '@/redux/slices/ApiSlice';
 
 import { FarmFormValues } from '..';
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
@@ -11,8 +12,19 @@ import deleteImg from '../../../../assets/Icons/delete.svg';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 import TextInput from '../../../../components/ui/inputs/TextInput';
 
-const pesticidesTypeOptions = ['Herbicide', 'Insecticide', 'Fungicide', 'Bactericide'];
-const appliedStageOptions = ['Sowing', 'Vegetative', 'Flowering', 'Fruiting'];
+const pesticidesTypeOptions = [
+  { label: 'Herbicide', value: 'Herbicide' },
+  { label: 'Insecticide', value: 'Insecticide' },
+  { label: 'Fungicide', value: 'Fungicide' },
+  { label: 'Bactericide', value: 'Bactericide' },
+];
+
+const appliedStageOptions = [
+  { label: 'Sowing', value: 'Sowing' },
+  { label: 'Vegetative', value: 'Vegetative' },
+  { label: 'Flowering', value: 'Flowering' },
+  { label: 'Fruiting', value: 'Fruiting' },
+];
 
 interface FarmStep8Props {
   values: FarmFormValues;
@@ -23,21 +35,13 @@ interface FarmStep8Props {
 
 const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setFieldValue }) => {
   const [showPesticideForm, setShowPesticideForm] = useState(true);
-  const { data, isLoading } = useGetPesticidesQuery({});
-  const PesticideList = data?.data?.data || [];
-
-  const PesticideName = isLoading
-    ? ['Loading...']
-    : PesticideList.length > 0
-    ? PesticideList.map((f: { name: string }) => f.name)
-    : ['No fertilizer found'];
-
-  const PesticideBrand =
-    PesticideList.find(
-      (PesticideList: { name: string; pesticide_brand: [] }) =>
-        PesticideList.name === values.pesticidesName,
-    )?.pesticide_brand || [];
-  const brandName = PesticideBrand.map((brand: { brand: string }) => brand);
+  const { data } = useGetPesticidesQuery({});
+  const PesticideName = data?.data || [];
+  const selectedId = values.pesticidesName;
+  const { data: brandData } = useGetBreedNamesbyPesticidesQuery(
+    selectedId ? selectedId : skipToken,
+  );
+  const brandName = brandData?.data || [];
 
   const handleSavePesticide = () => {
     const pesticide = {

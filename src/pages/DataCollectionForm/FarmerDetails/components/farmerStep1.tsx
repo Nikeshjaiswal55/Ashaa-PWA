@@ -26,18 +26,15 @@ interface FarmerStep1Props {
 
 const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setFieldValue }) => {
   const { data } = useGetStateQuery({});
-  const stateData = data?.data?.data || [];
-  const stateOptions = stateData.map((state: { name: string; _id: string }) => ({
-    label: state.name,
-    value: state._id,
-  }));
+  const stateOptions = data?.data || [];
+  console.log(stateOptions);
 
   const selectedStateId = values.state || '';
   const { data: districtData } = useGetDistrictByStateQuery(
     selectedStateId ? selectedStateId : skipToken,
   );
 
-  const districtOptions = districtData?.data?.data || [];
+  const districtOptions = districtData?.data || [];
   console.log('district option: ', districtOptions);
 
   const selectedDistrictId = values.district || '';
@@ -47,13 +44,13 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
   const { data: tehsilData } = useGetTehsilByDistrictQuery(
     selectedDistrictId ? selectedDistrictId : skipToken,
   );
-  const tehsilOptions = tehsilData?.data?.data || [];
+  const tehsilOptions = tehsilData?.data || [];
   const selectedTehsil = values.subDistrict || '';
 
   const { data: villageData } = useGetVillagesByTehsilQuery(
     selectedTehsil ? selectedTehsil : skipToken,
   );
-  const villageOptions = villageData?.data?.data || [];
+  const villageOptions = villageData?.data || [];
 
   const farmUnits: FormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
 

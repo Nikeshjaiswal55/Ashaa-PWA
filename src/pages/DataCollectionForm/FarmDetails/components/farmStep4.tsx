@@ -10,7 +10,15 @@ import ImageUploadInput from '../../../../components/ui/inputs/ImageUploadInput'
 import RadioInputs from '../../../../components/ui/inputs/RadioInputs';
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 
-const waterSourceOptions = ['Canal', 'Borewell', 'Pond', 'River', 'Rainwater', 'Other'];
+const waterSourceOptions = [
+  { label: 'Canal', value: 'Canal' },
+  { label: 'Borewell', value: 'Borewell' },
+  { label: 'Pond', value: 'Pond' },
+  { label: 'River', value: 'River' },
+  { label: 'Rainwater', value: 'Rainwater' },
+  { label: 'Other', value: 'Other' },
+];
+
 const retentionOptions = ['Low', 'Medium', 'High'];
 const drainageOptions = ['Good', 'Moderate', 'Poor'];
 

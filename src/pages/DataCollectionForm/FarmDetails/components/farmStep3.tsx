@@ -5,7 +5,16 @@ import ImageUploadInput from '../../../../components/ui/inputs/ImageUploadInput'
 import SelectInput from '../../../../components/ui/inputs/SelectInput';
 import ToggleButtonGroup from '../../../../components/ui/inputs/ToggleButtonGroup';
 
-const soilTypeOptions = ['Sandy', 'Clay', 'Silty', 'Peaty', 'Saline', 'Loamy', 'Black', 'Red'];
+const soilTypeOptions = [
+  { label: 'Sandy', value: 'Sandy' },
+  { label: 'Clay', value: 'Clay' },
+  { label: 'Silty', value: 'Silty' },
+  { label: 'Peaty', value: 'Peaty' },
+  { label: 'Saline', value: 'Saline' },
+  { label: 'Loamy', value: 'Loamy' },
+  { label: 'Black', value: 'Black' },
+  { label: 'Red', value: 'Red' },
+];
 
 interface FarmStep3Props {
   values: FarmFormValues;

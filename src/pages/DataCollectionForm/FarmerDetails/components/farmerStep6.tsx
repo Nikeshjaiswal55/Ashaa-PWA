@@ -29,13 +29,9 @@ interface FarmerStep5Props {
 }
 
 const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setFieldValue }) => {
-  const { data, isLoading } = useGetApplicationNameQuery({});
-  const ApplicationData = data?.data?.data || [];
-  const ApplicatioName = isLoading
-    ? ['Loading...']
-    : ApplicationData.length > 0
-    ? ApplicationData.map((item: { name: string }) => item.name)
-    : ['No storage found'];
+  const { data } = useGetApplicationNameQuery({});
+  const ApplicationName = data?.data || [];
+
   return (
     <div className="space-y-[23px] pt-[78px]">
       {/* Smartphone Ownership */}
@@ -86,23 +82,10 @@ const FarmerStep6: React.FC<FarmerStep5Props> = ({ values, errors, touched, setF
         className="bg-[rgba(54,195,96,0.2)] "
       />
 
-      {/* App Name */}
-      {/* <TextInput<FormValues>
-      label="App Name"
-      name="appName"
-      placeholder="Enter name of software/app"
-      type="text"
-      values={values}
-      errors={errors}
-      touched={touched}
-      setFieldValue={setFieldValue}
-      labelcss={''}
-    /> */}
-
       <SelectInput<FormValues>
         label="App Name"
         name="appName"
-        options={ApplicatioName}
+        options={ApplicationName}
         values={values}
         errors={errors}
         touched={touched}

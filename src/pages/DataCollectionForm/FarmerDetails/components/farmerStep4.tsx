@@ -17,12 +17,6 @@ const capacityUnits: { label: string; value: string }[] = [
   { label: 'Tonnes', value: 'tonnes' },
   { label: 'Kg', value: 'kg' },
 ];
-const conditionOptions: { label: string; value: string }[] = [
-  { label: 'Select Condition', value: '' },
-  { label: 'Good', value: 'good' },
-  { label: 'Moderate', value: 'moderate' },
-  { label: 'Poor', value: 'poor' },
-];
 
 interface FarmerStep4Props {
   values: FormValues;
@@ -31,20 +25,16 @@ interface FarmerStep4Props {
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
 const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setFieldValue }) => {
-  const { data, isLoading } = useGetStorageListQuery({});
-  const storageName = data?.data?.data || [];
-  const storageType = isLoading
-    ? ['Loading...']
-    : storageName.length > 0
-    ? storageName.map((item: { name: string }) => item.name)
-    : ['No storage found'];
+  const { data } = useGetStorageListQuery({});
+  const storageName = data?.data || [];
+
   return (
     <div className="mt-[104px] space-y-[23px]">
       {/* Storage Facilities Type */}
       <SelectInput<FormValues>
         label="Storage Facilities Type"
         name="storageType"
-        options={storageType}
+        options={storageName}
         values={values}
         errors={errors}
         touched={touched}
@@ -115,7 +105,7 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
         label="Condition"
         name="condition"
         values={values}
-        options={conditionOptions}
+        options={['Good', 'Moderate', 'Poor']}
       />
 
       {/* storagePhoto */}

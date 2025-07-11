@@ -12,8 +12,14 @@ import ToggleButtonGroup from '../../../../components/ui/inputs/ToggleButtonGrou
 const irrigationOptions = ['Drip', 'Flood', 'Sprinkler'];
 const laborOptions = ['Family', 'Hired', 'Seasonal'];
 const marketOptions = ['Mandi', 'Society', 'Private'];
-const farmingApproachOptions = ['Organic', 'Conventional'];
-const croppingPatternOptions = ['Mono', 'Mixed'];
+const farmingApproachOptions = [
+  { label: 'Organic', value: 'Organic' },
+  { label: 'Conventional', value: 'Conventional' },
+];
+const croppingPatternOptions = [
+  { label: 'Mono', value: 'Mono' },
+  { label: 'Mixed', value: 'Mixed' },
+];
 
 interface FarmStep2Props {
   values: FarmFormValues;

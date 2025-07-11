@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { skipToken } from '@reduxjs/toolkit/query';
 import { ErrorMessage, Field, FieldArray } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
@@ -7,7 +8,7 @@ import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
-import { useGetEquipementQuery } from '@/redux/slices/ApiSlice';
+import { useGetBreedNamesbyEquipementQuery, useGetEquipementQuery } from '@/redux/slices/ApiSlice';
 
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
@@ -30,22 +31,18 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
   setShowForm2,
   showForm2,
 }) => {
-  const { data, isLoading } = useGetEquipementQuery({});
+  const { data } = useGetEquipementQuery({});
   const EquipmentList = values.Equipment || [];
-  const equipement = data?.data?.data || [];
-  const equipementName = isLoading
-    ? ['Loading...']
-    : equipement.length > 0
-    ? equipement.map((e: { name: string }) => e.name)
-    : ['No equipment found'];
-  const equipementBrand =
-    equipement.find((equipement: { name: string }) => equipement.name === values.equipment)
-      ?.brand || [];
-  const brandName = isLoading
-    ? ['Loading...']
-    : equipementBrand.length > 0
-    ? equipementBrand.map((b: { brand: string }) => b.brand)
-    : ['No brand found'];
+  const equipementName = data?.data || [];
+  console.log(equipementName);
+
+  const selectedEquipementID = values.equipment;
+  console.log('selectedEquipementID: ', selectedEquipementID);
+  const { data: breedList } = useGetBreedNamesbyEquipementQuery(
+    selectedEquipementID ? selectedEquipementID : skipToken,
+  );
+  const breedNames = breedList?.data || [];
+
   const handleSaveAnimal = () => {
     const newEquipment: Equipment = {
       equipment: values.equipment,
@@ -171,7 +168,7 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                         errors={errors}
                         width="w-[200px]"
                         height="h-[40px]"
-                        defaultOption=""
+                        defaultOption="Select Equipment Name"
                         setFieldValue={setFieldValue}
                         values={values}
                         label={''}
@@ -224,7 +221,7 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                     <SelectInput<FormValues>
                       name="brandName"
                       label="Brand Name"
-                      options={brandName}
+                      options={breedNames}
                       defaultOption="Select Brand"
                       errors={errors}
                       touched={touched}
@@ -259,20 +256,6 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                       customClass={'border-[2px] h-[52px]'}
                       labelcss={'px-2  bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
                       labelFirst={''}
-                    />
-
-                    {/* breedName */}
-
-                    <TextInput<FormValues>
-                      name="breedName"
-                      label="Breed Name"
-                      placeholder="Enter Breed Name"
-                      errors={errors}
-                      touched={touched}
-                      type="text"
-                      setFieldValue={setFieldValue}
-                      values={values}
-                      labelcss={'bg-[radial-gradient(circle,rgba(54,195,96,0.2))] '}
                     />
 
                     {/* onRent */}

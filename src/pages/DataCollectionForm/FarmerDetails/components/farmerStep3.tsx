@@ -1,3 +1,4 @@
+import { skipToken } from '@reduxjs/toolkit/query';
 import { ErrorMessage, Field, FieldArray } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
@@ -7,6 +8,7 @@ import TextInput from '@/components/ui/inputs/TextInput';
 import ToggleButtonGroup from '@/components/ui/inputs/ToggleButtonGroup';
 import UnitInput from '@/components/ui/inputs/UnitInput';
 import { useGetLivestockNamesQuery } from '@/redux/slices/ApiSlice';
+import { useGetBreedNamesbyLiveStockQuery } from '@/redux/slices/ApiSlice';
 
 import OpenArrow from '../../../../assets/Icons/OpenArrow.svg';
 import closeArrow from '../../../../assets/Icons/arrow.png';
@@ -33,17 +35,17 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
 }) => {
   console.log('Touched:', touched);
   const animalList = values.animals || [];
-
-  const { data, isLoading } = useGetLivestockNamesQuery({});
-
-  if (isLoading) return <div>Loading...</div>;
+  const { data } = useGetLivestockNamesQuery({});
 
   // Extract animal list
-  const animalNameOptions = data?.data?.data || [];
-  console.log(animalNameOptions);
-  const selectedAnimalNames = values.animalType;
-  console.log('selectedAnimalNames:', selectedAnimalNames);
+  const animalNameOptions = data?.data || [];
+  const selectedAnimalNameId = values.animalType;
 
+  const { data: BreedList } = useGetBreedNamesbyLiveStockQuery(
+    selectedAnimalNameId ? selectedAnimalNameId : skipToken,
+  );
+  const breedOptions = BreedList?.data?.data || [];
+  console.log('breedOptions: ', breedOptions);
   const handleSaveAnimal = () => {
     // Construct the new animal from form values
     const newAnimal: Animal = {
@@ -268,15 +270,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         <SelectInput<FormValues>
                           name="breedName"
                           label="Breed Name"
-                          options={
-                            isLoading
-                              ? ['Loading breeds...']
-                              : (
-                                  animalNameOptions.find(
-                                    (animal: { name: string }) => animal.name === values.animalType,
-                                  )?.breeds || []
-                                ).map((breed: { name: string }) => breed.name)
-                          }
+                          options={breedOptions}
                           touched={touched}
                           errors={errors}
                           width="w-full"
