@@ -17,7 +17,6 @@ const capacityUnits: { label: string; value: string }[] = [
   { label: 'Tonnes', value: 'tonnes' },
   { label: 'Kg', value: 'kg' },
 ];
-
 const conditionOptions: { label: string; value: string }[] = [
   { label: 'Select Condition', value: '' },
   { label: 'Good', value: 'good' },
@@ -112,7 +111,6 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
         </div>
       </div>
 
-      {/* capacityUnit */}
       <RadioInputs<FormValues>
         label="Condition"
         name="condition"

@@ -8,8 +8,12 @@ import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import RadioInputs from '@/components/ui/inputs/RadioInputs';
 import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
-import { useGetDistrictByStateQuery, useGetStateQuery } from '@/redux/slices/ApiSlice';
-import { useGetTehsilByDistrictQuery } from '@/redux/slices/ApiSlice';
+import {
+  useGetDistrictByStateQuery,
+  useGetStateQuery,
+  useGetTehsilByDistrictQuery,
+  useGetVillagesByTehsilQuery,
+} from '@/redux/slices/ApiSlice';
 
 import { FormValues } from '../../FarmerDetails/index';
 
@@ -33,12 +37,9 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
     selectedStateId ? selectedStateId : skipToken,
   );
 
-  // const districtList = districtData?.data?.data || [];
-  const districtOptions = districtData?.data?.data || []; // districtList.map((d: { name: string; _id: string }) => ({
+  const districtOptions = districtData?.data?.data || [];
   console.log('district option: ', districtOptions);
-  //   label: d.name,
-  //   value: d._id,.,,
-  // }));
+
   const selectedDistrictId = values.district || '';
   console.log(selectedDistrictId);
 
@@ -46,11 +47,13 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
   const { data: tehsilData } = useGetTehsilByDistrictQuery(
     selectedDistrictId ? selectedDistrictId : skipToken,
   );
-  const tehsilList = tehsilData?.data?.data || [];
-  const tehsilOptions = tehsilList.map((t: { name: string; _id: string }) => ({
-    label: t.name,
-    value: t._id,
-  }));
+  const tehsilOptions = tehsilData?.data?.data || [];
+  const selectedTehsil = values.subDistrict || '';
+
+  const { data: villageData } = useGetVillagesByTehsilQuery(
+    selectedTehsil ? selectedTehsil : skipToken,
+  );
+  const villageOptions = villageData?.data?.data || [];
 
   const farmUnits: FormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
 
@@ -237,16 +240,19 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         </div>
       </div>
 
-      <TextInput<FormValues>
-        label={'Village'}
-        name={'village'}
-        type="text"
-        placeholder={'Enter your village'}
-        values={values}
-        errors={errors}
+      <SelectInput<FormValues>
+        label="Village"
+        name="village"
+        options={villageOptions}
         touched={touched}
+        width="w-full"
+        height="h-[52px]"
+        errors={errors}
+        defaultOption="Select Your Village"
         setFieldValue={setFieldValue}
-        labelcss={''}
+        values={values}
+        customClass={'border-[2px]'}
+        labelFirst={''}
       />
 
       <ImageUploadInput<FormValues>

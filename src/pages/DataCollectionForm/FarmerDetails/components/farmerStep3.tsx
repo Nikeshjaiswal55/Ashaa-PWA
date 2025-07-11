@@ -39,9 +39,10 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   if (isLoading) return <div>Loading...</div>;
 
   // Extract animal list
-  const animals = data?.data?.data || [];
-  const animalNames = animals.map((animal: { name: string }) => animal.name);
-  console.log('Animal Names:', animalNames);
+  const animalNameOptions = data?.data?.data || [];
+  console.log(animalNameOptions);
+  const selectedAnimalNames = values.animalType;
+  console.log('selectedAnimalNames:', selectedAnimalNames);
 
   const handleSaveAnimal = () => {
     // Construct the new animal from form values
@@ -179,13 +180,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                         {/* animalType */}
                         <SelectInput<FormValues>
                           name="animalType"
-                          options={
-                            isLoading
-                              ? ['Loading animals...']
-                              : animalNames.length > 0
-                              ? animalNames
-                              : ['No animals found']
-                          }
+                          options={animalNameOptions}
                           touched={touched}
                           errors={errors}
                           width="w-[200px]"
@@ -277,7 +272,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                             isLoading
                               ? ['Loading breeds...']
                               : (
-                                  animals.find(
+                                  animalNameOptions.find(
                                     (animal: { name: string }) => animal.name === values.animalType,
                                   )?.breeds || []
                                 ).map((breed: { name: string }) => breed.name)

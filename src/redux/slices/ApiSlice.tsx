@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://172.26.32.1:3000/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.45:3000/' }),
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
@@ -27,6 +27,9 @@ const ApiSlice = createApi({
     }),
     getTehsilByDistrict: build.query({
       query: (districtId) => `tehsil/by-district/${districtId}`,
+    }),
+    getVillagesByTehsil: build.query({
+      query: (tehsilId) => `village/by-tehsil/${tehsilId}`,
     }),
     getPesticides: build.query({
       query: () => 'pesticide',
@@ -83,5 +86,6 @@ export const {
   useGetProfileDataQuery,
   useGetDistrictByStateQuery,
   useGetTehsilByDistrictQuery,
+  useGetVillagesByTehsilQuery,
 } = ApiSlice;
 export default ApiSlice;
