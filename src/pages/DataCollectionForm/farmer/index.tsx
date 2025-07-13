@@ -75,7 +75,7 @@ const FarmCard = () => {
         <div className="flex items-center justify-between  justify-center border-2 border-dashed border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none">
           <span
             className="font-semibold text-green-900  text-base"
-            onClick={() => navigate('/DataCollectionForm/FarmDetails?reset=true')}
+            onClick={() => navigate('/onboarding/farm?reset=true')}
           >
             + Add Fertilizer Usage
           </span>

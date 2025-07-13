@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.45:3000/' }), //http://192.168.1.45:3000/
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://172.17.128.1:3000/' }), //http://192.168.1.45:3000/
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({

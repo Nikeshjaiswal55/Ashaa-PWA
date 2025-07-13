@@ -14,8 +14,9 @@ interface FarmerStep2Props {
   setFieldValue: FormikHelpers<FormValues>['setFieldValue'];
 }
 const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setFieldValue }) => {
+  console.log('FarmerStep2 touch: ', touched);
   return (
-    <div className="space-y-[23px] mt-[59px]">
+    <div className="space-y-[23px] mt-[59px] pb-[75px]">
       {/*  Years of Farming Experience */}
       <TextInput<FormValues>
         label="Years of Farming Experience"
@@ -36,7 +37,7 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
           Upload Experience Video{' '}
         </label>
         <div
-          className={`flex flex-col justify-center items-center  h-[81px] border-[2px] border-[#858585] border-dashed rounded-lg cursor-pointer transition-colors ${
+          className={`flex flex-col justify-center items-center  h-[81px] border-[2px] border-gray-500 border-dashed rounded-lg cursor-pointer transition-colors ${
             touched.farmerVideo && errors.farmerVideo
               ? 'border-red-400 bg-red-50 hover:bg-red-100'
               : 'border-gray-300 bg-gray-50 hover:bg-gray-100'

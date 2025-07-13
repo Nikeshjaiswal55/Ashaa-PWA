@@ -41,7 +41,7 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
   const { data: brandData } = useGetBreedNamesbyPesticidesQuery(
     selectedId ? selectedId : skipToken,
   );
-  const brandName = brandData?.data || [];
+  const brandName = brandData?.data.brands || [];
 
   const handleSavePesticide = () => {
     const pesticide = {
@@ -54,12 +54,11 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
       pesticidesappliedStage: values.pesticidesappliedStage,
     };
     setFieldValue('pesticidesUsageList', [...(values.pesticidesUsageList || []), pesticide]);
-
     setShowPesticideForm(false);
   };
 
   return (
-    <div className=" mt-[34px]">
+    <div className=" mt-[34px] pb-[75px]">
       <FieldArray
         name="pesticidesUsageList"
         render={(arrayHelpers) => (

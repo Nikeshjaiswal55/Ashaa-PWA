@@ -26,10 +26,10 @@ const Onboarding1 = () => {
         initial={{ y: '-35%' }}
         animate={{ y: 2 }}
         transition={{ type: 'tween', duration: 4, ease: 'easeInOut' }}
-        className="absolute z-10 rounded-full overflow-hidden left-1/2 -translate-x-1/2 -top-1/4 w-[500px] h-[700px] sm:w-[600px] sm:h-[600px] sm:-top-40 md:w-[700px] md:h-[700px] md:-top-48 lg:w-[788px] lg:h-[788px] lg:-top-[262px]"
+        className="absolute z-10 rounded-full overflow-hidden left-1/2 -translate-x-1/2 -top-1/4 w-[500px] h-[750px] sm:w-[600px] sm:h-[800px] sm:-top-40 md:w-[700px] md:h-[700px] md:-top-48 lg:w-[788px] lg:h-[788px] lg:-top-[262px]"
       >
         <img src={image1} alt="Pea Pods" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-green-900" style={{ opacity: 0.6 }} />
+        <div className="absolute inset-0 bg-green-900" style={{ opacity: 0.8 }} />
       </motion.div>
       {/* Aasha Logo and Text */}
       <motion.div

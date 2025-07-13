@@ -71,7 +71,7 @@ const ImageUploadInput = <T extends object>({
         className={`flex justify-center items-center w-full h-[81px] ${height} border-[2px] border-dashed rounded-[10px] cursor-pointer transition-colors ${
           touched[name as keyof typeof touched] && errors[name as keyof typeof errors]
             ? 'border-red-400 bg-red-50 hover:bg-red-100'
-            : 'border-gray-300'
+            : 'border-gray-500'
         }`}
         onClick={() => document.getElementById(name)?.click()}
       >

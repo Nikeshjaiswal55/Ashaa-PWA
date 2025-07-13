@@ -170,7 +170,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(8);
+  const [step, setStep] = useState(1);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
   const navigate = useNavigate();
 
@@ -307,19 +307,19 @@ export const FarmerDetailsForm: React.FC = () => {
     // step 4
     Yup.object().shape({
       waterSource: Yup.string().required('Water source is required'),
-      waterSourcePhoto: Yup.mixed()
-        .required('Water source photo is required')
-        .test(
-          'fileType',
-          'Only image files are allowed',
-          (value) =>
-            !value ||
-            (typeof value === 'object' &&
-              value !== null &&
-              'type' in value &&
-              typeof (value as { type?: string }).type === 'string' &&
-              ['image/jpeg', 'image/png', 'image/gif'].includes((value as { type: string }).type)),
-        ),
+      // waterSourcePhoto: Yup.mixed()
+      //   .required('Water source photo is required')
+      //   .test(
+      //     'fileType',
+      //     'Only image files are allowed',
+      //     (value) =>
+      //       !value ||
+      //       (typeof value === 'object' &&
+      //         value !== null &&
+      //         'type' in value &&
+      //         typeof (value as { type?: string }).type === 'string' &&
+      //         ['image/jpeg', 'image/png', 'image/gif'].includes((value as { type: string }).type)),
+      //   ),
       waterRetentionCapacity: Yup.string().required('Water retention capacity is required'),
       drainageQuality: Yup.string().required('Drainage quality is required'),
     }),
@@ -408,7 +408,7 @@ export const FarmerDetailsForm: React.FC = () => {
       console.log('All steps done, final submission.');
       console.log(values); //
       // You can send final API call here
-      navigate(`/DataCollectionForm/farmer`);
+      navigate(`/farmer/:id`);
     }
 
     setSubmitting(false);
@@ -473,7 +473,7 @@ export const FarmerDetailsForm: React.FC = () => {
           validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
           validateOnChange={true}
-          validateOnBlur={true}
+          validateOnBlur={false}
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (
             <Form className="flex flex-col flex-grow ">

@@ -25,6 +25,8 @@ interface FarmerStep1Props {
 }
 
 const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setFieldValue }) => {
+  console.log('FarmerStep1 touch: ', touched);
+
   const { data } = useGetStateQuery({});
   const stateOptions = data?.data || [];
   console.log(stateOptions);
@@ -79,7 +81,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
   ];
 
   return (
-    <div className="space-y-[23px] mt-[59px] ">
+    <div className="space-y-[23px] mt-[59px] pb-[74px]">
       {InputData.map((input) => (
         <TextInput<FormValues>
           key={input.id}

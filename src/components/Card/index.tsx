@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react';
 
 import { Filter } from 'lucide-react';
 
-import farmEnrollImage from '@/assets/home/farm-enrolled.jpg';
-
+import farmEnrollImage from '../../assets/home/farm-enrolled.jpg';
 import { Button } from '../ui/button';
 
 interface CardProps {
@@ -46,16 +45,19 @@ export default Card;
 
 export const FarmEnrolledCard = () => {
   return (
-    <Card className="relative bg-green-200 rounded-xl mx-4  mt-2 overflow-hidden h-[145px]">
-      <div className={`absolute -inset-5 bg-cover bg-center bg-[${farmEnrollImage}]`} />
+    <Card className="relative bg-green-200 rounded-xl mx-4 mt-2 overflow-hidden h-[145px]">
+      <div
+        className="absolute -inset-5 bg-cover bg-center"
+        style={{ backgroundImage: `url(${farmEnrollImage})` }}
+      />
       <div className="absolute inset-0 bg-green-900/50" />
 
       <div className="text-white p-4 h-full">
         <h2 className="text-lg font-semibold absolute top-9 left-13">Farm Enrolled</h2>
         <p className="text-sm mt-1 flex items-center absolute top-16 left-13">
           <span className="relative flex items-center justify-center w-3 h-3 mr-2">
-            <span className="absolute h-full w-full rounded-full bg-white opacity-75 animate-ping"></span>
-            <span className="  h-2  w-2 bg-white rounded-full z-10"></span>
+            <span className="absolute h-full w-full rounded-full bg-white opacity-75 animate-ping" />
+            <span className="h-2 w-2 bg-white rounded-full z-10" />
           </span>
           1,250 Enrolled
         </p>

@@ -28,12 +28,12 @@ interface FarmStep4Props {
   touched: FormikTouched<FarmFormValues>;
   setFieldValue: FormikHelpers<FarmFormValues>['setFieldValue'];
 }
+
 const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setFieldValue }) => {
   const waterManagementList = values.waterManagement || [];
-  const [showWaterManagementForm, setShowWaterManagementForm] = useState(true); //for show or hide form
+  const [showWaterManagementForm, setShowWaterManagementForm] = useState(true);
 
   const handleSaveAnimal = () => {
-    // Construct the new animal from form values
     const WaterManagement: waterManagement = {
       waterSourcePhoto: values.waterSourcePhoto,
       waterRetentionCapacity: values.waterRetentionCapacity,
@@ -41,15 +41,13 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
       waterSource: values.waterSource,
     };
     setFieldValue('waterManagement', [...(values.waterManagement || []), WaterManagement]);
-    // Reset animal fields after save
     setShowWaterManagementForm(false);
-    setShowWaterManagementForm(false); // Hide the form after saving
   };
 
   return (
     <div className="w-full max-w-2xl mt-5 rounded-xl md:p-8">
       <FieldArray
-        name="waterManagment"
+        name="waterManagement"
         render={(arrayHelpers) => (
           <>
             {/* List */}
@@ -61,11 +59,19 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                 {/* Left: Image & Delete Button */}
                 <div className="relative w-14 h-14 shrink-0">
                   {item.waterSourcePhoto ? (
-                    <img
-                      src={URL.createObjectURL(item.waterSourcePhoto)}
-                      alt="water"
-                      className="w-full h-full object-cover rounded-lg border"
-                    />
+                    typeof item.waterSourcePhoto === 'object' ? (
+                      <img
+                        src={URL.createObjectURL(item.waterSourcePhoto)}
+                        alt="water"
+                        className="w-full h-full object-cover rounded-lg border"
+                      />
+                    ) : (
+                      <img
+                        src={item.waterSourcePhoto}
+                        alt="water"
+                        className="w-full h-full object-cover rounded-lg border"
+                      />
+                    )
                   ) : (
                     <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-400 border">
                       No Image
@@ -120,7 +126,7 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
               </div>
             ))}
 
-            {/* Add New Wat er Source Section */}
+            {/* Add New Water Source Section */}
             <div className=" max-w-md  mx-auto mt-[49px]">
               <div
                 className="flex items-center justify-between bg-[#E9F7EF] border-2 border-dashed mb-5 border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none"
@@ -131,9 +137,9 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                 </span>
                 <span className="text-green-900 text-2xl font-bold">
                   {showWaterManagementForm ? (
-                    <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
+                    <img src={OpenArrow} className="w-6 h-5" alt="open arrow" />
                   ) : (
-                    <img src={closeArrow} className="w-6 h-3" alt="close arrow"></img>
+                    <img src={closeArrow} className="w-6 h-3" alt="close arrow" />
                   )}
                 </span>
               </div>
@@ -143,7 +149,6 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                   className="  rounded-[10px] space-y-[23px] px-2 py-2"
                   style={{ background: 'rgba(54, 195, 96, 0.2)' }}
                 >
-                  <div className="flex"></div>
                   <>
                     <SelectInput
                       values={values}
@@ -192,9 +197,8 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                       onClick={handleSaveAnimal}
                       className="w-full h-[34px] bg-[#005B24] text-white  rounded-lg font-semibold"
                     >
-                      {' '}
-                      Save Animal{' '}
-                    </button>{' '}
+                      Save Animal
+                    </button>
                   </>
                 </div>
               )}

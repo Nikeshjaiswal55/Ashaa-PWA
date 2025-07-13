@@ -12,6 +12,8 @@ import Layout from './components/Layout';
 import { store } from './redux/store';
 import Pages from './routes/Pages';
 
+// import Onboarding1 from './pages/Onboarding/onboarding1';
+
 function App() {
   return (
     <Fragment>
