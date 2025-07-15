@@ -51,7 +51,7 @@ const FarmStep7: React.FC<FarmStep7Props> = ({ values, errors, touched, setField
     selectedId ? selectedId : skipToken,
   );
 
-  const breedName = breedData?.data?.data || [];
+  const breedName = breedData?.data || [];
 
   // Save current fertilizer to fertilizerUsageList array
   const handleSaveFertilizer = () => {

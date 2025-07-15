@@ -12,8 +12,6 @@ import location from '../../../../assets/Icons/location.svg';
 import { FormValues } from '../../FarmerDetails/index';
 
 const capacityUnits: { label: string; value: string }[] = [
-  { label: 'Select Unit', value: '' },
-  { label: 'Quintals', value: 'quintals' },
   { label: 'Tonnes', value: 'tonnes' },
   { label: 'Kg', value: 'kg' },
 ];
@@ -29,7 +27,7 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
   const storageName = data?.data || [];
 
   return (
-    <div className="mt-[104px] space-y-[23px]">
+    <div className="mt-[80px] space-y-[23px]">
       {/* Storage Facilities Type */}
       <SelectInput<FormValues>
         label="Storage Facilities Type"
@@ -75,7 +73,7 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
       {/* Capacity */}
       <div>
         <label className="text-lg font-semibold text-[#005B24] ">Capacity</label>
-        <div className="flex items-center bg-green-100 rounded-2xl w-[185px] h-[33px] px-4 py-2 w-fit gap-2">
+        <div className="flex items-center bg-green-100 rounded-2xl w-[185px] h-[33px] px-2 py-2 w-fit ">
           <input
             type="number"
             name="capacity"
@@ -94,8 +92,8 @@ const FarmerStep4: React.FC<FarmerStep4Props> = ({ values, errors, touched, setF
             width="w-auto"
             height="h-auto"
             label=""
-            customClass="bg-transparent text-gray-500 font-semibold text-lg border-none focus:ring-0 focus:outline-none"
-            defaultOption={''}
+            customClass="bg-transparent text-gray-500 font-normal text-sm border-none focus:ring-0 focus:outline-none"
+            defaultOption={'Quintity'}
             labelFirst={''}
           />
         </div>

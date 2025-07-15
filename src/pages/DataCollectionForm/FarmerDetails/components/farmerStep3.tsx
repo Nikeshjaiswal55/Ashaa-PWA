@@ -40,11 +40,12 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
   // Extract animal list
   const animalNameOptions = data?.data || [];
   const selectedAnimalNameId = values.animalType;
+  console.log(selectedAnimalNameId, 'selectedAnimalNameId');
 
   const { data: BreedList } = useGetBreedNamesbyLiveStockQuery(
     selectedAnimalNameId ? selectedAnimalNameId : skipToken,
   );
-  const breedOptions = BreedList?.data?.data || [];
+  const breedOptions = BreedList?.data || [];
   console.log('breedOptions: ', breedOptions);
   const handleSaveAnimal = () => {
     // Construct the new animal from form values
@@ -94,7 +95,13 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           <div className="relative w-10 h-10">
                             {animal.photo ? (
                               <img
-                                src={URL.createObjectURL(animal.photo)}
+                                src={
+                                  animal.photo instanceof File
+                                    ? URL.createObjectURL(animal.photo)
+                                    : typeof animal.photo === 'string'
+                                    ? animal.photo
+                                    : ''
+                                }
                                 alt="animal"
                                 className="w-full h-full object-cover rounded-md"
                               />
@@ -187,7 +194,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
                           errors={errors}
                           width="w-[200px]"
                           height="h-[40px]"
-                          defaultOption="Cow / Goat etc."
+                          defaultOption="Select Option"
                           setFieldValue={setFieldValue}
                           values={values}
                           label={''}

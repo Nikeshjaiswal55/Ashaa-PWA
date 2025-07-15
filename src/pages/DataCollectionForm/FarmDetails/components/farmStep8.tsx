@@ -41,7 +41,7 @@ const FarmStep8: React.FC<FarmStep8Props> = ({ values, errors, touched, setField
   const { data: brandData } = useGetBreedNamesbyPesticidesQuery(
     selectedId ? selectedId : skipToken,
   );
-  const brandName = brandData?.data.brands || [];
+  const brandName = brandData?.data || [];
 
   const handleSavePesticide = () => {
     const pesticide = {

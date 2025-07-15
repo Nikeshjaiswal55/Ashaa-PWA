@@ -16,6 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     '/onboarding/farmer',
     '/onboarding/farm',
     '/onboarding',
+    '/onboarding/farmer-farm/progress',
     '/',
     '/change-password',
   ];

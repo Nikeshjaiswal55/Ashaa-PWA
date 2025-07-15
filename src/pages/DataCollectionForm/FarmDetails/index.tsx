@@ -284,22 +284,8 @@ export const FarmerDetailsForm: React.FC = () => {
       soilTestingReportAvailable: Yup.boolean().required(),
       soilTestingReport: Yup.mixed().when('soilTestingReportAvailable', {
         is: true,
-        then: (schema) =>
-          schema
-            .required('Soil testing report is required')
-            .test(
-              'fileType',
-              'Only PDF or image files are allowed',
-              (value) =>
-                !value ||
-                (typeof value === 'object' &&
-                  value !== null &&
-                  'type' in value &&
-                  typeof (value as { type?: string }).type === 'string' &&
-                  ['application/pdf', 'image/jpeg', 'image/png', 'image/gif'].includes(
-                    (value as { type: string }).type,
-                  )),
-            ),
+        then: (schema) => schema.required('Soil testing report is required'),
+
         otherwise: (schema) => schema.notRequired(),
       }),
     }),
@@ -307,19 +293,8 @@ export const FarmerDetailsForm: React.FC = () => {
     // step 4
     Yup.object().shape({
       waterSource: Yup.string().required('Water source is required'),
-      // waterSourcePhoto: Yup.mixed()
-      //   .required('Water source photo is required')
-      //   .test(
-      //     'fileType',
-      //     'Only image files are allowed',
-      //     (value) =>
-      //       !value ||
-      //       (typeof value === 'object' &&
-      //         value !== null &&
-      //         'type' in value &&
-      //         typeof (value as { type?: string }).type === 'string' &&
-      //         ['image/jpeg', 'image/png', 'image/gif'].includes((value as { type: string }).type)),
-      //   ),
+      waterSourcePhoto: Yup.mixed().required('Water source photo is required'),
+
       waterRetentionCapacity: Yup.string().required('Water retention capacity is required'),
       drainageQuality: Yup.string().required('Drainage quality is required'),
     }),
@@ -472,7 +447,7 @@ export const FarmerDetailsForm: React.FC = () => {
           initialValues={initialValues}
           validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
-          validateOnChange={true}
+          validateOnChange={false}
           validateOnBlur={false}
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (

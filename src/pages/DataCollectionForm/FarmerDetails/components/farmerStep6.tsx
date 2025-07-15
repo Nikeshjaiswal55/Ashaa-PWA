@@ -7,14 +7,12 @@ import { useGetApplicationNameQuery } from '@/redux/slices/ApiSlice';
 import { FormValues } from '../../FarmerDetails/index';
 
 const internetOptions: { label: string; value: string }[] = [
-  { label: 'Select Internet Type', value: '' },
   { label: 'WiFi', value: 'wifi' },
   { label: 'Mobile Data', value: 'mobile-data' },
   { label: 'No Internet', value: 'no-internet' },
 ];
 
 const ownerOptions: { label: string; value: string }[] = [
-  { label: 'Select Owner', value: '' },
   { label: 'Self', value: 'self' },
   { label: 'Son', value: 'son' },
   { label: 'Daughter', value: 'daughter' },

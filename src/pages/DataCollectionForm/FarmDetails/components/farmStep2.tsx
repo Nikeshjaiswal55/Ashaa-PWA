@@ -29,7 +29,7 @@ interface FarmStep2Props {
 }
 const FarmStep2: React.FC<FarmStep2Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
-    <div className="space-y-[37px] mt-[23px]">
+    <div className="space-y-[37px] mt-[23px] pb-[59px]">
       {/* Irrigation Method */}
       <RadioInputs
         label="Irrigation Method"

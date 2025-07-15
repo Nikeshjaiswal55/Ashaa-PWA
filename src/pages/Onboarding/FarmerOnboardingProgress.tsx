@@ -39,7 +39,7 @@ const Page2: React.FC = () => {
       <div className="h-full bg-white relative">
         <Header hideText hideProfile />
 
-        <div className="text-center mt-10">
+        <div className="text-center mt-30">
           <h2 className="text-green-800 font-semibold text-lg">Farmer & Farm</h2>
           <p className="text-green-800 font-semibold text-lg">Information Step</p>
         </div>

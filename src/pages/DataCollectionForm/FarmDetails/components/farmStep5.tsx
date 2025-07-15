@@ -12,13 +12,13 @@ interface FarmStep5Props {
 }
 const FarmStep5: React.FC<FarmStep5Props> = ({ values, errors, touched, setFieldValue }) => {
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 mt-[90px]">
       <ImageUploadInput
         name="farmPhoto"
         values={values}
         id="farmPhoto"
         placeholder="Upload farm image"
-        height="h-[167px]"
+        height="h-[167px] "
         errors={errors}
         touched={touched}
         setFieldValue={setFieldValue}

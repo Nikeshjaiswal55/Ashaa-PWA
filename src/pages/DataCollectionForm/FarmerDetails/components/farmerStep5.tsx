@@ -34,10 +34,22 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
   const { data } = useGetEquipementQuery({});
   const EquipmentList = values.Equipment || [];
   const equipementName = data?.data || [];
-  console.log(equipementName);
+  // Helper to get equipment name from ID
+  const getEquipmentName = (id: string) => {
+    const found = equipementName.find(
+      (e: {
+        _id?: string;
+        value?: string;
+        id?: string;
+        label?: string;
+        name?: string;
+        equipmentName?: string;
+      }) => e._id === id || e.value === id || e.id === id,
+    );
+    return found ? found.label || found.name || found.equipmentName || found.value || id : id;
+  };
 
   const selectedEquipementID = values.equipment;
-  console.log('selectedEquipementID: ', selectedEquipementID);
   const { data: breedList } = useGetBreedNamesbyEquipementQuery(
     selectedEquipementID ? selectedEquipementID : skipToken,
   );
@@ -61,6 +73,32 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
     setShowForm2(false);
   };
 
+  // Helper for image preview (File or string)
+  const getImagePreview = (img: File | string | null | undefined): string | null => {
+    if (img instanceof File) {
+      return URL.createObjectURL(img);
+    }
+    if (typeof img === 'string' && img.length > 0) {
+      return img;
+    }
+    return null;
+  };
+
+  //Brand name nikalne ke liye helper
+  const getBrandName = (id: string) => {
+    const found = breedNames.find(
+      (b: {
+        _id?: string;
+        value?: string;
+        id?: string;
+        label?: string;
+        name?: string;
+        brandName?: string;
+      }) => b._id === id || b.value === id || b.id === id,
+    );
+    return found ? found.label || found.name || found.brandName || found.value || id : id;
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="mb-[112px] w-full max-w-2xl rounded-[10px] md:p-8">
@@ -68,8 +106,7 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
           name="Equipment"
           render={(arrayHelpers) => (
             <div className="bg-[radial-gradient(circle,rgba(54,195,96,0.10),white)]  to-white ">
-              {/* Animal List */}
-
+              {/* Equipment List */}
               {EquipmentList.length > 0 && (
                 <div className="mb-4">
                   {EquipmentList.map((item: Equipment, idx: number) => (
@@ -80,9 +117,9 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                       {/* LEFT: Image + Equipment + Brand */}
                       <div className="flex items-center gap-2">
                         <div className="relative w-10 h-10">
-                          {item.equipmentImage ? (
+                          {getImagePreview(item.equipmentImage) ? (
                             <img
-                              src={URL.createObjectURL(item.equipmentImage)}
+                              src={getImagePreview(item.equipmentImage)}
                               alt="equipment"
                               className="w-full h-full object-cover rounded-md"
                             />
@@ -101,8 +138,12 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                           </button>
                         </div>
                         <div>
-                          <div className="text-[#005B24] font-bold text-md">{item.equipment}</div>
-                          <div className="text-gray-500 text-sm">{item.brandName}</div>
+                          <div className="text-[#005B24] font-bold text-md">
+                            {getEquipmentName(item.equipment)}
+                          </div>
+                          <div className="text-gray-500 text-sm">
+                            {getBrandName(item.brandName)}
+                          </div>
                         </div>
                       </div>
 
@@ -111,7 +152,7 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                         {item.equipmentQuantity}
                       </div>
 
-                      {/* RIGHT: Milk Info + Edit */}
+                      {/* RIGHT: Edit */}
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
@@ -125,13 +166,12 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                           >
-                            {' '}
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
                               strokeWidth={2}
                               d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5M18.5 2.5l3 3L13 14h-3v-3L18.5 2.5z"
-                            />{' '}
+                            />
                           </svg>
                         </button>
                       </div>
@@ -140,15 +180,14 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                 </div>
               )}
 
-              {/* Collapsible Add New Animal Section */}
+              {/* Collapsible Add New Equipment Section */}
               <div className="mt-[34px] max-w-md mx-auto">
                 <div
-                  className="flex items-center justify-between bg-[#E9F7EF] border-[2px]  border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
+                  className="flex items-center justify-between bg-[#E9F7EF] border-[2px] border-dashed  border-[#005B24] px-5 py-3 rounded-xl h-[43px] cursor-pointer select-none transition-all duration-150 shadow-none "
                   onClick={() => setShowForm2((prev: boolean) => !prev)}
                 >
                   <span className="font-semibold text-[#005B24]">+ Add New Equipment</span>
                   <span className="text-[#005B24] text-xl">
-                    {' '}
                     {showForm2 ? (
                       <img src={OpenArrow} className="w-6 h-5" alt="open arrow"></img>
                     ) : (
@@ -157,31 +196,30 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                   </span>
                 </div>
                 {showForm2 && (
-                  // Form to Add New Animal
+                  // Form to Add New Equipment
                   <div className="mt-3 bg-[radial-gradient(circle,rgba(54,195,96,0.2))] rounded-[10px] p-2 shadow-md space-y-[23px]">
                     <div className="flex gap-2 h-12 ">
-                      {/* animalType */}
+                      {/* Equipment */}
                       <SelectInput<FormValues>
                         name="equipment"
                         options={equipementName}
                         touched={touched}
                         errors={errors}
-                        width="w-[200px]"
+                        width="w-[190px]"
                         height="h-[40px]"
-                        defaultOption="Select Equipment Name"
+                        defaultOption="Select Option"
                         setFieldValue={setFieldValue}
                         values={values}
                         label={''}
-                        customClass={'px-4 text-sm font-semibold bg-white text-[#005B24]'}
+                        customClass={'px-4 text-sm font-normal bg-white text-gray-500 '}
                         labelFirst={''}
                       />
 
-                      {/* quantity */}
+                      {/* Quantity */}
                       <div className="relative flex items-center justify-center bg-white rounded-md shadow-sm w-full h-[40px] mt-2 px-3">
                         <label htmlFor="equipmentQuantity" className="text-gray-500 text-sm mr-2">
                           Quantity
                         </label>
-
                         <Field
                           id="equipmentQuantity"
                           name="equipmentQuantity"
@@ -195,7 +233,6 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                             }`}
                         />
                       </div>
-
                       <ErrorMessage
                         name="equipmentQuantity"
                         component="div"
@@ -203,8 +240,7 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                       />
                     </div>
 
-                    {/* How Much Milk Your Cows Produce? */}
-
+                    {/* Equipment Type */}
                     <TextInput<FormValues>
                       name="equipmentType"
                       label="Equipment Type"
@@ -234,13 +270,10 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                       labelFirst={''}
                     />
 
-                    {/* milk selling place */}
-
                     {/* Owner */}
                     <SelectInput<FormValues>
                       name="owner"
                       options={[
-                        { label: 'Select Ownership Type', value: '' },
                         { label: 'Self', value: 'self' },
                         { label: 'Rented', value: 'rented' },
                         { label: 'Other', value: 'other' },
@@ -284,7 +317,6 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                             placeholder="Upload Document"
                           />
                         </div>
-
                         <div className="w-60">
                           <ImageUploadInput<FormValues>
                             name="equipmentImage"
@@ -304,8 +336,7 @@ const FarmerStep5: React.FC<FarmerStep5Props> = ({
                       onClick={handleSaveAnimal}
                       className="w-full bg-[#005B24] h-[34px] text-white rounded-[10px] text-base font-normal"
                     >
-                      {' '}
-                      Save{' '}
+                      Save
                     </button>
                   </div>
                 )}
