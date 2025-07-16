@@ -117,7 +117,7 @@ export interface FarmFormValues {
   soilTestingReport: File | null;
 
   //   step 4
-  waterSource: string;
+  waterSource: string[];
   waterSourcePhoto: File | null;
   waterRetentionCapacity: string;
   waterManagement: waterManagement[];
@@ -131,7 +131,7 @@ export interface FarmFormValues {
   cultivationArea: string;
   cropName: string;
   cropVariety: string;
-  seedSource: string;
+  seedSource: string[];
   seedingRate: string;
   CropList: CropList[];
   seedingRateUnit: string;
@@ -170,7 +170,7 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(6);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
   const navigate = useNavigate();
 
@@ -196,8 +196,8 @@ export const FarmerDetailsForm: React.FC = () => {
 
     // Step 2
     irrigationMethod: 'Drip',
-    hasKCC: true,
-    loanApproved: true,
+    hasKCC: false,
+    loanApproved: false,
     laborAvailability: 'Family',
     hiredLaborPayment: '',
     farmingApproach: '',
@@ -207,12 +207,12 @@ export const FarmerDetailsForm: React.FC = () => {
     // step-3
     soilType: '',
     soilPhoto: null,
-    soilTestingReportAvailable: true,
+    soilTestingReportAvailable: false,
     soilTestingReport: null,
 
     // step 4
     waterManagement: [],
-    waterSource: '',
+    waterSource: [],
     waterSourcePhoto: null,
     waterRetentionCapacity: 'Low',
     drainageQuality: 'Good',
@@ -225,7 +225,7 @@ export const FarmerDetailsForm: React.FC = () => {
     cultivationArea: '',
     cropName: '',
     cropVariety: '',
-    seedSource: '',
+    seedSource: [],
     seedingRate: '',
     CropList: [],
     seedingRateUnit: 'kg/Acre',
@@ -292,7 +292,7 @@ export const FarmerDetailsForm: React.FC = () => {
 
     // step 4
     Yup.object().shape({
-      waterSource: Yup.string().required('Water source is required'),
+      waterSource: Yup.array().min(1, 'At least one water source is required'),
       waterSourcePhoto: Yup.mixed().required('Water source photo is required'),
 
       waterRetentionCapacity: Yup.string().required('Water retention capacity is required'),
@@ -307,7 +307,7 @@ export const FarmerDetailsForm: React.FC = () => {
       cultivationArea: Yup.string().required('Cultivation Area is required'),
       cropName: Yup.string().required('Crop Name is required'),
       cropVariety: Yup.string().required('Crop Variety is required'),
-      seedSource: Yup.string().required('Seed Source is required'),
+      seedSource: Yup.array().min(1, 'At least one seed source is required'),
       seedingRate: Yup.number()
         .typeError('Seeding Rate must be a number')
         .required('Seeding Rate is required')

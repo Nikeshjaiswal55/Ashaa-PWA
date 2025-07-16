@@ -17,19 +17,6 @@ const FarmerStep2: React.FC<FarmerStep2Props> = ({ values, errors, touched, setF
   console.log('FarmerStep2 touch: ', touched);
   return (
     <div className="space-y-[23px] mt-[59px] pb-[75px]">
-      {/*  Years of Farming Experience */}
-      <TextInput<FormValues>
-        label="Years of Farming Experience"
-        name="yearsOfExperience"
-        type="text"
-        placeholder="Enter number of years"
-        errors={errors}
-        touched={touched}
-        setFieldValue={setFieldValue}
-        values={values}
-        labelcss={''}
-      />
-
       {/* Farmer Video Upload */}
       <div>
         <label className="block text-lg text-[#005B24] font-semibold mb-2">

@@ -1,20 +1,13 @@
 import React from 'react';
 
-import { skipToken } from '@reduxjs/toolkit/query';
 import { ErrorMessage, Field } from 'formik';
 import { FormikErrors, FormikHelpers, FormikTouched } from 'formik';
 
 import ImageUploadInput from '@/components/ui/inputs/ImageUploadInput';
 import RadioInputs from '@/components/ui/inputs/RadioInputs';
-import SelectInput from '@/components/ui/inputs/SelectInput';
 import TextInput from '@/components/ui/inputs/TextInput';
-import {
-  useGetDistrictByStateQuery,
-  useGetStateQuery,
-  useGetTehsilByDistrictQuery,
-  useGetVillagesByTehsilQuery,
-} from '@/redux/slices/ApiSlice';
 
+import location from '../../../../assets/Icons/location.svg';
 import { FormValues } from '../../FarmerDetails/index';
 
 interface FarmerStep1Props {
@@ -27,32 +20,32 @@ interface FarmerStep1Props {
 const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setFieldValue }) => {
   console.log('FarmerStep1 touch: ', touched);
 
-  const { data } = useGetStateQuery({});
-  const stateOptions = data?.data || [];
-  console.log(stateOptions);
+  // const { data } = useGetStateQuery({});
+  // const stateOptions = data?.data || [];
+  // console.log(stateOptions);
 
-  const selectedStateId = values.state || '';
-  const { data: districtData } = useGetDistrictByStateQuery(
-    selectedStateId ? selectedStateId : skipToken,
-  );
+  // const selectedStateId = values.state || '';
+  // const { data: districtData } = useGetDistrictByStateQuery(
+  //   selectedStateId ? selectedStateId : skipToken,
+  // );
 
-  const districtOptions = districtData?.data || [];
-  console.log('district option: ', districtOptions);
+  // const districtOptions = districtData?.data || [];
+  // console.log('district option: ', districtOptions);
 
-  const selectedDistrictId = values.district || '';
-  console.log(selectedDistrictId);
+  // const selectedDistrictId = values.district || '';
+  // console.log(selectedDistrictId);
 
-  //sub district
-  const { data: tehsilData } = useGetTehsilByDistrictQuery(
-    selectedDistrictId ? selectedDistrictId : skipToken,
-  );
-  const tehsilOptions = tehsilData?.data || [];
-  const selectedTehsil = values.subDistrict || '';
+  // //sub district
+  // const { data: tehsilData } = useGetTehsilByDistrictQuery(
+  //   selectedDistrictId ? selectedDistrictId : skipToken,
+  // );
+  // const tehsilOptions = tehsilData?.data || [];
+  // const selectedTehsil = values.subDistrict || '';
 
-  const { data: villageData } = useGetVillagesByTehsilQuery(
-    selectedTehsil ? selectedTehsil : skipToken,
-  );
-  const villageOptions = villageData?.data || [];
+  // const { data: villageData } = useGetVillagesByTehsilQuery(
+  //   selectedTehsil ? selectedTehsil : skipToken,
+  // );
+  // const villageOptions = villageData?.data || [];
 
   const farmUnits: FormValues['farmSizeUnit'][] = ['Acre', 'Hectare', 'Bigha'];
 
@@ -168,7 +161,7 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         <ErrorMessage name="separateFarms" component="div" className="text-red-500 text-xs mt-1" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex gap-4">
           <div className="flex-1">
             <SelectInput<FormValues>
@@ -203,9 +196,9 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="grid grid-cols-1 mb-9 h-[52px] md:grid-cols-2 w-full ">
+      {/* <div className="grid grid-cols-1 mb-9 h-[52px] md:grid-cols-2 w-full ">
         <div className="flex gap-3">
           <div className="flex-1">
             <SelectInput<FormValues>
@@ -237,9 +230,9 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <SelectInput<FormValues>
+      {/* <SelectInput<FormValues>
         label="Village"
         name="village"
         options={villageOptions}
@@ -252,6 +245,32 @@ const FarmerStep1: React.FC<FarmerStep1Props> = ({ values, errors, touched, setF
         values={values}
         customClass={'border-[2px]'}
         labelFirst={''}
+      /> */}
+      <TextInput<FormValues>
+        label="Current Location"
+        name="currentLocation"
+        type="text"
+        placeholder="Enter your current location"
+        values={values}
+        errors={errors}
+        rightIcon={location}
+        touched={touched}
+        setFieldValue={setFieldValue}
+        labelcss=""
+        // autoFocus // yeh line cursor ko iss field par laayegi jab component load hoga
+      />
+
+      {/*  Years of Farming Experience */}
+      <TextInput<FormValues>
+        label="Years of Farming Experience"
+        name="yearsOfExperience"
+        type="text"
+        placeholder="Enter number of years"
+        errors={errors}
+        touched={touched}
+        setFieldValue={setFieldValue}
+        values={values}
+        labelcss={''}
       />
 
       <ImageUploadInput<FormValues>

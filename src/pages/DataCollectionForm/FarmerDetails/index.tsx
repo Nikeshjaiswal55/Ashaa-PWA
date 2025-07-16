@@ -79,13 +79,14 @@ export interface FormValues {
   gender: 'Male' | 'Female' | 'Other';
   totalFarmSize: string; // Kept as string for input, Yup handles number conversion
   farmSizeUnit: 'Acre' | 'Hectare' | 'Bigha';
+  currentLocation: string;
   separateFarms: string; // Kept as string for input
-  state: string;
-  district: string;
+  // state: string;
+  // district: string;
 
-  subDistrict: string;
-  pinCode: string;
-  village: string;
+  // subDistrict: string;
+  // pinCode: string;
+  // village: string;
   farmerPhoto: File | null;
   //step 2
   yearsOfExperience: string;
@@ -149,7 +150,7 @@ const HeaderData = [
 export const FarmerDetailsForm: React.FC = () => {
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(4);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -159,11 +160,12 @@ export const FarmerDetailsForm: React.FC = () => {
     totalFarmSize: '',
     farmSizeUnit: 'Acre',
     separateFarms: '3', // Default as string to match input type
-    state: '',
-    district: '',
-    subDistrict: '',
-    pinCode: '',
-    village: '',
+    currentLocation: '',
+    // state: '',
+    // district: '',
+    // subDistrict: '',
+    // pinCode: '',
+    // village: '',
     farmerPhoto: null,
     yearsOfExperience: '',
     Certification: '',
@@ -177,7 +179,7 @@ export const FarmerDetailsForm: React.FC = () => {
     milkProduction: 3,
     milkSellingPlace: '',
     breedName: '',
-    insuranceAvailable: true,
+    insuranceAvailable: false,
     insuranceCompany: '',
     quantity: 3,
     animals: [],
@@ -200,15 +202,15 @@ export const FarmerDetailsForm: React.FC = () => {
     owner: '',
     cheak: 'Good',
     Equipment: [],
-    onRent: true,
+    onRent: false,
     equipmentDocument: null,
     equipmentImage: null,
 
     //  stepx-6
-    smartphoneOwnership: true,
+    smartphoneOwnership: false,
     internetAccess: '',
     ownedBy: '',
-    farmSoftwareUsed: true,
+    farmSoftwareUsed: false,
     appName: '',
   };
 
@@ -236,22 +238,23 @@ export const FarmerDetailsForm: React.FC = () => {
         .integer('Must be an integer')
         .min(0, 'Cannot be negative')
         .required('Number of separate farms is required'),
-      state: Yup.string().required('State is required'),
-      district: Yup.string().required('District is required'),
-      subDistrict: Yup.string().required('Sub-District/Block is required'),
-      pinCode: Yup.string()
-        .matches(/^[0-9]{6}$/, 'Enter a valid 6-digit pin code')
-        .required('Pin code is required'),
-      village: Yup.string().required('Village is required'),
-      farmerPhoto: Yup.mixed().nullable(), // Allow null, add .required() if mandatory
-    }),
-    //step-2 form validation
-    Yup.object().shape({
+      currentLocation: Yup.string().required('Current Location is required'),
       yearsOfExperience: Yup.number()
         .typeError('Must be a number')
         .required('This field is required')
         .min(0, 'Experience cannot be negative')
         .max(100, 'Too much experience'),
+      // state: Yup.string().required('State is required'),
+      // district: Yup.string().required('District is required'),
+      // subDistrict: Yup.string().required('Sub-District/Block is required'),
+      // pinCode: Yup.string()
+      //   .matches(/^[0-9]{6}$/, 'Enter a valid 6-digit pin code')
+      //   .required('Pin code is required'),
+      // village: Yup.string().required('Village is required'),
+      // farmerPhoto: Yup.mixed().nullable(), // Allow null, add .required() if mandatory
+    }),
+    //step-2 form validation
+    Yup.object().shape({
       awards: Yup.string(),
       Certification: Yup.string().max(100, 'Too long').nullable(),
       // CertificateImage: Yup.mixed().nullable(), // Allow null, add .required() if mandatory
@@ -282,7 +285,6 @@ export const FarmerDetailsForm: React.FC = () => {
         .min(1, 'Minimum 1 required'),
       capacityUnit: Yup.string().required('Unit is required'),
       condition: Yup.string().oneOf(['Good', 'Moderate', 'Poor']).required('Condition is required'),
-      storagePhoto: Yup.mixed().nullable().required('Photo is required'),
     }),
 
     // step 5
@@ -294,8 +296,7 @@ export const FarmerDetailsForm: React.FC = () => {
       owner: Yup.string().required('Required'),
       cheak: Yup.string().oneOf(['Good', 'Moderate', 'Poor']).required('Required'),
       onRent: Yup.boolean().required('Required'),
-      equipmentDocument: Yup.mixed().nullable(),
-      equipmentImage: Yup.mixed().nullable(),
+      // equipmentDocument: Yup.mixed().nullable(),
     }),
 
     //step-6
@@ -409,7 +410,7 @@ export const FarmerDetailsForm: React.FC = () => {
           initialValues={initialValues}
           validationSchema={validationSchemaArray[step - 1]}
           onSubmit={handleSubmit}
-          validateOnChange={true}
+          validateOnChange={false}
           validateOnBlur={false}
         >
           {({ isSubmitting, setFieldValue, errors, touched, values }) => (

@@ -8,7 +8,6 @@ import closeArrow from '../../../../assets/Icons/arrow.png';
 import DeleteImg from '../../../../assets/Icons/delete.svg';
 import ImageUploadInput from '../../../../components/ui/inputs/ImageUploadInput';
 import RadioInputs from '../../../../components/ui/inputs/RadioInputs';
-import SelectInput from '../../../../components/ui/inputs/SelectInput';
 
 const waterSourceOptions = [
   { label: 'Canal', value: 'Canal' },
@@ -38,7 +37,9 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
       waterSourcePhoto: values.waterSourcePhoto,
       waterRetentionCapacity: values.waterRetentionCapacity,
       drainageQuality: values.drainageQuality,
-      waterSource: values.waterSource,
+      waterSource: Array.isArray(values.waterSource)
+        ? values.waterSource.join(', ')
+        : values.waterSource,
     };
     setFieldValue('waterManagement', [...(values.waterManagement || []), WaterManagement]);
     setShowWaterManagementForm(false);
@@ -150,21 +151,41 @@ const FarmStep4: React.FC<FarmStep4Props> = ({ values, errors, touched, setField
                   style={{ background: 'rgba(54, 195, 96, 0.2)' }}
                 >
                   <>
-                    <SelectInput
-                      values={values}
-                      label="Water Sources"
-                      labelFirst=""
-                      name="waterSource"
-                      options={waterSourceOptions}
-                      defaultOption="Select your Water Sources"
-                      width="w-full"
-                      height="h-[48px]"
-                      customClass="border-2"
-                      errors={errors}
-                      touched={touched}
-                      setFieldValue={setFieldValue}
-                      labelcss="px-2 bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
-                    />
+                    <div className="mb-4">
+                      <label className="block text-lg font-semibold text-[#005B24] mb-1">
+                        Water Sources
+                      </label>
+                      <div className="flex flex-wrap gap-4">
+                        {waterSourceOptions.map((option) => (
+                          <label key={option.value} className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              name="waterSource"
+                              value={option.value}
+                              checked={values.waterSource.includes(option.value)}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setFieldValue('waterSource', [
+                                    ...values.waterSource,
+                                    option.value,
+                                  ]);
+                                } else {
+                                  setFieldValue(
+                                    'waterSource',
+                                    values.waterSource.filter((v) => v !== option.value),
+                                  );
+                                }
+                              }}
+                              className="accent-[#005B24] "
+                            />
+                            {option.label}
+                          </label>
+                        ))}
+                      </div>
+                      {touched.waterSource && errors.waterSource && (
+                        <div className="text-red-500 text-xs mt-1">{errors.waterSource}</div>
+                      )}
+                    </div>
                     <div>
                       <label className="block text-lg font-semibold text-green-900 ">
                         Upload Water Sources Photo

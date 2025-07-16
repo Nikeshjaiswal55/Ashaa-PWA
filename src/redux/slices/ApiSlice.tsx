@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.42:3000/' }), //http://192.168.1.45:3000/
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://172.18.208.1:3000/' }), //http://192.168.1.45:3000/
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
@@ -27,20 +27,6 @@ const ApiSlice = createApi({
     getBreedNamesbyEquipement: build.query({
       query: (equipementNamesId) => `equipement-brand/by-equipment/${equipementNamesId}`,
     }),
-
-    getState: build.query({
-      query: () => 'state',
-    }),
-    getDistrictByState: build.query({
-      query: (stateId) => `district/by-state/${stateId}`,
-    }),
-    getTehsilByDistrict: build.query({
-      query: (districtId) => `tehsil/by-district/${districtId}`,
-    }),
-    getVillagesByTehsil: build.query({
-      query: (tehsilId) => `village/by-tehsil/${tehsilId}`,
-    }),
-
     getPesticides: build.query({
       query: () => 'pesticide',
     }),
@@ -50,6 +36,19 @@ const ApiSlice = createApi({
     getApplicationName: build.query({
       query: () => 'application-name',
     }),
+
+    // getState: build.query({
+    //   query: () => 'state',
+    // }),
+    // getDistrictByState: build.query({
+    //   query: (stateId) => `district/by-state/${stateId}`,
+    // }),
+    // getTehsilByDistrict: build.query({
+    //   query: (districtId) => `tehsil/by-district/${districtId}`,
+    // }),
+    // getVillagesByTehsil: build.query({
+    //   query: (tehsilId) => `village/by-tehsil/${tehsilId}`,
+    // }),
 
     getProfileData: build.query({
       query: () => ({
@@ -91,15 +90,11 @@ export const {
   useGetStorageListQuery,
   useGetFertilizerQuery,
   useGetEquipementQuery,
-  useGetStateQuery,
   useGetPesticidesQuery,
   useGetApplicationNameQuery,
   useLoginMutation,
   useChangePasswordMutation,
   useGetProfileDataQuery,
-  useGetDistrictByStateQuery,
-  useGetTehsilByDistrictQuery,
-  useGetVillagesByTehsilQuery,
   useGetBreedNamesbyLiveStockQuery,
   useGetBreedNamesbyEquipementQuery,
   useGetBreedNamesbyFertilizerQuery,

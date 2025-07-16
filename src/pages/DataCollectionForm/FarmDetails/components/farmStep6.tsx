@@ -197,21 +197,38 @@ const FarmStep6: React.FC<FarmStep6Props> = ({
                       labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
                     />
 
-                    <SelectInput<FarmFormValues>
-                      label="Seed Source"
-                      name="seedSource"
-                      options={seedSourceOptions}
-                      defaultOption="Enter seed supplier"
-                      values={values}
-                      errors={errors}
-                      touched={touched}
-                      setFieldValue={setFieldValue}
-                      customClass="border-2"
-                      width="w-full"
-                      height="h-[52px]"
-                      labelFirst=""
-                      labelcss="bg-[radial-gradient(circle,rgba(54,195,96,0.2))]"
-                    />
+                    <div className="mb-4">
+                      <label className="block text-lg font-semibold text-[#005B24] mb-1">
+                        Seed Source
+                      </label>
+                      <div className="flex flex-wrap gap-4">
+                        {seedSourceOptions.map((option) => (
+                          <label key={option.value} className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              name="seedSource"
+                              value={option.value}
+                              checked={values.seedSource.includes(option.value)}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setFieldValue('seedSource', [...values.seedSource, option.value]);
+                                } else {
+                                  setFieldValue(
+                                    'seedSource',
+                                    values.seedSource.filter((v) => v !== option.value),
+                                  );
+                                }
+                              }}
+                              className="accent-[#005B24]"
+                            />
+                            {option.label}
+                          </label>
+                        ))}
+                      </div>
+                      {touched.seedSource && errors.seedSource && (
+                        <div className="text-red-500 text-xs mt-1">{errors.seedSource}</div>
+                      )}
+                    </div>
 
                     <div>
                       <label className="block text-green-900 font-semibold">Seeding Rate</label>
