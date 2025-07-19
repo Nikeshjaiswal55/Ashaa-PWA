@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const ApiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://172.18.208.1:3000/' }), //http://192.168.1.45:3000/
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.42:3000/' }), //http://192.168.1.45:3000/
   endpoints: (build) => ({
     //------------------------------------------------------------------------------get------------------------------------------------------------------------------------------------------
     getLivestockNames: build.query({
@@ -82,6 +82,18 @@ const ApiSlice = createApi({
         },
       }),
     }),
+
+    // Save all farmer data (multi-step form)
+    saveFarmerAll: build.mutation({
+      query: (body) => ({
+        url: 'farmer/save-all',
+        method: 'POST',
+        body,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -95,9 +107,11 @@ export const {
   useLoginMutation,
   useChangePasswordMutation,
   useGetProfileDataQuery,
+
   useGetBreedNamesbyLiveStockQuery,
   useGetBreedNamesbyEquipementQuery,
   useGetBreedNamesbyFertilizerQuery,
   useGetBreedNamesbyPesticidesQuery,
+  useSaveFarmerAllMutation,
 } = ApiSlice;
 export default ApiSlice;

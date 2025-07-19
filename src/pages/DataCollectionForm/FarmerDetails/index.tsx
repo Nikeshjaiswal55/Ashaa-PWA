@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 
+import { useSaveFarmerAllMutation } from '@/redux/slices/ApiSlice';
+
 import image from '../../../assets/header/image.png';
 import '../form.css';
 import FarmerStep1 from './components/farmerStep1';
@@ -142,15 +144,127 @@ const HeaderData = [
   'Livestock',
   'Storage Facilities',
   'Equipment Details',
-  'Equipment Details',
   'Technology Access',
 ];
 
+// Utility: Convert object (including nested, arrays, files) to FormData
+function objectToFormData(
+  obj: Record<string, unknown>,
+  form?: FormData,
+  namespace?: string,
+): FormData {
+  const fd = form || new FormData();
+  for (const property in obj) {
+    if (!Object.prototype.hasOwnProperty.call(obj, property) || obj[property] === undefined)
+      continue;
+    const formKey = namespace ? `${namespace}[${property}]` : property;
+    if (obj[property] instanceof File || obj[property] instanceof Blob) {
+      fd.append(formKey, obj[property] as Blob);
+    } else if (Array.isArray(obj[property])) {
+      (obj[property] as unknown[]).forEach((value, i) => {
+        if (typeof value === 'object' && value !== null) {
+          objectToFormData(value as Record<string, unknown>, fd, `${formKey}[${i}]`);
+        } else {
+          fd.append(`${formKey}[${i}]`, value as string | Blob);
+        }
+      });
+    } else if (typeof obj[property] === 'object' && obj[property] !== null) {
+      objectToFormData(obj[property] as Record<string, unknown>, fd, formKey);
+    } else if (obj[property] !== null) {
+      fd.append(formKey, obj[property] as string | Blob);
+    }
+  }
+  return fd;
+}
+
+// Step-wise payload mapping
+function getStepPayload(step: number, values: FormValues) {
+  switch (step) {
+    case 1:
+      return {
+        farmerDetail: {
+          name: values.farmerName,
+          contact: values.contactNumber,
+          gender: values.gender,
+          aadhar_number: values.aadharCardNumber?.trim() ? values.aadharCardNumber : null,
+          current_location: values.currentLocation?.trim() ? values.currentLocation : null,
+          farm_size: values.totalFarmSize,
+          farm_size_unit: values.farmSizeUnit,
+          farm_count: Number(values.separateFarms),
+          farm_experience: values.yearsOfExperience?.trim() ? values.yearsOfExperience : '',
+          is_form_valid: true,
+        },
+      };
+    case 2:
+      return {
+        farmerAdditionalInfo: {
+          awards: values.awards,
+          Certification: values.Certification,
+          // Add more fields as per your step 2 form
+        },
+      };
+    case 3:
+      return {
+        farmerLivestock: values.animals.map((animal) => ({
+          animalType: animal.animalType,
+          quantity: animal.quantity,
+          milkProduction: animal.milkProduction,
+          milkSellingPlace: animal.milkSellingPlace,
+          breedName: animal.breedName,
+          insuranceAvailable: animal.insuranceAvailable,
+          insuranceCompany: animal.insuranceCompany,
+          photo: animal.photo,
+          is_form_valid: true,
+        })),
+      };
+    case 4:
+      return {
+        farmerStorage: {
+          storage_type: values.storageType,
+          name: values.warehouseName,
+          location: values.warehouseLocation,
+          capacity: values.capacity,
+          unit: values.capacityUnit,
+          condition: values.condition,
+          image: values.storagePhoto,
+          is_form_valid: true,
+        },
+      };
+    case 5:
+      return {
+        farmerEquipment: values.Equipment.map((eq) => ({
+          equipment: eq.equipment,
+          equipmentQuantity: eq.equipmentQuantity,
+          equipment_type: eq.equipmentType,
+          brand_name: eq.brandName,
+          owner: eq.owner,
+          // onRent: eq.onRent,
+          insuranceCompany: eq.insuranceCompany,
+          // equipmentDocument: eq.equipmentDocument,
+          equipmentImage: eq.equipmentImage,
+        })),
+      };
+    case 6:
+      return {
+        technologyAccess: {
+          smartphoneOwnership: values.smartphoneOwnership,
+          internetAccess: values.internetAccess,
+          ownedBy: values.ownedBy,
+          farmSoftwareUsed: values.farmSoftwareUsed,
+          appName: values.appName,
+        },
+      };
+    default:
+      return {};
+  }
+}
+
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
+  const [saveFarmerAll] = useSaveFarmerAllMutation();
   const [showForm, setShowForm] = useState(true); // for step 3 component
   const [showForm2, setShowForm2] = useState(true); // for step 5 component
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -313,36 +427,31 @@ export const FarmerDetailsForm: React.FC = () => {
     }),
   ];
 
-  const handleSubmit = (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
-    console.log('Form Data:', values);
-    // Simulate form submission
+  const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+    const payload = getStepPayload(step, values);
+    // Check if payload contains any File or Blob
+    function containsFile(obj: unknown): boolean {
+      if (!obj || typeof obj !== 'object') return false;
+      if (obj instanceof File || obj instanceof Blob) return true;
+      if (Array.isArray(obj)) return obj.some(containsFile);
+      return Object.values(obj).some(containsFile);
+    }
+    const hasFile = containsFile(payload);
     try {
-      alert('Form submitted! Check the console for data.');
-    } catch (e) {
-      console.warn('`alert` failed, likely due to iframe restrictions. Form data:', values);
-      const submissionMessage = document.createElement('div');
-      submissionMessage.textContent =
-        'Form submitted! Check the console for data. (Custom fallback message)';
-      submissionMessage.style.position = 'fixed';
-      submissionMessage.style.top = '20px';
-      submissionMessage.style.left = '50%';
-      submissionMessage.style.transform = 'translateX(-50%)';
-      submissionMessage.style.padding = '10px 20px';
-      submissionMessage.style.backgroundColor = 'lightgreen';
-      submissionMessage.style.border = '1px solid green';
-      submissionMessage.style.borderRadius = '5px';
-      submissionMessage.style.zIndex = '1000';
-      document.body.appendChild(submissionMessage);
-      setTimeout(() => {
-        document.body.removeChild(submissionMessage);
-      }, 3000);
+      if (hasFile) {
+        const formData = objectToFormData(payload);
+        await saveFarmerAll(formData).unwrap();
+      } else {
+        await saveFarmerAll(payload).unwrap();
+      }
+      if (step < validationSchemaArray.length) {
+        setStep((prev) => prev + 1);
+      } else {
+        alert('All steps done, final submission.');
+      }
+    } catch (e: unknown) {
+      alert('API Error: ' + (e?.data?.message || e?.message || 'Unknown error'));
     }
-    if (step < validationSchemaArray.length) {
-      setStep((prev) => prev + 1);
-    } else {
-      console.log('All steps done, final submission.');
-    }
-
     setSubmitting(false);
   };
 

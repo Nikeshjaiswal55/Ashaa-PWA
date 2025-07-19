@@ -61,9 +61,7 @@ const FarmerStep3: React.FC<FarmerStep3Props> = ({
       milk: '',
     };
     setFieldValue('animals', [...(values.animals || []), newAnimal]);
-    // Reset animal fields after save
     setShowForm(false);
-    setShowForm(false); // Hide the form after saving
   };
 
   const milkSellingPlaces: { label: string; value: string }[] = [
