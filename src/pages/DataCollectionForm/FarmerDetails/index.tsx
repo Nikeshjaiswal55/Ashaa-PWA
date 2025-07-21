@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
+import { toast } from 'sonner';
 
+import { Toaster } from '@/components/ui/sonner';
 import { useSaveFarmerAllMutation } from '@/redux/slices/ApiSlice';
 
 import image from '../../../assets/header/image.png';
@@ -262,8 +264,8 @@ function getStepPayload(step: number, values: FormValues) {
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
   const [saveFarmerAll] = useSaveFarmerAllMutation();
-  const [showForm, setShowForm] = useState(true); // for step 3 component
-  const [showForm2, setShowForm2] = useState(true); // for step 5 component
+  const [showForm, setShowForm] = useState(true);
+  const [showForm2, setShowForm2] = useState(true);
   const [step, setStep] = useState(1);
 
   const initialValues: FormValues = {
@@ -273,7 +275,7 @@ export const FarmerDetailsForm: React.FC = () => {
     gender: 'Male',
     totalFarmSize: '',
     farmSizeUnit: 'Acre',
-    separateFarms: '3', // Default as string to match input type
+    separateFarms: '3',
     currentLocation: '',
     // state: '',
     // district: '',
@@ -447,7 +449,11 @@ export const FarmerDetailsForm: React.FC = () => {
       if (step < validationSchemaArray.length) {
         setStep((prev) => prev + 1);
       } else {
-        alert('All steps done, final submission.');
+        console.log('all steps have complete');
+        toast.success('Successful!', {
+          description: 'All steps done, final submission.',
+          duration: 3000,
+        });
       }
     } catch (e: unknown) {
       alert('API Error: ' + (e?.data?.message || e?.message || 'Unknown error'));
@@ -467,6 +473,7 @@ export const FarmerDetailsForm: React.FC = () => {
         backgroundBlendMode: 'overlay',
       }}
     >
+      <Toaster position="top-right" richColors />
       <div className="w-full max-w-2xl rounded-xl md:p-8 flex flex-col flex-grow">
         {/* Progress Steps */}
         <div className="flex justify-center items-center space-x-0 sm:space-x-0 mb-[18px]">

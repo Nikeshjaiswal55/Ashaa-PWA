@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
+import { toast } from 'sonner';
+
+import { Toaster } from '@/components/ui/sonner';
+import { useSaveFarmerAllMutation } from '@/redux/slices/ApiSlice';
 
 import image from '../../../assets/header/image.png';
 import '../form.css';
@@ -157,6 +161,170 @@ export interface FarmFormValues {
   pesticidesUsageList: PesticidesUsage[];
 }
 
+// Utility: Convert object (including nested, arrays, files) to FormData
+function objectToFormData(
+  obj: Record<string, unknown>,
+  form?: FormData,
+  namespace?: string,
+): FormData {
+  const fd = form || new FormData();
+  for (const property in obj) {
+    if (!Object.prototype.hasOwnProperty.call(obj, property) || obj[property] === undefined)
+      continue;
+    const formKey = namespace ? `${namespace}[${property}]` : property;
+    if (obj[property] instanceof File || obj[property] instanceof Blob) {
+      fd.append(formKey, obj[property] as Blob);
+    } else if (Array.isArray(obj[property])) {
+      (obj[property] as unknown[]).forEach((value, i) => {
+        if (typeof value === 'object' && value !== null) {
+          objectToFormData(value as Record<string, unknown>, fd, `${formKey}[${i}]`);
+        } else {
+          fd.append(`${formKey}[${i}]`, value as string | Blob);
+        }
+      });
+    } else if (typeof obj[property] === 'object' && obj[property] !== null) {
+      objectToFormData(obj[property] as Record<string, unknown>, fd, formKey);
+    } else if (obj[property] !== null) {
+      fd.append(formKey, obj[property] as string | Blob);
+    }
+  }
+  return fd;
+}
+
+// --- Build farmerFarmDetails payload ---
+function getStepPayload(step: number, values: FarmFormValues) {
+  switch (step) {
+    case 1:
+      return {
+        farmerFarmDetails: [
+          {
+            size: values.individualFarmSize,
+            location: values.farmLocation,
+            survey_number: values.khasraNumber,
+            ownership_name: values.ownerName,
+            owned_by: values.landOwnership,
+            topography: values.topography,
+            is_form_valid: true,
+          },
+        ],
+      };
+
+    case 2:
+      return {
+        farmerFarmDetails: [
+          {
+            irrigation_method: values.irrigationMethod,
+            kcc_status: values.hasKCC,
+            loan_status: values.loanApproved,
+            labour_availability: values.laborAvailability,
+            labour_payout_method: values.hiredLaborPayment,
+            farming_approach: values.farmingApproach,
+            cropping_pattern: values.croppingPattern,
+            primary_market: values.primaryMarket,
+            is_form_valid: true,
+          },
+        ],
+      };
+
+    case 3:
+      return {
+        farmerFarmDetails: [
+          {
+            soil_type: values.soilType,
+            soil_image: values.soilPhoto,
+            soil_report_image: values.soilTestingReport,
+            soil_report_name: '',
+            farm_photo: values.farmPhoto,
+            is_form_valid: true,
+          },
+        ],
+      };
+
+    case 4:
+      return {
+        farmerFarmDetails: [
+          {
+            farmerWaterManagement: values.waterManagement.map((wm) => ({
+              water_source: [wm.waterSource],
+              water_source_image: wm.waterSourcePhoto,
+              water_retention_capacity: wm.waterRetentionCapacity,
+              drainage_quality: wm.drainageQuality,
+              is_active: true,
+              is_form_valid: true,
+            })),
+          },
+        ],
+      };
+
+    case 5:
+      return {
+        farmerFarmDetails: [
+          {
+            farm_photo: values.farmPhoto,
+          },
+        ],
+      };
+
+    case 6:
+      return {
+        farmerFarmDetails: [
+          {
+            farmerCropDetail: values.CropList.map((crop) => ({
+              cultivation_area: crop.cultivationArea,
+              crop_name: crop.cropName,
+              crop_variety: crop.cropVariety,
+              seed_source: Array.isArray(crop.seedSource) ? crop.seedSource : [crop.seedSource],
+              seeding_rate: crop.seedingRate,
+              seeding_unit: crop.seedingRateUnit,
+              seed_name: crop.seedName,
+              crop_image: crop.cropPhoto,
+              is_form_valid: true,
+            })),
+          },
+        ],
+      };
+
+    case 7:
+      return {
+        farmerFarmDetails: [
+          {
+            farmerFertilizer: values.FertilizerUsageList.map((fert) => ({
+              name: fert.fertilizerName,
+              type: fert.fertilizerType,
+              quantity: fert.quantity,
+              price: fert.price,
+              brand_name: fert.companyName,
+              applied_rate: fert.appliedRate,
+              applied_stage: fert.appliedStage,
+              is_form_valid: true,
+            })),
+          },
+        ],
+      };
+
+    case 8:
+      return {
+        farmerFarmDetails: [
+          {
+            farmerPesticide: values.pesticidesUsageList.map((pest) => ({
+              name: pest.pesticidesName,
+              type: pest.pesticidesType,
+              quantity: pest.pesticidesQuantity,
+              price: pest.pesticidesprice,
+              brand_name: pest.pesticidescompanyName,
+              applied_rate: pest.pesticidesappliedRate,
+              applied_stage: pest.pesticidesappliedStage,
+              is_form_valid: true,
+            })),
+          },
+        ],
+      };
+
+    default:
+      return {};
+  }
+}
+
 const HeaderData = [
   'Farm Details I',
   'Farm Details II',
@@ -170,9 +338,10 @@ const HeaderData = [
 
 // --- Main Form Component ---
 export const FarmerDetailsForm: React.FC = () => {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(8);
   const [showCropDetailsForm, setShowCropDetailsForm] = useState(true); // //for show or hide Crop Details form step 4
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const [saveFarmerAll] = useSaveFarmerAllMutation();
 
   const [searchParams] = useSearchParams();
 
@@ -351,41 +520,38 @@ export const FarmerDetailsForm: React.FC = () => {
     }),
   ];
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: FarmFormValues,
     { setSubmitting }: FormikHelpers<FarmFormValues>,
   ) => {
-    try {
-      alert('Form submitted! Check the console for data.');
-    } catch (e) {
-      console.warn('`alert` failed, likely due to iframe restrictions. Form data:', values);
-      const submissionMessage = document.createElement('div');
-      submissionMessage.textContent =
-        'Form submitted! Check the console for data. (Custom fallback message)';
-      submissionMessage.style.position = 'fixed';
-      submissionMessage.style.top = '20px';
-      submissionMessage.style.left = '50%';
-      submissionMessage.style.transform = 'translateX(-50%)';
-      submissionMessage.style.padding = '10px 20px';
-      submissionMessage.style.backgroundColor = 'lightgreen';
-      submissionMessage.style.border = '1px solid green';
-      submissionMessage.style.borderRadius = '5px';
-      submissionMessage.style.zIndex = '1000';
-      document.body.appendChild(submissionMessage);
-      setTimeout(() => {
-        document.body.removeChild(submissionMessage);
-      }, 3000);
-    }
-    if (step < validationSchemaArray.length) {
-      setStep((prev) => prev + 1); // Move to next step
-      console.log(values);
-    } else {
-      console.log('All steps done, final submission.');
-      console.log(values); //
-      // You can send final API call here
-      navigate(`/farmer/:id`);
-    }
+    const payload = getStepPayload(step, values);
 
+    function containsFile(obj: unknown): boolean {
+      if (!obj || typeof obj !== 'object') return false;
+      if (obj instanceof File || obj instanceof Blob) return true;
+      if (Array.isArray(obj)) return obj.some(containsFile);
+      return Object.values(obj).some(containsFile);
+    }
+    const hasFile = containsFile(payload);
+    try {
+      if (hasFile) {
+        const formData = objectToFormData(payload);
+        await saveFarmerAll(formData).unwrap();
+      } else {
+        await saveFarmerAll(payload).unwrap();
+      }
+      if (step < validationSchemaArray.length) {
+        setStep((prev) => prev + 1);
+      } else {
+        console.log('all steps have complete');
+        toast.success('Successful!', {
+          description: 'All steps done, final submission.',
+          duration: 3000,
+        });
+      }
+    } catch (e: unknown) {
+      alert('API Error: ' + (e?.data?.message || e?.message || 'Unknown error'));
+    }
     setSubmitting(false);
   };
 
@@ -401,7 +567,7 @@ export const FarmerDetailsForm: React.FC = () => {
         backgroundBlendMode: 'overlay',
       }}
     >
-      {/* Background gradient with image */}
+      <Toaster position="top-right" richColors />
 
       <div className="w-full max-w-2xl rounded-xl md:p-8 flex flex-col flex-grow">
         {/* Progress Steps */}

@@ -107,7 +107,6 @@ export const {
   useLoginMutation,
   useChangePasswordMutation,
   useGetProfileDataQuery,
-
   useGetBreedNamesbyLiveStockQuery,
   useGetBreedNamesbyEquipementQuery,
   useGetBreedNamesbyFertilizerQuery,
