@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FadeLoader } from 'react-spinners';
 
-import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
 import TextInput from '@/components/ui/inputs/TextInput';
 import { Toaster } from '@/components/ui/sonner';
+import { welcomeValidationSchema } from '@/constants/validationSchemas';
 import { useLoginMutation } from '@/redux/slices/ApiSlice';
 
 import login_illustration from '../../assets/auth/welcome_screen.svg';
@@ -23,23 +23,6 @@ const Welcome: React.FC = () => {
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .test(
-        'is-valid',
-        'Enter a valid 10-digit mobile number or a valid email address',
-        (value) => {
-          const isPhone = /^\d{10}$/.test(value || '');
-          const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value || '');
-          return isPhone || isEmail;
-        },
-      )
-      .required('This field is required'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  });
-
   const handleSubmit = async (values: WelcomeFormValues) => {
     try {
       const response = await login(values).unwrap();
@@ -52,7 +35,6 @@ const Welcome: React.FC = () => {
           description: 'Welcome to Ashaa Dashboard',
           duration: 3000,
         });
-
         setTimeout(() => {
           if (isFirstLogin === true) {
             navigate('/change-password');
@@ -66,7 +48,6 @@ const Welcome: React.FC = () => {
       toast.error('Login failed! Please check your credentials.');
     }
   };
-
   const EyeOpenIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
       <path
@@ -76,7 +57,6 @@ const Welcome: React.FC = () => {
       />
     </svg>
   );
-
   const EyeClosedIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
       <path
@@ -90,12 +70,10 @@ const Welcome: React.FC = () => {
       />
     </svg>
   );
-
   return (
     <>
       <Meta title="Welcome" />
       <Toaster position="top-right" richColors />
-
       <div className="bg-white min-h-screen flex flex-col px-4">
         {/* Top Section */}
         <div className="pt-8 text-center">
@@ -119,7 +97,7 @@ const Welcome: React.FC = () => {
           <div className="max-w-md w-full mx-auto">
             <Formik
               initialValues={{ email: '', password: '' }}
-              validationSchema={validationSchema}
+              validationSchema={welcomeValidationSchema}
               onSubmit={handleSubmit}
             >
               {({ values, errors, touched, setFieldValue }) => (

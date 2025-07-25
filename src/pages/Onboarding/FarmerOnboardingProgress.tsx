@@ -52,7 +52,7 @@ const Page2: React.FC = () => {
               image={step.image}
               title={step.title}
               subtitle={step.subtitle}
-              status={step.status as 'completed' | 'remaining'}
+              status={step.status as 'remaining' | 'remaining'}
               showLine={index !== steps.length - 1}
             />
           ))}

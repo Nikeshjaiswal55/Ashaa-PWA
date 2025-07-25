@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'sonner';
 
 import { Toaster } from '@/components/ui/sonner';
+import { farmerDetailsValidationSchemas } from '@/constants/validationSchemas';
 import { useSaveFarmerAllMutation } from '@/redux/slices/ApiSlice';
 
 import image from '../../../assets/header/image.png';
@@ -266,7 +266,7 @@ export const FarmerDetailsForm: React.FC = () => {
   const [saveFarmerAll] = useSaveFarmerAllMutation();
   const [showForm, setShowForm] = useState(true);
   const [showForm2, setShowForm2] = useState(true);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
 
   const initialValues: FormValues = {
     farmerName: '',
@@ -330,108 +330,8 @@ export const FarmerDetailsForm: React.FC = () => {
     appName: '',
   };
 
-  const validationSchemaArray = [
-    Yup.object().shape({
-      farmerName: Yup.string().required("Farmer's full name is required"),
-      contactNumber: Yup.string()
-        .matches(/^[0-9]{10}$/, 'Enter a valid 10-digit mobile number')
-        .required('Contact number is required'),
-      aadharCardNumber: Yup.string()
-        .matches(/^[0-9]{4}-[0-9]{4}-[0-9]{4}$/, 'Enter a valid Aadhar number (XXXX-XXXX-XXXX)')
-        .required('Aadhar card number is required'),
-      gender: Yup.string()
-        .oneOf(['Male', 'Female', 'Other'] as const)
-        .required('Gender is required'),
-      totalFarmSize: Yup.number()
-        .typeError('Farm size must be a number')
-        .positive('Farm size must be positive')
-        .required('Total farm size is required'),
-      farmSizeUnit: Yup.string()
-        .oneOf(['Acre', 'Hectare', 'Bigha'] as const)
-        .required('Unit is required'),
-      separateFarms: Yup.number()
-        .typeError('Number of farms must be a number')
-        .integer('Must be an integer')
-        .min(0, 'Cannot be negative')
-        .required('Number of separate farms is required'),
-      currentLocation: Yup.string().required('Current Location is required'),
-      yearsOfExperience: Yup.number()
-        .typeError('Must be a number')
-        .required('This field is required')
-        .min(0, 'Experience cannot be negative')
-        .max(100, 'Too much experience'),
-      // state: Yup.string().required('State is required'),
-      // district: Yup.string().required('District is required'),
-      // subDistrict: Yup.string().required('Sub-District/Block is required'),
-      // pinCode: Yup.string()
-      //   .matches(/^[0-9]{6}$/, 'Enter a valid 6-digit pin code')
-      //   .required('Pin code is required'),
-      // village: Yup.string().required('Village is required'),
-      // farmerPhoto: Yup.mixed().nullable(), // Allow null, add .required() if mandatory
-    }),
-    //step-2 form validation
-    Yup.object().shape({
-      awards: Yup.string(),
-      Certification: Yup.string().max(100, 'Too long').nullable(),
-      // CertificateImage: Yup.mixed().nullable(), // Allow null, add .required() if mandatory
-    }),
-
-    // step-3 form validation
-    Yup.object().shape({
-      animalType: Yup.string().required('Required'),
-      quantity: Yup.number().required('Required'),
-      milkProduction: Yup.number().required('Required'),
-      milkSellingPlace: Yup.string().required('Required'),
-      breedName: Yup.string().required('Required'),
-      insuranceAvailable: Yup.boolean().required('Required'),
-      insuranceCompany: Yup.string().when('insuranceAvailable', {
-        is: true,
-        then: (schema) => schema.required('Required'),
-      }),
-    }),
-
-    // step 4
-    Yup.object().shape({
-      storageType: Yup.string().required('Storage Facilities Type is required'),
-      warehouseName: Yup.string().required('Warehouse Name is required'),
-      warehouseLocation: Yup.string().required('Warehouse Location is required'),
-      capacity: Yup.number()
-        .typeError('Capacity must be a number')
-        .required('Capacity is required')
-        .min(1, 'Minimum 1 required'),
-      capacityUnit: Yup.string().required('Unit is required'),
-      condition: Yup.string().oneOf(['Good', 'Moderate', 'Poor']).required('Condition is required'),
-    }),
-
-    // step 5
-    Yup.object().shape({
-      equipment: Yup.string().required('Required'),
-      equipmentQuantity: Yup.number().min(1, 'Minimum 1').required('Required'),
-      equipmentType: Yup.string().required('Required'),
-      brandName: Yup.string().required('Required'),
-      owner: Yup.string().required('Required'),
-      cheak: Yup.string().oneOf(['Good', 'Moderate', 'Poor']).required('Required'),
-      onRent: Yup.boolean().required('Required'),
-      // equipmentDocument: Yup.mixed().nullable(),
-    }),
-
-    //step-6
-    Yup.object().shape({
-      smartphoneOwnership: Yup.boolean().required('Required'),
-      internetAccess: Yup.string().required('Please select internet access'),
-      ownedBy: Yup.string().required('Please select owner'),
-      farmSoftwareUsed: Yup.boolean().required('Required'),
-      appName: Yup.string().when('farmSoftwareUsed', {
-        is: true,
-        then: (schema) => schema.required('App Name is required'),
-        otherwise: (schema) => schema.notRequired(),
-      }),
-    }),
-  ];
-
   const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
     const payload = getStepPayload(step, values);
-    // Check if payload contains any File or Blob
     function containsFile(obj: unknown): boolean {
       if (!obj || typeof obj !== 'object') return false;
       if (obj instanceof File || obj instanceof Blob) return true;
@@ -446,7 +346,7 @@ export const FarmerDetailsForm: React.FC = () => {
       } else {
         await saveFarmerAll(payload).unwrap();
       }
-      if (step < validationSchemaArray.length) {
+      if (step < farmerDetailsValidationSchemas.length) {
         setStep((prev) => prev + 1);
       } else {
         console.log('all steps have complete');
@@ -524,7 +424,7 @@ export const FarmerDetailsForm: React.FC = () => {
         <h3 className="text-center ">{HeaderData[step - 1]}</h3>
         <Formik
           initialValues={initialValues}
-          validationSchema={validationSchemaArray[step - 1]}
+          validationSchema={farmerDetailsValidationSchemas[step - 1]}
           onSubmit={handleSubmit}
           validateOnChange={false}
           validateOnBlur={false}
@@ -637,7 +537,7 @@ export const FarmerDetailsForm: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        {step < validationSchemaArray.length ? 'Next Step' : 'Submit'}
+                        {step < farmerDetailsValidationSchemas.length ? 'Next Step' : 'Submit'}
                         <ArrowRightIcon className=" w-6 h-6" />
                       </>
                     )}

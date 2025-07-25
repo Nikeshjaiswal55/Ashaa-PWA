@@ -81,7 +81,7 @@
       "eslint --max-warnings=0"
     ]
   },
-  "author": {
+  "author": { 
     "name": "Suren Atoyan",
     "email": "contact@surenatoyan.com",
     "url": "http://surenatoyan.com/"

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'sonner';
 
 import { Toaster } from '@/components/ui/sonner';
+import { farmDetailsValidationSchemas } from '@/constants/validationSchemas';
 import { useSaveFarmerAllMutation } from '@/redux/slices/ApiSlice';
 
 import image from '../../../assets/header/image.png';
@@ -421,105 +421,6 @@ export const FarmerDetailsForm: React.FC = () => {
     pesticidesUsageList: [],
   };
 
-  const validationSchemaArray = [
-    Yup.object().shape({
-      individualFarmSize: Yup.string().required('Farm size is required'),
-      farmSizeUnit: Yup.string().required('Unit is required'),
-      farmLocation: Yup.string().required('Farm location is required'),
-      khasraNumber: Yup.string().required('Khasra/Survey number is required'),
-      landOwnership: Yup.string().required('Land ownership is required'),
-      ownerName: Yup.string().required('Owner name is required'),
-      topography: Yup.string().required('Topography is required'),
-    }),
-    //step-2 form validation
-    Yup.object().shape({
-      irrigationMethod: Yup.string().required('Irrigation method is required'),
-      hasKCC: Yup.boolean().required(),
-      loanApproved: Yup.boolean().required(),
-      laborAvailability: Yup.string().required('Labor availability is required'),
-      hiredLaborPayment: Yup.string().when('laborAvailability', {
-        is: 'Hired',
-        then: (schema) => schema.required('Hired labor payment is required'),
-        otherwise: (schema) => schema.notRequired(),
-      }),
-      farmingApproach: Yup.string().required('Farming approach is required'),
-      croppingPattern: Yup.string().required('Cropping pattern is required'),
-      primaryMarket: Yup.string().required('Primary market is required'),
-    }),
-
-    // step-3 form validation
-    Yup.object().shape({
-      soilType: Yup.string().required('Soil type is required'),
-      soilTestingReportAvailable: Yup.boolean().required(),
-      soilTestingReport: Yup.mixed().when('soilTestingReportAvailable', {
-        is: true,
-        then: (schema) => schema.required('Soil testing report is required'),
-
-        otherwise: (schema) => schema.notRequired(),
-      }),
-    }),
-
-    // step 4
-    Yup.object().shape({
-      waterSource: Yup.array().min(1, 'At least one water source is required'),
-      waterSourcePhoto: Yup.mixed().required('Water source photo is required'),
-
-      waterRetentionCapacity: Yup.string().required('Water retention capacity is required'),
-      drainageQuality: Yup.string().required('Drainage quality is required'),
-    }),
-
-    // step 5
-    Yup.object().shape({}),
-
-    //step-6
-    Yup.object().shape({
-      cultivationArea: Yup.string().required('Cultivation Area is required'),
-      cropName: Yup.string().required('Crop Name is required'),
-      cropVariety: Yup.string().required('Crop Variety is required'),
-      seedSource: Yup.array().min(1, 'At least one seed source is required'),
-      seedingRate: Yup.number()
-        .typeError('Seeding Rate must be a number')
-        .required('Seeding Rate is required')
-        .positive('Seeding Rate must be positive'),
-      seedingRateUnit: Yup.string().required('Unit is required'),
-      seedName: Yup.string().required('Seed Name is required'),
-    }),
-
-    // step-7
-    Yup.object().shape({
-      fertilizerName: Yup.string().required('Fertilizer Name is required'),
-      fertilizerType: Yup.string().required('Fertilizer Type is required'),
-      quantity: Yup.number()
-        .typeError('Quantity must be a number')
-        .required('Quantity is required')
-        .positive('Quantity must be positive'),
-      price: Yup.number()
-        .typeError('Price must be a number')
-        .required('Price is required')
-        .positive('Price must be positive'),
-      companyName: Yup.string().required('Company Name is required'),
-      appliedRate: Yup.string().required('Applied Rate is required'),
-      appliedStage: Yup.string().required('Applied Stage is required'),
-    }),
-
-    //  step-8
-    Yup.object().shape({
-      pesticidesName: Yup.string().required('Pesticides Name is required'),
-      pesticidesType: Yup.string().required('Pesticides Type is required'),
-      pesticidesQuantity: Yup.number()
-        .typeError('Quantity must be a number')
-        .required('Quantity is required')
-        .positive('Quantity must be positive'),
-      pesticidesprice: Yup.number()
-        .typeError('Price must be a number')
-        .required('Price is required')
-        .positive('Price must be positive'),
-      pesticidescompanyName: Yup.string().required('Company Name is required'),
-      pesticidesappliedRate: Yup.string().required('Applied Rate is required'),
-      pesticidesappliedStage: Yup.string().required('Applied Stage is required'),
-    }),
-  ];
-
   const handleSubmit = async (
     values: FarmFormValues,
     { setSubmitting }: FormikHelpers<FarmFormValues>,
@@ -540,7 +441,7 @@ export const FarmerDetailsForm: React.FC = () => {
       } else {
         await saveFarmerAll(payload).unwrap();
       }
-      if (step < validationSchemaArray.length) {
+      if (step < farmDetailsValidationSchemas.length) {
         setStep((prev) => prev + 1);
       } else {
         console.log('all steps have complete');
@@ -548,6 +449,9 @@ export const FarmerDetailsForm: React.FC = () => {
           description: 'All steps done, final submission.',
           duration: 3000,
         });
+        // navigate('/onboarding/farmer-farm/progress',{
+        //   state: { reset: true }, // Reset the form on progress page
+        // });
       }
     } catch (e: unknown) {
       alert('API Error: ' + (e?.data?.message || e?.message || 'Unknown error'));
@@ -611,7 +515,7 @@ export const FarmerDetailsForm: React.FC = () => {
         {/* <h3 className="text-center">{HeaderData[step - 1]}</h3> */}
         <Formik
           initialValues={initialValues}
-          validationSchema={validationSchemaArray[step - 1]}
+          validationSchema={farmDetailsValidationSchemas[step - 1]}
           onSubmit={handleSubmit}
           validateOnChange={false}
           validateOnBlur={false}
@@ -736,7 +640,7 @@ export const FarmerDetailsForm: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      {step < validationSchemaArray.length ? 'Next Step' : 'Submit'}
+                      {step < farmDetailsValidationSchemas.length ? 'Next Step' : 'Submit'}
                       <ArrowRightIcon className=" w-6 h-6" />
                     </>
                   )}

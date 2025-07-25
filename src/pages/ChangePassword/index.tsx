@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
 import TextInput from '@/components/ui/inputs/TextInput';
 import { Toaster } from '@/components/ui/sonner';
+import { changePasswordValidationSchema } from '@/constants/validationSchemas';
 import { useChangePasswordMutation } from '@/redux/slices/ApiSlice';
 
 interface ChangePasswordValues {
@@ -31,16 +31,6 @@ const ChangePassword: React.FC = () => {
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
-  const validationSchema = Yup.object({
-    currentPassword: Yup.string().required('Current password is required'),
-    newPassword: Yup.string()
-      .required('New password is required')
-      .min(6, 'Password must be at least 6 characters'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('newPassword')], 'Passwords must match')
-      .required('Confirm password is required'),
-  });
 
   const handleSubmit = async (values: ChangePasswordValues) => {
     try {
@@ -106,7 +96,7 @@ const ChangePassword: React.FC = () => {
 
           <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            validationSchema={changePasswordValidationSchema}
             onSubmit={handleSubmit}
           >
             {({ values, errors, touched, setFieldValue }) => (
